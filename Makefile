@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
+#    By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/01/15 14:44:08 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/01/20 14:00:23 by tgoudman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
 NAME = minishell
 LIBFT_DIR = Libft
 
-SRCS = main.c minishell.c parsing.c \
+SRCS = main.c minishell.c parsing.c signale.c\
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(BONUS:.c=.o)
