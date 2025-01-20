@@ -5,43 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/01/15 14:44:08 by jdhallen         ###   ########.fr        #
+#    Created: 2024/10/21 15:17:46 by jdhallen          #+#    #+#              #
+#    Updated: 2025/01/07 15:26:38 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
-LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
+#CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR) -I$(PRINTF_DIR)
+#LFLAGS = -L$(LIBFT_DIR) -L$(PRINTF_DIR) -lft
+AR = ar
+ARFLAGS = rcs
+NAME = libft.a
 
-NAME = minishell
-LIBFT_DIR = Libft
+LIBFT_DIR = ft_libft
+PRINTF_DIR = ft_printf
+GNL_DIR = get_next_line
 
-SRCS = main.c minishell.c parsing.c \
-
-OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(BONUS:.c=.o)
+executable = test
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME):
 	@$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
-	
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(MAKE) -C $(PRINTF_DIR)
+	@$(MAKE) -C $(GNL_DIR)
+	@$(AR) $(ARFLAGS) $(NAME) $(LIBFT_DIR)/*.o $(PRINTF_DIR)/*.o  $(GNL_DIR)/*.o
+	echo "make ok"
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@rm -f $(OBJS)
-	@rm -f $(OBJS_BONUS)
+	@$(MAKE) -C $(PRINTF_DIR) clean
+	@$(MAKE) -C $(GNL_DIR) clean
 	echo "clean ok"
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(PRINTF_DIR) fclean
+	@$(MAKE) -C $(GNL_DIR) fclean
 	@rm -f $(NAME)
+	@rm -f *.out
+	@rm -f $(executable)
 	echo "fclean ok"
 
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re

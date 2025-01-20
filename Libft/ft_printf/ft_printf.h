@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 09:01:01 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/15 14:43:03 by jdhallen         ###   ########.fr       */
+/*   Created: 2024/10/24 13:15:34 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/06 09:21:17 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <stdio.h>
-# include <stdlib.h>
+# include <stdarg.h>
 # include <unistd.h>
-# include "Libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <limits.h>
+# include <stdio.h>
+
+int	ft_printf(int fd, const char *string, ...);
+int	ft_puthexamaj_n(int fd, unsigned int n);
+int	ft_puthexamin_n(int fd, unsigned int n);
+int	ft_putchar_n(int fd, char c);
+int	ft_putstr_n(int fd, char *str);
+int	ft_putunnbr_n(int fd, unsigned int n);
+int	ft_putnbr_n(int fd, int n);
+int	ft_putp_n(int fd, void *n);
 
 #endif

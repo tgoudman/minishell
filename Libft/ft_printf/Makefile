@@ -3,45 +3,36 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
+#    By: jdhallen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/01/15 14:44:08 by jdhallen         ###   ########.fr        #
+#    Created: 2024/10/21 15:17:46 by jdhallen          #+#    #+#              #
+#    Updated: 2024/10/30 09:19:27 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
-LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
+CFLAGS = -Wall -Wextra -Werror
+AR = ar
+ARFLAGS = rcs
+NAME = ft_libftprintf.a
 
-NAME = minishell
-LIBFT_DIR = Libft
+SRC = ft_printf.c ft_putchar_n.c ft_puthexamaj_n.c ft_puthexamin_n.c \
+	ft_putnbr_n.c ft_putstr_n.c ft_putunnbr_n.c ft_putp_n.c
 
-SRCS = main.c minishell.c parsing.c \
-
-OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(BONUS:.c=.o)
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
-	
+$(NAME): $(OBJ) 
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@$(MAKE) -C $(LIBFT_DIR) clean
-	@rm -f $(OBJS)
-	@rm -f $(OBJS_BONUS)
-	echo "clean ok"
+	@rm -f $(OBJ)
 
 fclean: clean
-	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
-	echo "fclean ok"
 
 re: fclean all
-
-.PHONY: all clean fclean

@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 09:01:01 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/15 14:43:03 by jdhallen         ###   ########.fr       */
+/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/06 09:20:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_printf.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "Libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <limits.h>
+int	ft_putstr_n(int fd, char *str)
+{
+	int	i;
 
-#endif
+	i = 0;
+	if (str == 0)
+	{
+		return (ft_putstr_n(fd, "(null)"));
+	}
+	while (str[i] != '\0')
+	{
+		write(fd, &str[i], 1);
+		i++;
+	}
+	return (i);
+}
+
+/*
+int	main(void)
+{
+	char *st = "hello";
+	
+	printf("%d\n", ft_putstr_n(st));
+}
+*/

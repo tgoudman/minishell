@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putunnbr_n.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 09:01:01 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/15 14:43:03 by jdhallen         ###   ########.fr       */
+/*   Created: 2024/10/24 13:13:18 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/06 09:20:47 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_printf.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "Libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <limits.h>
+int	ft_putunnbr_n(int fd, unsigned int n)
+{
+	unsigned int	i;
+	char			c;
 
-#endif
+	i = 0;
+	if (n >= 10)
+		i += ft_putunnbr_n(fd, n / 10);
+	i ++;
+	c = (n % 10) + '0';
+	write(fd, &c, 1);
+	return (i);
+}
+
+/*
+int main(void)
+{
+    int i;
+
+    i = ft_putunnbr_n(1400);
+    printf("\n%d\n", i);
+}
+*/

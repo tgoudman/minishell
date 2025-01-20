@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 09:01:01 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/15 14:43:03 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/15 14:38:01 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/15 14:39:27 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "Libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <limits.h>
+# include "ft_libft/ft_libft.h"
+# include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line.h"
 
 #endif

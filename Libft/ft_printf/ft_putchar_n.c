@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putchar_n.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 09:01:01 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/15 14:43:03 by jdhallen         ###   ########.fr       */
+/*   Created: 2024/10/24 13:14:10 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/06 09:18:41 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_printf.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "Libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <limits.h>
+int	ft_putchar_n(int fd, char c)
+{
+	write(fd, &c, 1);
+	return (1);
+}
 
-#endif
+// int	main(void)
+// {
+// 	char st = 'h';
+// 	printf("%d\n", ft_putchar_n(st));
+// }
