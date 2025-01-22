@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 09:00:46 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/22 12:20:54 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/22 12:12:09 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char const **argv, char **env)
+void free_cmd(char **cmd)
 {
-	t_bash	            shell;
-	
-	(void)argv;
-	(void)argc;
-	ft_minishell(&shell, env);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (cmd[i] != NULL)
+		free(cmd[i++]);
+	free(cmd);
+}
+
+void	free_list(t_lst **env)
+{
+	t_lst	*tmp;
+
+	while (*env)
+	{
+		tmp = *env;
+		(*env) = (*env)->next;
+		free(tmp->name);
+		free(tmp->data);
+		free(tmp);
+	}
 }
