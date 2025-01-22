@@ -3,21 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+         #
+#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/01/20 14:00:23 by tgoudman         ###   ########.fr        #
+#    Updated: 2025/01/22 17:08:25 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -I$(LIBFT_DIR)
 LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
-
 NAME = minishell
 LIBFT_DIR = Libft
 
-SRCS = main.c minishell.c parsing.c signale.c\
+# -Werror
+
+SRCS = main.c minishell.c parsing.c signale.c builtins.c \
+		cleaning.c init.c init_env.c exec.c export.c\
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(BONUS:.c=.o)

@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "typeinfo": "c",
+        "functional": "c",
+        "__functional_03": "c",
+        "minishell.h": "c",
+        "errno.h": "c",
+        "sstream": "c",
+        "strstream": "c"
+    }
+}
