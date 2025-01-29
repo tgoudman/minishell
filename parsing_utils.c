@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaning.c                                         :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 14:50:37 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/28 16:09:53 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/28 16:10:16 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_cmd(char **cmd)
+int	ft_strcmp_var(const char *s1, const char *s2)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (cmd == NULL)
-		return ;
-	while (cmd[i] != NULL)
+	while (s1[i])
 	{
-		free(cmd[i++]);
+		if (!(isalnum(s2[i]) || s2[i] == '_'))
+			break ;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	if (cmd != NULL)
-		free(cmd);
-}
-
-void	free_list(t_lst **env)
-{
-	t_lst	*tmp;
-
-	while (*env)
-	{
-		tmp = *env;
-		(*env) = (*env)->next;
-		free(tmp->name);
-		free(tmp->data);
-		free(tmp);
-	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

@@ -1,42 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaning.c                                         :+:      :+:    :+:   */
+/*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 14:50:37 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/29 12:00:14 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/29 12:07:15 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_cmd(char **cmd)
-{
-	int	i;
-
-	i = 0;
-	if (cmd == NULL)
-		return ;
-	while (cmd[i] != NULL)
-	{
-		free(cmd[i++]);
-	}
-	if (cmd != NULL)
-		free(cmd);
-}
-
-void	free_list(t_lst **env)
-{
-	t_lst	*tmp;
-
-	while (*env)
-	{
-		tmp = *env;
-		(*env) = (*env)->next;
-		free(tmp->name);
-		free(tmp->data);
-		free(tmp);
-	}
-}
+int	search_for_quote(t_bash *shell)

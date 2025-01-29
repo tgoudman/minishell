@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:54:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/22 16:29:04 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/28 16:10:32 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@
 
 typedef enum e_command
 {
-    ECHO,
-    CD,
-    PWD,
-    EXPORT,
-    UNSET,
-    ENV,
-    EXIT,
-    CMD_COUNT
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT,
+	CMD_COUNT
 } t_command;
 
 typedef struct s_var
@@ -58,34 +58,39 @@ typedef struct s_var
 	int	l;
 }	t_var;
 
-typedef struct s_cmd
+typedef struct	s_cmd
 {
-	char *cmd_name;
-	char **args;
+	char	*name;
+	char	**args;
+	int		input;
+	int		output;
 }	t_cmd;
 
-typedef struct s_line
+typedef struct	s_line
 {
-	t_cmd	cmd;
-	char 	*input_file;
-	char 	*output_file;
-	int 	input_fd;
-	int 	output_fd;
-	int		append;
-	int		hd;
-	int		id;
-}	t_line;
+	char	**group;
+	t_cmd   *cmd;
+	int		cmd_nbr;
+}   t_line;
 
 typedef struct s_lst
 {
 	struct s_lst	*next;
-	char				*name; 
-	char				*data;
+	char			*name; 
+	char			*data;
 }		t_lst;
+
+typedef struct s_lst_fd
+{
+	struct s_lst	*next;
+	char			*name;
+	int				fd;
+	char			type;
+}	   t_lst_fd;
 
 typedef struct s_bash t_bash;
 
-typedef void	(*t_builtins)(t_bash *, int);
+typedef int	(*t_builtins)(t_bash *, t_cmd *, int);
 
 typedef struct s_func
 {
@@ -96,21 +101,23 @@ typedef struct s_func
 
 typedef struct s_bash
 {
-	t_line	line;
-	int		prev_return;
-	t_func		func[7];
+	t_line		  line;
+	int			 prev_return;
+	t_func		  func[7];
 	struct s_lst	*lst_env;
-}	t_bash;
+	struct s_lst_fd *lst_fd;
+}   t_bash;
 
 //EXEC
-int	single_function(t_bash *shell);
+int	single_function(t_bash *shell, t_cmd *cmd);
 
 //INIT FUNCTION
 void	init_env(t_bash *shell, char const **env);
-int 	init_struct(t_bash *shell, char const **env);
+int 	init_struct(t_bash *shell, char **env);
 
 // MAIN FUNCTION
-void	ft_minishell(t_bash *shell, char const **env);
+int		main(int argc, char const **argv, char **env);
+void	ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
 void	init_signale(struct sigaction *sa);
@@ -118,8 +125,11 @@ void 	handler(int signum);
 int 	return_signal(int sig, int access);
 
 //PARSING
-int	cmd_manager(t_bash *shell, char *input);
-int parsing(t_bash *shell);
+char	**ft_sep(char const *str, char c);
+int		ft_strcmp_var(const char *s1, const char *s2);
+int		cmd_manager(t_bash *shell, char *input);
+int 	parsing(t_bash *shell);
+int		search_for_var(t_bash *shell);
 
 //CLEANING
 
@@ -137,13 +147,13 @@ char	*get_data(char *str);
 //BUILTIN
 
 void	init_func(t_func *builtin);
-int 	ft_echo(t_bash *shell, int output);
-int		ft_cd(t_bash *shell, int output);
-int		ft_pwd(t_bash *shell, int output);
-int		ft_export(t_bash *shell, int output);
-int		ft_unset(t_bash *shell, int output);
-int		ft_env(t_bash *shell, int output);
-int		ft_exit(t_bash *shell, int output);
+int 	ft_echo(t_bash *shell, t_cmd *cmd, int output);
+int		ft_cd(t_bash *shell, t_cmd *cmd, int output);
+int		ft_pwd(t_bash *shell, t_cmd *cmd, int output);
+int		ft_export(t_bash *shell, t_cmd *cmd, int output);
+int		ft_unset(t_bash *shell, t_cmd *cmd, int output);
+int		ft_env(t_bash *shell, t_cmd *cmd, int output);
+int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
 
 
 #endif

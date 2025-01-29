@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdhallen <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/21 15:17:46 by jdhallen          #+#    #+#              #
-#    Updated: 2024/10/30 09:19:27 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/01/28 10:56:52 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ ARFLAGS = rcs
 NAME = ft_libftprintf.a
 
 SRC = ft_printf.c ft_putchar_n.c ft_puthexamaj_n.c ft_puthexamin_n.c \
-	ft_putnbr_n.c ft_putstr_n.c ft_putunnbr_n.c ft_putp_n.c
+	ft_putnbr_n.c ft_putstr_n.c ft_putunnbr_n.c ft_putp_n.c ft_puttab_n.c
 
 OBJ = $(SRC:.c=.o)
 

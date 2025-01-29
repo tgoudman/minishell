@@ -6,13 +6,13 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:43 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/22 16:24:00 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:06:23 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_minishell(t_bash *shell, char const **env)
+void	ft_minishell(t_bash *shell, char **env)
 {
 	struct sigaction	sa;
 	char			    *input;
@@ -31,7 +31,10 @@ void	ft_minishell(t_bash *shell, char const **env)
 			shell->prev_return = sig_return;
 		sig_return = 0;
 		if (input == NULL)
-			printf("exit");
+		{
+			ft_printf(1, "exit");
+			return ;
+		}
 		if (!*input)
 		{
 			free(input);
@@ -42,4 +45,3 @@ void	ft_minishell(t_bash *shell, char const **env)
 	}
 	rl_clear_history();
 }
-

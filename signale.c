@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:52:24 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/22 12:02:08 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:03:51 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 
 int return_signal(int sig, int access)
 {
-	static int return_value;
+	static int	return_value;
+	int			temp;
 
 	if (access == 1)
 		return_value = sig;
 	if (access == 0)
-		return (return_value);
+	{
+		temp = return_value;
+		return_value = 0;
+		return (temp);
+	}
 	return (130);
 }
 
@@ -30,8 +35,10 @@ void handler(int signum)
 
 	if (signum == SIGINT)
 		res = return_signal(130, 1);
-	ft_printf(1, "\nInput: ");
-	fflush(stdout);
+	ft_printf(1, "\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 void	init_signale(struct sigaction *sa)

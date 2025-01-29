@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:59:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2024/10/22 14:06:37 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:28:13 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_libft.h"
 
-static void	ft_freeall(char **l, size_t n)
+static void	freeall(char **l, size_t n)
 {
 	size_t	i;
 
@@ -25,7 +25,7 @@ static void	ft_freeall(char **l, size_t n)
 	free(l);
 }
 
-static size_t	ft_lsep(const char *s, const char c)
+static size_t	count_segment(const char *str, const char c)
 {
 	size_t	ts;
 	size_t	x;
@@ -34,28 +34,28 @@ static size_t	ft_lsep(const char *s, const char c)
 	x = 0;
 	ts = 0;
 	in_sub = 0;
-	while (s[x] != '\0')
+	while (str[x] != '\0')
 	{
-		if (s[x] != c && in_sub == 0)
+		if (str[x] != c && in_sub == 0)
 		{
 			in_sub = 1;
 			ts++;
 		}
-		else if (c == s[x])
+		else if (c == str[x])
 			in_sub = 0;
 		x++;
 	}
 	return (ts);
 }
 
-static size_t	ft_tsep(const char *s, const char c, size_t *start)
+static size_t	segment_length(const char *str, const char c, size_t *start)
 {
 	size_t	x;
 
 	x = 0;
-	while (s[*start] != '\0' && s[*start] == c)
+	while (str[*start] != '\0' && str[*start] == c)
 		(*start)++;
-	while (s[*start] != '\0' && s[*start] != c)
+	while (str[*start] != '\0' && str[*start] != c)
 	{
 		x++;
 		(*start)++;
@@ -63,53 +63,53 @@ static size_t	ft_tsep(const char *s, const char c, size_t *start)
 	return (x);
 }
 
-static char	*ft_talloc(const char *s, char c, size_t *j)
+static char	*alloc_segment(const char *str, char c, size_t *j)
 {
 	size_t	k;
 	size_t	len;
 	char	*t;
 
-	len = ft_tsep(s, c, j);
+	len = segment_length(str, c, j);
 	t = (char *)malloc((len + 1) * sizeof(char));
 	if (t == NULL)
 		return (NULL);
 	k = 0;
 	while (k < len)
 	{
-		t[k] = s[*j - len + k];
+		t[k] = str[*j - len + k];
 		k++;
 	}
 	t[k] = '\0';
 	return (t);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *str, char c)
 {
 	size_t	i;
 	size_t	j;
-	char	**l;
+	char	**list;
 
-	if (s == NULL)
+	if (str == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
-	if (s[0] == '\0')
+	if (str[0] == '\0')
 	{
-		l = (char **)malloc(sizeof(char *));
-		if (l == NULL)
+		list = (char **)malloc(sizeof(char *));
+		if (list == NULL)
 			return (NULL);
-		return (l[0] = NULL, l);
+		return (list[0] = NULL, list);
 	}
-	l = (char **)malloc((ft_lsep(s, c) + 1) * sizeof(char *));
-	if (l == NULL)
+	list = (char **)malloc((count_segment(str, c) + 1) * sizeof(char *));
+	if (list == NULL)
 		return (NULL);
-	while (i < ft_lsep(s, c))
+	while (i < count_segment(str, c))
 	{
-		l[i] = ft_talloc(s, c, &j);
-		if (l[i++] == NULL)
-			return (ft_freeall(l, i - 1), NULL);
+		list[i] = alloc_segment(str, c, &j);
+		if (list[i++] == NULL)
+			return (freeall(list, i - 1), NULL);
 	}
-	return (l[i] = NULL, l);
+	return (list[i] = NULL, list);
 }
 
 /*

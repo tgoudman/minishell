@@ -6,50 +6,70 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/22 17:08:56 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:59:54 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// char *return_var_value(t_bash *shell, char *str, int i)
-// {
-// 	t_lst *node;
-// 	t_lst *next;
-// 	while(shell->lst_env->next != NULL)
-// 	{
-// 		if (ft_strcmp(shell->lst_env->next, str) == 0)
-// 			return ()
-// 	}
-// }
-
-// int	search_for_var(t_bash *shell)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while(shell->line.cmd.args[i] == NULL)
-// 	{
-// 		if (shell->line.cmd.args[i][0] == '$')
-// 			return_var_value(shell,
-// 				ft_strchr(shell->line.cmd.args[i], '$'), i);
-// 	}
-// }
-
 int parsing(t_bash *shell)
 {
-	// search_for_var(shell);
-	single_function(shell);
+	int	len;
+	int	i;
+
+	if (search_for_var(shell) == ERROR)
+		return (ERROR);
+	ft_printf(1, "Command after PARSING VAR is : %t\n", shell->line.group);
+	if (shell->line.group == NULL)
+		return (ERROR);
+	len = 0;
+	while (shell->line.group[len] != NULL)
+		len++;
+	ft_printf(1, "Command after PARSING is : %t\n", shell->line.group);
+	shell->line.cmd = malloc(shell->line.cmd_nbr * sizeof(t_cmd));
+	if (shell->line.cmd == NULL)
+		return (ERROR);
+	shell->line.cmd[0].args = malloc(len * sizeof(char*));
+	if (shell->line.cmd[0].args == NULL)
+		return (ERROR);
+	shell->line.cmd[0].args[len - 1] = NULL;
+	i = 0;
+	while (i < len)
+	{
+		if (i == 0)
+		{
+			shell->line.cmd[0].name = ft_strdup(shell->line.group[i]);
+			if (shell->line.cmd[0].name == NULL)
+				return (ERROR);
+		}
+		else
+		{
+			shell->line.cmd[0].args[i - 1] = ft_strdup(shell->line.group[i]);
+			if (shell->line.cmd[0].args[i - 1] == NULL)
+				return (ERROR);
+		}
+		i++;
+	}
+	single_function(shell, &shell->line.cmd[0]);
 	return (1);
 }
 
 int	cmd_manager(t_bash *shell, char *input)
 {
-	shell->line.cmd.args = ft_split(input, ' ');
-	if (shell->line.cmd.args == NULL)
+	shell->line.cmd_nbr = 1;
+	shell->line.group = ft_split(input, ' ');
+	if (shell->line.group == NULL)
 		return (0);
-	parsing(shell);
 	free(input);
-	free_cmd(shell->line.cmd.args);
+	if (parsing(shell) == ERROR)
+		return (ERROR);
+	if (shell->line.cmd[0].name)
+		free(shell->line.cmd[0].name);
+	if (shell->line.cmd[0].args)
+		free_cmd(shell->line.cmd[0].args);
+	if (shell->line.cmd)
+		free(shell->line.cmd);
+	if (shell->line.group)
+		free_cmd(shell->line.group);
 	return (0);
 }

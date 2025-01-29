@@ -6,59 +6,29 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/22 17:08:41 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:49:07 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-int ft_echo(t_bash *shell, int output)
+int ft_cd(t_bash *shell, t_cmd *cmd, int output)
 {
-	t_var	v;
-	int newline;
-
-	newline = TRUE;
-	v.i = 0;
-	while (shell->line.cmd.args[v.i++] != NULL)
-	{
-		if (shell->line.cmd.args[v.i][0] != '-')
-			break ;
-		v.j = 1;
-		while (shell->line.cmd.args[v.i][v.j] == 'n')
-			v.j++;
-		if (shell->line.cmd.args[v.i][v.j] != '\0')
-			break ;
-		newline = FALSE;
-	}
-	while (shell->line.cmd.args[v.i] != NULL)
-	{
-		ft_printf(output, "%s", shell->line.cmd.args[v.i++]);
-		if (shell->line.cmd.args[v.i] != NULL)
-			ft_printf(output, " ");
-	}
-	if (newline == TRUE)
-		ft_printf(output, "\n");
-	return (shell->prev_return = 0, 0);
-}
-
-int ft_cd(t_bash *shell, int output)
-{
-	if (shell->line.cmd.args[1] == NULL)
+	if (cmd->args[0] == NULL)
 		chdir(getenv("HOME"));
 	else
 	{
-		if (chdir(shell->line.cmd.args[1]) != 0)
+		if (chdir(cmd->args[0]) != 0)
 		{
 			ft_printf(2, "minishell: cd: %s: %s\n",
-				shell->line.cmd.args[1], strerror(errno));
+				cmd->args[0], strerror(errno));
 			return (shell->prev_return = 1, 1);
 		}
 	}
 	return (shell->prev_return = 0, 0);
 }
 
-int ft_pwd(t_bash *shell, int output)
+int ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 {
 	char *pathname;
 
@@ -71,21 +41,26 @@ int ft_pwd(t_bash *shell, int output)
 	return (shell->prev_return = 0, 0);
 }
 
-int ft_unset(t_bash *shell, int output)
-{
-	shell->prev_return = 0;
-}
-
-int ft_env(t_bash *shell, int output)
+int ft_env(t_bash *shell, t_cmd *cmd, int output)
 {
 	ft_printf_list(&shell->lst_env, output);
 	shell->prev_return = 0;
 	return (0);
 }
 
-int ft_exit(t_bash *shell, int output)
+int ft_exit(t_bash *shell, t_cmd *cmd, int output)
 {
-	shell->prev_return = 0;
+	(void)output;
+	free_list(&shell->lst_env);
+	if (cmd->args)
+		free_cmd(cmd->args);
+	if (cmd->name)
+		free(cmd->name);
+	if (shell->line.cmd)
+		free(shell->line.cmd);
+	if (shell->line.group)
+		free_cmd(shell->line.group);
+	exit(1);
 }
 
 void	init_func(t_func *builtin)

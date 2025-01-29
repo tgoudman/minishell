@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/22 16:44:52 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:03:14 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_printf_list(t_lst **list, int output)
 	tmp = *list;
 	while (tmp)
 	{
-		ft_printf(output, "%s = %s\n", tmp->name, tmp->data);
+		ft_printf(output, "%s=%s\n", tmp->name, tmp->data);
 		tmp = tmp->next;
 	}
 }
