@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/30 18:41:04 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:01:35 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ typedef struct	s_line
 	int		cmd_nbr;
 }   t_line;
 
+typedef struct s_lst_var
+{
+	struct s_lst	*next;
+	char			*string; 
+	int				is_squote;
+}		t_lst_var;
+
 typedef struct s_lst
 {
 	struct s_lst	*next;
@@ -85,7 +92,8 @@ typedef struct s_lst_fd
 	struct s_lst	*next;
 	char			*name;
 	int				fd;
-	char			type;
+	char			type; // i = input o = output h = here_doc a = append
+	char			*limit;
 }	   t_lst_fd;
 
 typedef struct s_bash t_bash;
@@ -112,7 +120,7 @@ typedef struct s_bash
 int	single_function(t_bash *shell, t_cmd *cmd);
 
 //INIT FUNCTION
-void	init_env(t_bash *shell, char **env);
+void	init_env(t_bash *shell, char const **env);
 int 	init_struct(t_bash *shell, char **env);
 
 // MAIN FUNCTION
@@ -125,16 +133,19 @@ void 	handler(int signum);
 int 	return_signal(int sig, int access);
 
 //PARSING
-char	**ft_sep(char const *str, char c);
-int		ft_strcmp_var(const char *s1, const char *s2);
-int		cmd_manager(t_bash *shell, char *input);
-int 	parsing(t_bash *shell);
-int		search_for_var(t_bash *shell);
+t_lst_var	*temp_creation(char *str);
+char		*ft_subvar(char const *s, unsigned int start, int len);
+char		**ft_sep(char const *str, char c);
+int			search_for_quote(t_bash *shell, char *input);
+int			ft_strcmp_var(const char *s1, const char *s2);
+int			cmd_manager(t_bash *shell, char *input);
+int 		parsing(t_bash *shell);
+int			search_for_var(t_bash *shell);
 
 //CLEANING
-
-void	free_cmd(char **cmd);
+void	free_list_var(t_lst_var **lst_var);
 void	free_list(t_lst **shell);
+void	free_cmd(char **cmd);
 
 //LST
 t_lst	*create_new_node(char *data, char *name);
@@ -162,9 +173,5 @@ int			count_line_lst(t_lst *lst);
 char		**lst_to_tab(t_lst *lst);
 void		print_tabs(char **str, char *s);
 int			count_tab(char **str);
-
-
-
-
 
 #endif

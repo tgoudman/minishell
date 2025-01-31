@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/30 15:04:15 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:26:20 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ int parsing(t_bash *shell)
 	len = 0;
 	while (shell->line.group[len] != NULL)
 		len++;
-	ft_printf(1, "Command after PARSING is : %t\n", shell->line.group);
 	shell->line.cmd = malloc(shell->line.cmd_nbr * sizeof(t_cmd));
 	if (shell->line.cmd == NULL)
 		return (ERROR);
-	shell->line.cmd[0].args = malloc(len * sizeof(char*));
+	shell->line.cmd[0].args = malloc((len + 1) * sizeof(char*));
 	if (shell->line.cmd[0].args == NULL)
 		return (ERROR);
-	shell->line.cmd[0].args[len - 1] = NULL;
 	i = 0;
 	while (i < len)
 	{
@@ -42,22 +40,23 @@ int parsing(t_bash *shell)
 			if (shell->line.cmd[0].name == NULL)
 				return (ERROR);
 		}
-		else
-		{
-			shell->line.cmd[0].args[i - 1] = ft_strdup(shell->line.group[i]);
-			if (shell->line.cmd[0].args[i - 1] == NULL)
-				return (ERROR);
-		}
+		shell->line.cmd[0].args[i] = ft_strdup(shell->line.group[i]);
+		if (shell->line.cmd[0].args[i] == NULL)
+			return (ERROR);
 		i++;
 	}
+	shell->line.cmd[0].args[i] = NULL;
 	single_function(shell, &shell->line.cmd[0]);
 	return (1);
 }
 
 int	cmd_manager(t_bash *shell, char *input)
 {
+	if (search_for_quote(shell, input) == ERROR)
+		return (ERROR);
+	// shell->line.group = ft_split(input, ' ');
+	ft_printf(1, "Command after creation is : %t\n", shell->line.group);
 	shell->line.cmd_nbr = 1;
-	shell->line.group = ft_split(input, ' ');
 	if (shell->line.group == NULL)
 		return (0);
 	free(input);
