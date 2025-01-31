@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 16:10:32 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:41:04 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_bash
 int	single_function(t_bash *shell, t_cmd *cmd);
 
 //INIT FUNCTION
-void	init_env(t_bash *shell, char const **env);
+void	init_env(t_bash *shell, char **env);
 int 	init_struct(t_bash *shell, char **env);
 
 // MAIN FUNCTION
@@ -154,6 +154,17 @@ int		ft_export(t_bash *shell, t_cmd *cmd, int output);
 int		ft_unset(t_bash *shell, t_cmd *cmd, int output);
 int		ft_env(t_bash *shell, t_cmd *cmd, int output);
 int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
+int		ft_execve(t_bash *shell, t_cmd *cmd);
+
+//UTILS
+char		**join_tab(char **tab_dst, char **tab_src);
+int			count_line_lst(t_lst *lst);
+char		**lst_to_tab(t_lst *lst);
+void		print_tabs(char **str, char *s);
+int			count_tab(char **str);
+
+
+
 
 
 #endif

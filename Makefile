@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
+#    By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/01/28 16:16:18 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/01/30 18:34:08 by tgoudman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -I$(LIBFT_DIR)
 LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
+OBJ_DIR = build
 NAME = minishell
 LIBFT_DIR = Libft
 
@@ -21,17 +22,20 @@ LIBFT_DIR = Libft
 SRCS =	main.c minishell.c parsing.c signale.c \
 		cleaning.c init.c init_env.c exec.c unset.c\
 		builtins.c export.c echo.c variable.c ft_sep.c \
-		parsing_utils.c
+		parsing_utils.c execve.c utils.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

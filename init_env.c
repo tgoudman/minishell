@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/23 11:03:14 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:39:55 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_printf_list(t_lst **list, int output)
 	}
 }
 
-void	init_env(t_bash *shell, char const **env)
+void	init_env(t_bash *shell, char **env)
 {
 	t_lst	*tmp;
 	int		i;
