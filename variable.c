@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:23:43 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:34:20 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char *return_var_value(t_bash *shell, char *str, t_lst_var	*node)
 
 	if (str[0] != '$')
 		return (ft_strdup(str));
+	if (str[1] == '?')
+		return (ft_itoa(shell->prev_return));
 	if (str[1] == '\0' && node->next != NULL)
 		if (node->next->is_squote != node->is_squote)
 			return (ft_strdup(""));
@@ -46,8 +48,6 @@ char *return_var_value(t_bash *shell, char *str, t_lst_var	*node)
 		return (ft_strdup(str));
 	if (str[1] == '\0')
 		return (ft_strdup("$"));
-	if (str[1] == '?')
-		return (ft_itoa(shell->prev_return));
 	var_len = 0;
 	while (str[var_len + 1] && (ft_isalnum(str[var_len + 1]) || str[var_len + 1] == '_' ))
 		var_len++;
