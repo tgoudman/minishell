@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:14:25 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 15:09:10 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:52:06 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int ft_echo(t_bash *shell, t_cmd *cmd, int output)
 	int newline;
 
 	newline = TRUE;
-	v.i = 0;
-	if (cmd->args[0] == NULL)
+	v.i = 1;
+	if (cmd->args[1] == NULL)
 		return (ft_printf(output, "\n"), shell->prev_return = 0, 0);
 	while (cmd->args[v.i] != NULL)
 	{

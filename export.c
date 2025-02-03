@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:24:23 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 17:19:10 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:19:35 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,21 @@ int check_args_export(t_bash *shell, char *str)
 			break ;
 		if (ft_isalnum(str[i]) == 0 && str[i] != '_')
 		{
-			printf("\033[31m'%s': not a valid identifier.\033[0m\n", str);
+			ft_printf(1, "\033[31m'%s': not a valid identifier\033[0m\n", str);
 			shell->prev_return = 1;
 			return (1);
 		}
 		++i;
 	}
+	return (0);
 }
 
 int ft_export(t_bash *shell, t_cmd *cmd, int output)
 {
 	int i;
 	
-	i = 0;
+	i = 1;
+	(void)output;
 	while (cmd->args[i])
 	{
 		while (ft_strchr(cmd->args[i], '=') == NULL)

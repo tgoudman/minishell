@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 14:50:37 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:15:09 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ void	free_list(t_lst **env)
 		(*env) = (*env)->next;
 		free(tmp->name);
 		free(tmp->data);
+		free(tmp);
+	}
+}
+
+void	free_list_var(t_lst_var **lst_var)
+{
+	t_lst_var	*tmp;
+
+	while (*lst_var)
+	{
+		tmp = *lst_var;
+		(*lst_var) = (*lst_var)->next;
+		free(tmp->string);
 		free(tmp);
 	}
 }

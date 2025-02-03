@@ -3,26 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+         #
+#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/01/30 18:34:08 by tgoudman         ###   ########.fr        #
+#    Updated: 2025/02/03 15:08:53 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -I$(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
 LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
 OBJ_DIR = build
 NAME = minishell
 LIBFT_DIR = Libft
 
-# -Werror
-
 SRCS =	main.c minishell.c parsing.c signale.c \
 		cleaning.c init.c init_env.c exec.c unset.c\
 		builtins.c export.c echo.c variable.c ft_sep.c \
-		parsing_utils.c execve.c utils.c
+		parsing_utils.c execve.c utils.c line_creation.c \
+		temp_creation.c ft_subvar.c create_temp.c\
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:46 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/30 18:40:40 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:05:58 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char const **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
 	t_bash	            shell;
 	

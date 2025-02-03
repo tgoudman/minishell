@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 16:49:07 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:18:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int ft_cd(t_bash *shell, t_cmd *cmd, int output)
 {
-	if (cmd->args[0] == NULL)
+	(void)output;
+	if (cmd->name == NULL)
+		return(0);
+	if (cmd->args[1] == NULL)
 		chdir(getenv("HOME"));
 	else
 	{
-		if (chdir(cmd->args[0]) != 0)
+		if (chdir(cmd->args[1]) != 0)
 		{
 			ft_printf(2, "minishell: cd: %s: %s\n",
-				cmd->args[0], strerror(errno));
+				cmd->args[1], strerror(errno));
 			return (shell->prev_return = 1, 1);
 		}
 	}
@@ -32,9 +35,10 @@ int ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 {
 	char *pathname;
 
+	(void)cmd;
 	pathname = getcwd(NULL, 0);
 	if (pathname == NULL)
-		return(ft_printf(output, "pwd: %s\n", strerror(errno)),
+		return(ft_printf(2, "pwd: %s\n", strerror(errno)),
 			shell->prev_return = 1, 1);
 	ft_printf(output, "%s\n", pathname);
 	free(pathname);
@@ -43,6 +47,7 @@ int ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 
 int ft_env(t_bash *shell, t_cmd *cmd, int output)
 {
+	(void)cmd;
 	ft_printf_list(&shell->lst_env, output);
 	shell->prev_return = 0;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:43 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/27 15:06:23 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:40:11 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_minishell(t_bash *shell, char **env)
 		sig_return = 0;
 		if (input == NULL)
 		{
-			ft_printf(1, "exit");
+			ft_printf(1, "exit\n");
 			return ;
 		}
 		if (!*input)

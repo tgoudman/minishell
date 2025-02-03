@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/30 15:50:16 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:04:23 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,10 @@ int	single_function(t_bash *shell, t_cmd *cmd)
 		shell->func[EXIT].exec(shell, cmd, 1);
 	else
 		ft_execve(shell, cmd);
+	// else 
+	// {
+	// 	ft_printf(1, "Command '%s' not found\n", cmd->name);
+	// 	shell->prev_return = 127;
+	// }
 	return (0);
 }

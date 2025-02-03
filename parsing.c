@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/31 12:26:20 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:25:15 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int parsing(t_bash *shell)
 
 	if (search_for_var(shell) == ERROR)
 		return (ERROR);
-	ft_printf(1, "Command after PARSING VAR is : %t\n", shell->line.group);
+	ft_printf(1, "Command after variable replacement is : %t\n", shell->line.group);
 	if (shell->line.group == NULL)
 		return (ERROR);
 	len = 0;
@@ -54,7 +54,6 @@ int	cmd_manager(t_bash *shell, char *input)
 {
 	if (search_for_quote(shell, input) == ERROR)
 		return (ERROR);
-	// shell->line.group = ft_split(input, ' ');
 	ft_printf(1, "Command after creation is : %t\n", shell->line.group);
 	shell->line.cmd_nbr = 1;
 	if (shell->line.group == NULL)
@@ -72,3 +71,5 @@ int	cmd_manager(t_bash *shell, char *input)
 		free_cmd(shell->line.group);
 	return (0);
 }
+
+	// shell->line.group = ft_split(input, ' ');

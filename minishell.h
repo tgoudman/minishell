@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/31 12:01:35 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:22:35 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct	s_line
 
 typedef struct s_lst_var
 {
-	struct s_lst	*next;
+	struct s_lst_var	*next;
 	char			*string; 
 	int				is_squote;
 }		t_lst_var;
@@ -120,11 +120,11 @@ typedef struct s_bash
 int	single_function(t_bash *shell, t_cmd *cmd);
 
 //INIT FUNCTION
-void	init_env(t_bash *shell, char const **env);
+void	init_env(t_bash *shell, char **env);
 int 	init_struct(t_bash *shell, char **env);
 
 // MAIN FUNCTION
-int		main(int argc, char const **argv, char **env);
+int		main(int argc, char **argv, char **env);
 void	ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
@@ -134,13 +134,19 @@ int 	return_signal(int sig, int access);
 
 //PARSING
 t_lst_var	*temp_creation(char *str);
-char		*ft_subvar(char const *s, unsigned int start, int len);
+char	*ft_subvar(char const *s, int start, int len, char quote);
 char		**ft_sep(char const *str, char c);
 int			search_for_quote(t_bash *shell, char *input);
 int			ft_strcmp_var(const char *s1, const char *s2);
 int			cmd_manager(t_bash *shell, char *input);
 int 		parsing(t_bash *shell);
 int			search_for_var(t_bash *shell);
+
+//PARSING LST
+t_lst_var	*create_new_node_var(char *string, int is_squote);
+void	list_add_back_var(t_lst_var **list, t_lst_var *new_node);
+void	ft_printf_list_var(t_lst_var **list, int output);
+int	lst_create_new_var(t_lst_var **lst_var, char *str, t_var v, char quote);
 
 //CLEANING
 void	free_list_var(t_lst_var **lst_var);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:58:16 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/30 18:44:43 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:11:58 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_lst   *search_node(t_bash *shell, char *str)
 int check_args_unset(t_bash *shell, char *str)
 {
 	int i;  i = 0;
-	if (((str[i] < 'a' || str[i] > 'z') && ((str[i] < 'A' || str[i] > 'Z')))
+	if ((str[i] < 'a' || str[i] > 'z') && ((str[i] < 'A' || str[i] > 'Z'))
 		&& (str[i] != '_'))
 	{
 		printf("\033[31m unset: %s: invalid parameter name.\033[0m\n", str);
@@ -69,8 +69,7 @@ int check_args_unset(t_bash *shell, char *str)
 	}
 	while (str[i] != '\0')
 	{
-		if (((str[i] < 'a' || str[i] > 'z') && ((str[i] < 'A' || str[i] > 'Z')))
-			&& (((str[i] < '0') || (str[i] > '9')) && (str[i] != '_')))
+		if (ft_isalnum(str[i]) == 0 && str[i] != '_')
 		{
 			printf("\033[31m unset: %s: invalid parameter name.\033[0m\n", str);
 			shell->prev_return = 1;
