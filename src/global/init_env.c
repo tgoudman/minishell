@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:06:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:05:23 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:09:51 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_lst	*create_new_node(char *data, char *name)
 {

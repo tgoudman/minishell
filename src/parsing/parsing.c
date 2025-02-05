@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/03 15:25:15 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:03:23 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int parsing(t_bash *shell)
 {
@@ -59,8 +59,9 @@ int	cmd_manager(t_bash *shell, char *input)
 	if (shell->line.group == NULL)
 		return (0);
 	free(input);
-	if (parsing(shell) == ERROR)
-		return (ERROR);
+	// if (parsing(shell) == ERROR)
+	// 	return (ERROR);
+	parsing(shell);
 	if (shell->line.cmd[0].name)
 		free(shell->line.cmd[0].name);
 	if (shell->line.cmd[0].args)

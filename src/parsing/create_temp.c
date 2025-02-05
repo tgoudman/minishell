@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_temp.c                                        :+:      :+:    :+:   */
+/*   create_temp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:17:35 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 12:08:11 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:12:06 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_lst_var	*create_new_node_var(char *string, int is_squote)
 {

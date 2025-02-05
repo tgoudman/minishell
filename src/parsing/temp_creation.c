@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char quote_check(char chr)
 {
@@ -67,10 +67,10 @@ t_lst_var	*temp_creation(char *str)
 		if (str[v.i] != '$')
 			v.i++;
 	}
+	ft_printf_list_var(&lst_var, 1);
 	return (lst_var);
 }
 
-	// ft_printf_list_var(&lst_var, 1);
 
 // 'echo $USER'test"$USER"
 		// if (quote != FALSE)

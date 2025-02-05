@@ -6,12 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:52:24 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 13:03:51 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:07:27 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "minishell.h"
+#include "../minishell.h"
 
 int return_signal(int sig, int access)
 {

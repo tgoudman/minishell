@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:13:20 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:08:18 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:07:33 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int init_struct(t_bash *shell, char **env)
 {

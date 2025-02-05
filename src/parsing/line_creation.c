@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:00:14 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:20:17 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:05:56 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	skip_quote(char *input, int char_nbr, int i, int search_error)
 {

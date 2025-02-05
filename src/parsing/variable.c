@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:34:20 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:12:56 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char *var_find(t_bash *shell, char *var, char *after)
 {
@@ -110,26 +110,41 @@ char *rebuild_temp(t_lst_var	*temp)
 
 int	search_for_var(t_bash *shell)
 {
-	t_lst_var	*temp;
-	int		i;
+	t_lst_var	**temp;
+	int			i;
+	int			len;
 
+	len = 0;
+	while (shell->line.group[len] != NULL)
+		len++;
+	temp = malloc((len + 1) * sizeof(t_lst_var *));
+	if (temp == NULL)
+		return (ERROR);
+	temp[len] = NULL;
 	i = 0;
-	while (shell->line.group[i] != NULL)
+	while (i < len)
 	{
-		temp = temp_creation(shell->line.group[i]);
-		if (temp == NULL)
-			return (free_cmd(shell->line.group), ERROR);
-		temp = demolish_var(shell, temp);
-		if (temp == NULL)
-			return (free_cmd(shell->line.group), ERROR);
-		free(shell->line.group[i]);
-		shell->line.group[i] = rebuild_temp(temp);
-		if (shell->line.group[i] == NULL)
-			return (free_cmd(shell->line.group), ERROR);
-		free_list_var(&temp);
+		temp[i] = temp_creation(shell->line.group[i]);
+		if (temp[i] == NULL)
+			return (free_list_point(&temp, len), free_cmd(shell->line.group), ERROR);
+		temp[i] = demolish_var(shell, temp[i]);
+		if (temp[i] == NULL)
+			return (free_list_point(&temp, len), free_cmd(shell->line.group), ERROR);
 		i++;
 	}
+	i = 0;
+	while (i < len)
+	{
+		free(shell->line.group[i]);
+		shell->line.group[i] = rebuild_temp(temp[i]);
+		if (shell->line.group[i] == NULL)
+			return (free_list_point(&temp, len), free_cmd(shell->line.group), ERROR);
+		i++;
+	}
+	ft_printf(1, "test\n");
+	free_list_point(&temp, len);
 	return (0);
 }
 
 // temp = ft_sep(shell->line.group[i], '$');
+	// cmd_parsing(shell, temp, len);

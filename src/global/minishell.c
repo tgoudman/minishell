@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:00:43 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/31 11:40:11 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:09:09 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_minishell(t_bash *shell, char **env)
 {

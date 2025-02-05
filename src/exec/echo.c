@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:14:25 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 13:52:06 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_echo_printf(t_cmd *cmd, int output, t_var *v)
 {

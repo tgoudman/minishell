@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:22:35 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:21:21 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <limits.h>
 # include <signal.h>
 # include <errno.h>
+# include "src/parsing/parsing.h"
 
 # ifndef TRUE
 #  define TRUE 1
@@ -48,7 +49,7 @@ typedef enum e_command
 	ENV,
 	EXIT,
 	CMD_COUNT
-} t_command;
+}	t_command;
 
 typedef struct s_var
 {
@@ -58,7 +59,7 @@ typedef struct s_var
 	int	l;
 }	t_var;
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
 	char	*name;
 	char	**args;
@@ -66,19 +67,12 @@ typedef struct	s_cmd
 	int		output;
 }	t_cmd;
 
-typedef struct	s_line
+typedef struct s_line
 {
 	char	**group;
-	t_cmd   *cmd;
+	t_cmd	*cmd;
 	int		cmd_nbr;
 }   t_line;
-
-typedef struct s_lst_var
-{
-	struct s_lst_var	*next;
-	char			*string; 
-	int				is_squote;
-}		t_lst_var;
 
 typedef struct s_lst
 {
@@ -117,7 +111,7 @@ typedef struct s_bash
 }   t_bash;
 
 //EXEC
-int	single_function(t_bash *shell, t_cmd *cmd);
+int		single_function(t_bash *shell, t_cmd *cmd);
 
 //INIT FUNCTION
 void	init_env(t_bash *shell, char **env);
@@ -132,24 +126,7 @@ void	init_signale(struct sigaction *sa);
 void 	handler(int signum);
 int 	return_signal(int sig, int access);
 
-//PARSING
-t_lst_var	*temp_creation(char *str);
-char	*ft_subvar(char const *s, int start, int len, char quote);
-char		**ft_sep(char const *str, char c);
-int			search_for_quote(t_bash *shell, char *input);
-int			ft_strcmp_var(const char *s1, const char *s2);
-int			cmd_manager(t_bash *shell, char *input);
-int 		parsing(t_bash *shell);
-int			search_for_var(t_bash *shell);
-
-//PARSING LST
-t_lst_var	*create_new_node_var(char *string, int is_squote);
-void	list_add_back_var(t_lst_var **list, t_lst_var *new_node);
-void	ft_printf_list_var(t_lst_var **list, int output);
-int	lst_create_new_var(t_lst_var **lst_var, char *str, t_var v, char quote);
-
 //CLEANING
-void	free_list_var(t_lst_var **lst_var);
 void	free_list(t_lst **shell);
 void	free_cmd(char **cmd);
 
@@ -174,10 +151,10 @@ int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
 int		ft_execve(t_bash *shell, t_cmd *cmd);
 
 //UTILS
-char		**join_tab(char **tab_dst, char **tab_src);
-int			count_line_lst(t_lst *lst);
-char		**lst_to_tab(t_lst *lst);
-void		print_tabs(char **str, char *s);
-int			count_tab(char **str);
+char	**join_tab(char **tab_dst, char **tab_src);
+int		count_line_lst(t_lst *lst);
+char	**lst_to_tab(t_lst *lst);
+void	print_tabs(char **str, char *s);
+int		count_tab(char **str);
 
 #endif

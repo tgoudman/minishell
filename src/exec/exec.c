@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:04:23 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:27 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	single_function(t_bash *shell, t_cmd *cmd)
 {

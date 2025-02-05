@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:23:30 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:22:19 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:01 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	ft_intlen(const char *s)
 {

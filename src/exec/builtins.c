@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:18:30 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:33 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int ft_cd(t_bash *shell, t_cmd *cmd, int output)
 {

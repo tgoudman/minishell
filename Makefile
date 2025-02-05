@@ -6,7 +6,7 @@
 #    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/02/03 15:08:53 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/02/05 10:10:16 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,21 @@ CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
 LFLAGS = -L$(LIBFT_DIR) -lft -lreadline
 OBJ_DIR = build
 NAME = minishell
+PARS_DIR = src/parsing
+EXEC_DIR = src/exec
+SRC_DIR = src/global
+vpath %.c $(PARS_DIR) $(EXEC_DIR) $(SRC_DIR)
 LIBFT_DIR = Libft
 
-SRCS =	main.c minishell.c parsing.c signale.c \
-		cleaning.c init.c init_env.c exec.c unset.c\
-		builtins.c export.c echo.c variable.c ft_sep.c \
-		parsing_utils.c execve.c utils.c line_creation.c \
-		temp_creation.c ft_subvar.c create_temp.c\
+SRCS =	main.c \
+		minishell.c  signale.c init.c init_env.c \
+		cleaning.c utils.c builtins.c export.c \
+		echo.c execve.c exec.c unset.c \
+		parsing.c parsing_utils.c\
+		variable.c cmd_creation.c\
+		temp_creation.c line_creation.c\
+		ft_subvar.c create_temp.c\
+		create_cmd.c cleaning_parsing.c\
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
@@ -34,7 +42,7 @@ $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LFLAGS)
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

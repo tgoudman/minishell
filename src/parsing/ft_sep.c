@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:28:36 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 15:05:17 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:00 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	freeall(char **list, size_t len)
 {

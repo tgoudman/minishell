@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:58:16 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/03 15:11:58 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:18 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_lst   *delete_node(t_lst *lst, int n)
 {

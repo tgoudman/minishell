@@ -6,11 +6,11 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/01/31 11:39:35 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:06:25 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*get_path(char *cmd)
 {
