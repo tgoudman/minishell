@@ -6,7 +6,7 @@
 #    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/02/05 10:10:16 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/02/05 10:22:36 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS =	main.c \
 		variable.c cmd_creation.c\
 		temp_creation.c line_creation.c\
 		ft_subvar.c create_temp.c\
-		create_cmd.c cleaning_parsing.c\
+		create_cmd.c cleaning_parsing.c convert_lst.c\
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
