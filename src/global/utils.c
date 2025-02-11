@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:45:38 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/03 18:07:29 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:29:13 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	count_line_lst_fd(t_lst_fd *lst)
+{
+	t_lst_fd	*tmp;
+	int		i;
+
+	i = 0;
+	if (!lst)
+		return (-1);
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		++i;
+	}
+	return (i);
+}
 
 int	count_line_lst(t_lst *lst)
 {
