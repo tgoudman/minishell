@@ -6,11 +6,20 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 11:54:29 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:07:21 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_space(char *input, int i)
+{
+	while (input[i] != '\0' && input[i] == ' ')
+		i++;
+	if (input[i] == '\0')
+		return (FALSE);
+	return (TRUE);
+}
 
 char	*copy_space(char *input, char *tmp)
 {
@@ -23,7 +32,7 @@ char	*copy_space(char *input, char *tmp)
 	j = 0;
 	space = 0;
 	quote = FALSE;
-	while (input[i] != '\0')
+	while (input[i] != '\0' && check_space(input, i) == TRUE)
 	{
 		if (quote != FALSE && input[i] == quote)
 			quote = FALSE;
@@ -82,11 +91,11 @@ char *input_remake(char *input)
 {
 	char	*tmp;
 
-	// ft_printf(1, "len : %i\n", move_space(input));
+	ft_printf(1, "len : %i\n", move_space(input));
 	tmp = malloc((move_space(input) + 1) * sizeof (char));
 	if (tmp == NULL)
 		return (NULL);
 	input = copy_space(input, tmp);
-	// ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));
+	ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));
 	return (input);
 }
