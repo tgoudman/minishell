@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/05 11:11:07 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:09:10 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,18 +134,8 @@ int	search_for_var(t_bash *shell)
 		i++;
 	}
 	result = convert_lst(temp);
-	cmd_parsing(shell, result);
-	i = 0;
-	while (i < len)
-	{
-		free(shell->line.group[i]);
-		shell->line.group[i] = rebuild_temp(temp[i]);
-		if (shell->line.group[i] == NULL)
-			return (free_list_point(&temp, len), free_cmd(shell->line.group), ERROR);
-		i++;
-	}
-	ft_printf(1, "test\n");
-	free_list_point(&temp, len);
+	if (cmd_parsing(shell, result) == ERROR)
+		return (ERROR);
 	return (0);
 }
 

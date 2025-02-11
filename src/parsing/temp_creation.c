@@ -42,8 +42,8 @@ int	quote_parsing_var(t_lst_var **lst_var, char *str, t_var *v, char *quote)
 		if (v->i > v->j)
 			if (lst_create_new_var(lst_var, str, *v, *quote) == ERROR)
 				return (ERROR);
-	if (quote_check(str[v->i]) != FALSE)
-		*quote = quote_check(str[v->i]);
+		if (quote_check(str[v->i]) != FALSE)
+			*quote = quote_check(str[v->i]);
 	}
 	return (0);
 }
@@ -67,7 +67,7 @@ t_lst_var	*temp_creation(char *str)
 		if (str[v.i] != '$')
 			v.i++;
 	}
-	ft_printf_list_var(&lst_var, 1);
+	// ft_printf_list_var(&lst_var, 1);
 	return (lst_var);
 }
 
