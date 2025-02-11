@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:17:35 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/04 10:12:06 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:08:49 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	lst_create_new_var(t_lst_var **lst_var, char *str, t_var v, char quote)
 	string = ft_subvar(str, v.j, v.i - v.j, quote);
 	if (string == NULL)
 		return (ERROR);
-	if (string[0] == '\0')
-		return (TRUE);
 	tmp = create_new_node_var(string, quote);
 	if (tmp == NULL)
 		return (ERROR);

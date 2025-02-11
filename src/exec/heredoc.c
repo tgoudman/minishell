@@ -5,19 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/10 10:35:04 by tgoudman         ###   ########.fr       */
+/*   Created: 2025/01/31 14:56:24 by tgoudman          #+#    #+#             */
+/*   Updated: 2025/02/05 11:27:46 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_heredoc(char *str, char	*del)
+void	heredoc(t_bash *shell, t_cmd *cmd)
 {
 	int		fd;
 	char	*input;
 
-	fd = open(str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	(void)shell;
+	fd = open("heredoc00.txt", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd == -1)
 		return (perror("Erreur lors de l'ouverture du fichier"));
 	while (1)
@@ -26,11 +27,14 @@ void	ft_heredoc(char *str, char	*del)
 		if (input == NULL)
 		{
 			printf("!!here-document delimited by end-of-file (wanted `%s')!!\n",
-				del);
+				cmd->args[1]);
 			break ;
 		}
-		if (ft_strcmp(input, del) == 0)
+		if (!*input)
+			free(input);
+		if (ft_strcmp(input, cmd->args[1]) == 0)
 			break ;
 		ft_putendl_fd(input, fd);
 	}
+	close(fd);
 }

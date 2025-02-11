@@ -62,35 +62,23 @@ t_lst_var	*temp_creation(char *str)
 		v.j = v.i;
 		if (str[v.i] == '$')
 			v.i++;
+		if (str[v.i] == ' ')
+		{
+			v.i++;
+			v.j++;
+		}
 		if (quote_parsing_var(&lst_var, str, &v, &quote) == ERROR)
 			return (free_list_var(&lst_var), NULL);
 		if (str[v.i] != '$')
 			v.i++;
 	}
-	// ft_printf_list_var(&lst_var, 1);
+	ft_printf_list_var(&lst_var, 1);
 	return (lst_var);
 }
 
-
-// 'echo $USER'test"$USER"
-		// if (quote != FALSE)
-		// {
-		// 	v.i++;
-		// 	while (str[v.i] != '\0' && str[v.i] != '$'
-		// 		&& str[v.i] != quote)
-		// 		v.i++;
-		// 	if (lst_create_new_var(&lst_var, str, v, quote) == ERROR)
-		// 		return (free_list_var(lst_var), NULL);
-		// 	if (str[v.i] == quote)
-		// 		quote = FALSE;
-		// }
-		// else
-		// {
-		// 	while (str[v.i] != '\0' && str[v.i] != '$'
-		// 		&& quote_check(str[v.i]) == FALSE)
-		// 		v.i++;
-		// 	if (v.i > v.j)
-		// 		lst_create_new_var(&lst_var, str, v, quote);
-		// 	if (quote_check(str[v.i]) != FALSE)
-		// 		quote = quote_check(str[v.i]);
-		// }
+		// if (ft_strcmp(node->string, "") == 0)
+		// 	{
+		// 		node->string = ft_strdup("");
+		// 		ft_printf(1, "\"null\"\n");
+		// 		continue ;
+		// 	}

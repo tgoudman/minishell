@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puttab_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:56:14 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/06 12:49:01 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:00:00 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_puttab_n(int fd, char **tab)
 	while (tab[i] != NULL)
 	{
 		ft_putstr_n(fd, tab[i]);
-		printf("\n");
 		ft_putchar_n(fd, ' ');
 		i++;
 	}

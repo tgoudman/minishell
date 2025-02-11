@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/11 11:55:25 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:52:22 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	cmd_manager(t_bash *shell, char *input)
 		parsing(shell);
 	}
 	i = 0;
+	ft_printf(1, "hello\n");
 	if (shell->line.cmd != NULL)
 	{
 		while (i < shell->line.cmd_nbr)
@@ -60,7 +61,6 @@ int	cmd_manager(t_bash *shell, char *input)
 		free_cmd(shell->line.group);
 	if (shell->line.lst_fd != NULL)
 		free_list_fd(&shell->line.lst_fd);
-	// ft_printf(1, "hello\n");
 	return (0);
 }
 

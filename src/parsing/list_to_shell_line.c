@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:42:51 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 12:12:12 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:48:08 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,15 @@ t_lst_arg *ft_new_cmd(t_lst_cmd *tmp_cmd, int *len)
 			tmp = temp_char;
 			temp_char = ft_strjoin(tmp, tmp_cmd->arg[v.i].str);
 			free(tmp);
+			if (temp_char == NULL)
+				return (NULL);
 		}
 		else
+		{
 			temp_char = ft_strdup(tmp_cmd->arg[v.i].str);
+			if (temp_char == NULL)
+				return (NULL);
+		}
 		arg = create_new_node_arg(ft_strdup(temp_char));
 		list_add_back_arg(&arg_lst, arg);
 		free(temp_char);

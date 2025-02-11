@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 12:25:09 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:31:11 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <signal.h>
 # include <errno.h>
 # include "src/parsing/parsing.h"
-# include "src/exec/builtins.h"
 
 # ifndef TRUE
 #  define TRUE 1
@@ -60,29 +59,13 @@ typedef struct s_var
 	int	l;
 }	t_var;
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
 	char	*name;
 	char	**args;
 	int		input;
 	int		output;
-}				t_cmd;
-
-
-typedef struct s_line
-{
-	struct s_lst_fd *lst_fd;
-	t_cmd			*cmd;
-	char			**group;
-	int				cmd_nbr;
-}   t_line;
-
-typedef struct s_lst
-{
-	struct s_lst	*next;
-	char			*name; 
-	char			*data;
-}		t_lst;
+}	t_cmd;
 
 typedef struct s_lst_fd
 {
@@ -93,7 +76,31 @@ typedef struct s_lst_fd
 	char			*limit;
 }	   t_lst_fd;
 
+typedef struct s_line
+{
+	struct s_lst_fd *lst_fd;
+	char			**group;
+	t_cmd			*cmd;
+	int				cmd_nbr;
+}   t_line;
+
+typedef struct s_lst
+{
+	struct s_lst	*next;
+	char			*name; 
+	char			*data;
+}		t_lst;
+
 typedef struct s_bash t_bash;
+
+typedef int	(*t_builtins)(t_bash *, t_cmd *, int);
+
+typedef struct s_func
+{
+	const char	*name;
+	t_builtins	exec;
+	int			rtn;
+}	t_func;
 
 typedef struct s_bash
 {
@@ -151,11 +158,5 @@ int		count_line_lst(t_lst *lst);
 char	**lst_to_tab(t_lst *lst);
 void	print_tabs(char **str, char *s);
 int		count_tab(char **str);
-int		count_line_lst_fd(t_lst_fd *lst);
-
-//UTILS
-void		list_add_back_fd(t_lst_fd **list, t_lst_fd *new_node);
-t_lst_fd	*create_new_node_fd(char *name, char type, char *limit);
-void		ft_printf_list_fd(t_lst_fd **list, int output);
 
 #endif

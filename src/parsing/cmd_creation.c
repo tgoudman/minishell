@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/11 12:14:34 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:31:15 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 			list_add_back_line(line_list, line);
 			line = create_new_node_line(ft_strdup("|"));
 			list_add_back_line(line_list, line);
-			pos->last_type = PIPE;
 		}
 		else if (is_bash_op(tmp->string[pos->j], '!'))
 		{
@@ -120,6 +119,8 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 				line = create_new_node_line(ft_strdup("|"));
 				list_add_back_line(line_list, line);
 				pos->last_type = PIPE;
+				pos->j++;
+				pos->start_of_char++;
 			}
 			pos->end_of_arg = pos->i;
 			pos->end_of_char = pos->j;
@@ -151,9 +152,9 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 	if (cmd_list == NULL)
 		return (ERROR);
 	create_heredoc_name(&fd_list);
-	// ft_printf_list_cmd(&cmd_list, 1);
-	// ft_printf_list_line(&line_list, 1);
-	// ft_printf_list_fd(&fd_list, 1);
+	ft_printf_list_cmd(&cmd_list, 1);
+	ft_printf_list_line(&line_list, 1);
+	ft_printf_list_fd(&fd_list, 1);
 	free_list_var(&main_lst);
 	if (convert_lst_to_line(shell, &line_list, &cmd_list, &fd_list) == ERROR)
 	{

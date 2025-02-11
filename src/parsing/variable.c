@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/10 13:09:10 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:50:43 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,6 @@ t_lst_var	*demolish_var(t_bash *shell, t_lst_var	*temp)
 		node = node->next;
 	}
 	return (temp);
-}
-
-char *rebuild_temp(t_lst_var	*temp)
-{
-	t_lst_var	*node;
-	char	*result;
-	char	*temp_join;
-	int		i;
-
-	node = temp;
-	result = ft_strdup("");
-	if (result == NULL)
-		return (NULL);
-	i = 0;
-	while (node != NULL)
-	{
-		temp_join = ft_strjoin(result, node->string);
-		free(result);
-		if (temp_join == NULL)
-			return (NULL);
-		result = temp_join;
-		node = node->next;
-	}
-	return (result);
 }
 
 int	search_for_var(t_bash *shell)
