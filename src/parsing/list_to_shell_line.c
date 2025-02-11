@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:42:51 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 13:48:08 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:47:24 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ t_lst_arg *ft_new_cmd(t_lst_cmd *tmp_cmd, int *len)
 		}
 		else
 		{
+			tmp = temp_char;
 			temp_char = ft_strdup(tmp_cmd->arg[v.i].str);
 			if (temp_char == NULL)
 				return (NULL);
+			free(tmp);
 		}
 		arg = create_new_node_arg(ft_strdup(temp_char));
 		list_add_back_arg(&arg_lst, arg);
@@ -148,7 +150,6 @@ int	lst_cmd_to_cmd_tab(t_bash *shell, t_lst_cmd **lst_cmd)
 		i++;
 		tmp_cmd = tmp_cmd->next;
 	}
-	shell->line.cmd[i].args = NULL;
 	return (TRUE);
 }
 
@@ -181,7 +182,7 @@ int	convert_lst_to_line(t_bash *shell, t_lst_line **lst_line,
 		if (shell->line.cmd[i].args != NULL
 			&& shell->line.cmd[i].args[0] != NULL)
 		{
-			shell->line.cmd->name = ft_strdup(shell->line.cmd[i].args[0]);
+			shell->line.cmd[i].name = ft_strdup(shell->line.cmd[i].args[0]);
 			if (shell->line.cmd[i].name == NULL)
 				return (ERROR);
 		}

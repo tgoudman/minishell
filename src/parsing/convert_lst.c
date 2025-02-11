@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:14:58 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 12:42:55 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:20:55 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_lst_var	*convert_lst(t_lst_var **lst_point)
 				temp = temp->next;
 				continue ;
 			}
-			node = create_new_node_var(temp->string, temp->is_squote);
+			node = create_new_node_var(ft_strdup(temp->string), temp->is_squote);
 			node->id = id;
 			id++;
 			list_add_back_var(&result, node);

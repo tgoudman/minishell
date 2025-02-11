@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:13:49 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 11:50:41 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:17:48 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char *get_lst_fd(t_lst_var *main_lst, t_cmd_pos *pos, char *type, char **limit)
 		return (NULL);
 	while (tmp != NULL)
 	{
-		if (is_bash_op(tmp->string[pos->j - 1], '!') == 0)
+		if (pos->j > 0 && is_bash_op(tmp->string[pos->j - 1], '!') == 0)
 			pos->j = 0;
 		while (tmp->string[pos->j] != '\0' && is_bash_op(tmp->string[pos->j], '*') == 0)
 		{
@@ -114,6 +114,7 @@ char *get_lst_fd(t_lst_var *main_lst, t_cmd_pos *pos, char *type, char **limit)
 	}
 	pos->start_of_arg = pos->i;
 	pos->start_of_char = pos->j;
+	*limit = NULL;
 	if (*type == 'h')
 	{
 		*limit = name;

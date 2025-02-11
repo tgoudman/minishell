@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/11 12:31:15 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:59:57 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 				while (fd_temp->next != NULL)
 					fd_temp = fd_temp->next;
 			}
-			line = create_new_node_line(ft_strjoin(ft_strdup("!"), fd_temp->name));
+			line = create_new_node_line(ft_strjoin("!", fd_temp->name));
 			list_add_back_line(line_list, line);
 			pos->last_type = FILE;
 			if (fd_res == BREAK)
@@ -149,13 +149,13 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 	pos.i = 0;
 	pos.j = 0;
 	cmd_list = get_lst_cmd(main_lst, &line_list, &fd_list, &pos);
+	free_list_var(&main_lst);
 	if (cmd_list == NULL)
 		return (ERROR);
 	create_heredoc_name(&fd_list);
 	ft_printf_list_cmd(&cmd_list, 1);
 	ft_printf_list_line(&line_list, 1);
 	ft_printf_list_fd(&fd_list, 1);
-	free_list_var(&main_lst);
 	if (convert_lst_to_line(shell, &line_list, &cmd_list, &fd_list) == ERROR)
 	{
 		free_list_cmd(&cmd_list);

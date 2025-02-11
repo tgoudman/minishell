@@ -69,7 +69,7 @@ t_lst_var	*temp_creation(char *str)
 		}
 		if (quote_parsing_var(&lst_var, str, &v, &quote) == ERROR)
 			return (free_list_var(&lst_var), NULL);
-		if (str[v.i] != '$')
+		if (str[v.i] != '\0' && str[v.i] != '$')
 			v.i++;
 	}
 	ft_printf_list_var(&lst_var, 1);

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 14:07:21 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:14:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	move_space(char *input)
 	len = 0;
 	quote = FALSE;
 	space = 0;
-	while (input[i] != '\0')
+	while (input[i] != '\0' && check_space(input, i) == TRUE)
 	{
 		if (quote != FALSE && input[i] == quote)
 			quote = FALSE;
