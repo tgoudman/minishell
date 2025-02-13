@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 14:14:30 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:50:57 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ char *input_remake(char *input)
 {
 	char	*tmp;
 
-	ft_printf(1, "len : %i\n", move_space(input));
+	// ft_printf(1, "len : %i\n", move_space(input));
 	tmp = malloc((move_space(input) + 1) * sizeof (char));
 	if (tmp == NULL)
 		return (NULL);
 	input = copy_space(input, tmp);
-	ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));
+	// ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));
 	return (input);
 }

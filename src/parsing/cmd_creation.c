@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/11 14:59:57 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:50:25 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_char_arg *get_lst_arg(t_lst_var *main_lst, t_cmd_pos *pos)
 	while (tmp != NULL && tmp->id <= pos->end_of_arg)
 	{
 		move_pos_v(tmp, &v, pos);
-		if (v.j < v.i && tmp->string[v.j] != '\0')
+		if (v.j == v.i && ft_strcmp(tmp->string, "") == 0)
 		{
 			// ft_printf(1, "%i, %i, %s\n", v.j, v.i, ft_substr(tmp->string, v.j, v.i - v.j));
 			arg_str = create_new_node_arg(ft_substr(tmp->string, v.j, v.i - v.j));
@@ -34,7 +34,16 @@ t_char_arg *get_lst_arg(t_lst_var *main_lst, t_cmd_pos *pos)
 			list_add_back_arg(&arg_stack, arg_str);
 			if (arg_str->str == NULL)
 				return (free_list_arg(&arg_stack), NULL);
-			// ft_printf(1, "CA string in [%i] : \033[34m \033[4m%s\033[0m\n", tmp->id, tmp->string);
+		}
+		if (v.j < v.i)
+		{
+			// ft_printf(1, "%i, %i, %s\n", v.j, v.i, ft_substr(tmp->string, v.j, v.i - v.j));
+			arg_str = create_new_node_arg(ft_substr(tmp->string, v.j, v.i - v.j));
+			arg_str->is_space = tmp->is_space;
+			list_add_back_arg(&arg_stack, arg_str);
+			if (arg_str->str == NULL)
+				return (free_list_arg(&arg_stack), NULL);
+		// ft_printf(1, "CA string in [%i] : \033[34m \033[4m%s\033[0m\n", tmp->id, tmp->string);
 		}
 		tmp = tmp->next;
 		if (tmp == NULL)
@@ -102,7 +111,7 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 			}
 			fd_res = act_is_fd(main_lst, fd_list, &tmp, pos);
 			if (fd_res == ERROR)
-				return (NULL);
+				return (free_list_cmd(&cmd_list), NULL);
 			fd_temp = *fd_list;
 			if (fd_temp != NULL)
 			{
@@ -151,11 +160,12 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 	cmd_list = get_lst_cmd(main_lst, &line_list, &fd_list, &pos);
 	free_list_var(&main_lst);
 	if (cmd_list == NULL)
-		return (ERROR);
+		return (free_list_cmd(&cmd_list),
+			free_list_line(&line_list), ERROR);
 	create_heredoc_name(&fd_list);
-	ft_printf_list_cmd(&cmd_list, 1);
-	ft_printf_list_line(&line_list, 1);
-	ft_printf_list_fd(&fd_list, 1);
+	// ft_printf_list_cmd(&cmd_list, 1);
+	// ft_printf_list_line(&line_list, 1);
+	// ft_printf_list_fd(&fd_list, 1);
 	if (convert_lst_to_line(shell, &line_list, &cmd_list, &fd_list) == ERROR)
 	{
 		free_list_cmd(&cmd_list);

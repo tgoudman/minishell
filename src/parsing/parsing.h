@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 12:37:20 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:36:55 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_lst_arg
 t_lst_var	*temp_creation(char *str);
 char		*ft_subvar(char const *s, int start, int len, char quote);
 char		*input_remake(char *input);
+char		*input_remake2(t_lst_var *lst_var);
 int			search_for_quote(t_bash *shell, char *input);
 int			ft_strcmp_var(const char *s1, const char *s2);
 int			cmd_manager(t_bash *shell, char *input);

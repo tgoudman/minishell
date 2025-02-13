@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/11 12:52:22 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:06:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int parsing(t_bash *shell)
 {
 	if (search_for_var(shell) == ERROR)
-		return (ERROR);
+		return (shell->prev_return = 2, ERROR);
 	if (shell->line.group == NULL)
 		return (ERROR);
 	ft_printf(1, "LINE after parsing is : %t\n", shell->line.group);

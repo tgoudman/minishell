@@ -26,9 +26,12 @@ int	quote_parsing_var(t_lst_var **lst_var, char *str, t_var *v, char *quote)
 	if (*quote != FALSE)
 	{
 		v->i++;
+		if (str[v->i] == '$')
+			v->i++;
 		while (str[v->i] != '\0' && str[v->i] != '$'
 			&& str[v->i] != *quote)
 			v->i++;
+		ft_printf(1,"test%c\n", str[v->i - 1]);
 		if (lst_create_new_var(lst_var, str, *v, *quote) == ERROR)
 			return (ERROR);
 		if (str[v->i] == *quote)
@@ -36,6 +39,7 @@ int	quote_parsing_var(t_lst_var **lst_var, char *str, t_var *v, char *quote)
 	}
 	else
 	{
+		ft_printf(1,"testelse\n");
 		while (str[v->i] != '\0' && str[v->i] != '$'
 			&& quote_check(str[v->i]) == FALSE)
 			v->i++;
@@ -62,7 +66,7 @@ t_lst_var	*temp_creation(char *str)
 		v.j = v.i;
 		if (str[v.i] == '$')
 			v.i++;
-		if (str[v.i] == ' ')
+		if (str[v.i] == ' ' && quote == FALSE)
 		{
 			v.i++;
 			v.j++;

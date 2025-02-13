@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:13:49 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 15:17:48 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:02:25 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	check_file_type(t_lst_var **tmp, t_cmd_pos *pos, char *type)
 		pos->j += 1;
 	pos->start_of_arg = pos->i;
 	pos->start_of_char = pos->j;
+	if ((*tmp)->string[pos->j] == '|')
+		return (ft_printf(1, "minishell : syntax error file\n"), BREAK);
 	if ((*tmp)->string[pos->j] == '\0')
 	{
 		*tmp = (*tmp)->next;
-		if (*tmp == NULL)
-			return (ft_printf(1, "minishell : syntax error heredoc\n"), BREAK);
+		if (*tmp == NULL || (*tmp)->string[0] == '|')
+			return (ft_printf(1, "minishell : syntax error file\n"), BREAK);
 		pos->i++;
 		pos->j = 0;
 		pos->start_of_arg = pos->i;
@@ -70,7 +72,7 @@ char *get_lst_fd(t_lst_var *main_lst, t_cmd_pos *pos, char *type, char **limit)
 	if (name == NULL)
 		return (NULL);
 	if (check_file_type(&tmp, pos, type) == BREAK)
-		return (NULL);
+		return (free(name), NULL);
 	while (tmp != NULL)
 	{
 		if (pos->j > 0 && is_bash_op(tmp->string[pos->j - 1], '!') == 0)

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 14:52:41 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:03:09 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	search_for_var(t_bash *shell)
 	t_lst_var	*result;
 	int			i;
 	int			len;
+	char		*input;
 
 	len = 0;
 	while (shell->line.group[len] != NULL)
@@ -110,8 +111,33 @@ int	search_for_var(t_bash *shell)
 		i++;
 	}
 	result = convert_lst(temp);
-	if (cmd_parsing(shell, result) == ERROR)
-		return (free_list_point(&temp, len), ERROR);
+	free_list_point(&temp, len);
+	input = input_remake2(result);
+	free_list_var(&result);
+	ft_printf(1, "input v3 : %s\n", input);
+	if (input != NULL)
+	{
+		if (search_for_quote(shell, input) == ERROR)
+			return (ERROR);
+		len = 0;
+		while (shell->line.group[len] != NULL)
+			len++;
+		temp = malloc((len + 1) * sizeof(t_lst_var *));
+		if (temp == NULL)
+			return (ERROR);
+		temp[len] = NULL;
+		i = 0;
+		while (i < len)
+		{
+			temp[i] = temp_creation(shell->line.group[i]);
+			if (temp[i] == NULL)
+				return (free_list_point(&temp, len), free_cmd(shell->line.group), ERROR);
+			i++;
+		}
+		result = convert_lst(temp);
+		if (cmd_parsing(shell, result) == ERROR)
+			return (free_list_point(&temp, len), ERROR);
+	}
 	return (free_list_point(&temp, len), 0);
 }
 

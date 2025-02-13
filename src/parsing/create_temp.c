@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:17:35 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/11 13:08:49 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:45:34 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_printf_list_var(t_lst_var **list, int output)
 	tmp = *list;
 	while (tmp)
 	{
-		ft_printf(output, "String is \033[34m%s\033[0m and is in quote \033[34m%c\033[0m\n", tmp->string, tmp->is_squote);
+		ft_printf(output, "String is \033[34m%s\033[0m, is in quote \033[34m%c\033[0m and is space \033[34m%i\033[0m\n", tmp->string, tmp->is_squote, tmp->is_space);
 		tmp = tmp->next;
 	}
 }
@@ -62,6 +62,7 @@ int	lst_create_new_var(t_lst_var **lst_var, char *str, t_var v, char quote)
 	if (string == NULL)
 		return (ERROR);
 	tmp = create_new_node_var(string, quote);
+	tmp->is_space = 0;
 	if (tmp == NULL)
 		return (ERROR);
 	list_add_back_var(lst_var, tmp);
