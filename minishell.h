@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/10 12:31:11 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:48:49 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <signal.h>
 # include <errno.h>
 # include "src/parsing/parsing.h"
+# include "src/exec/builtins.h"
 
 # ifndef TRUE
 #  define TRUE 1
@@ -150,7 +151,7 @@ int		ft_export(t_bash *shell, t_cmd *cmd, int output);
 int		ft_unset(t_bash *shell, t_cmd *cmd, int output);
 int		ft_env(t_bash *shell, t_cmd *cmd, int output);
 int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
-int		ft_execve(t_bash *shell, t_cmd *cmd);
+int		ft_execve(t_bash *shell);
 
 //UTILS
 char	**join_tab(char **tab_dst, char **tab_src);

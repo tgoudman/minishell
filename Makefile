@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
+#    By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/02/12 14:18:29 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/02/13 10:52:51 by tgoudman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS =	main.c \
 		create_cmd.c cleaning_parsing.c convert_lst.c\
 		heredoc.c create_line.c cmd_fd_creation.c \
 		list_to_shell_line.c cmd_check.c input_remake.c \
-		input_remake2.c
+		input_remake2.c openfile.c exec_utils.c input_output.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/12 14:06:30 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:54:25 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ int	cmd_manager(t_bash *shell, char *input)
 			return (0);
 		free(input);
 		parsing(shell);
+		single_function(shell, shell->line.cmd);
 	}
 	i = 0;
-	ft_printf(1, "hello\n");
+	// ft_printf(1, "hello\n");
 	if (shell->line.cmd != NULL)
 	{
 		while (i < shell->line.cmd_nbr)
