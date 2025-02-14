@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/12 13:50:25 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:30:21 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 			}
 			fd_res = act_is_fd(main_lst, fd_list, &tmp, pos);
 			if (fd_res == ERROR)
-				return (free_list_cmd(&cmd_list), NULL);
+				return (NULL);
 			fd_temp = *fd_list;
 			if (fd_temp != NULL)
 			{
@@ -128,8 +128,14 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 				line = create_new_node_line(ft_strdup("|"));
 				list_add_back_line(line_list, line);
 				pos->last_type = PIPE;
-				pos->j++;
-				pos->start_of_char++;
+				if (tmp->string[pos->j] == '\0')
+				{
+					tmp = tmp->next;
+					pos->i++;
+					pos->j = 0;
+					pos->start_of_arg = pos->i;
+					pos->start_of_char = pos->j;
+				}
 			}
 			pos->end_of_arg = pos->i;
 			pos->end_of_char = pos->j;
@@ -160,12 +166,11 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 	cmd_list = get_lst_cmd(main_lst, &line_list, &fd_list, &pos);
 	free_list_var(&main_lst);
 	if (cmd_list == NULL)
-		return (free_list_cmd(&cmd_list),
-			free_list_line(&line_list), ERROR);
+		return (free_list_line(&line_list), ERROR);
 	create_heredoc_name(&fd_list);
-	// ft_printf_list_cmd(&cmd_list, 1);
-	// ft_printf_list_line(&line_list, 1);
-	// ft_printf_list_fd(&fd_list, 1);
+	ft_printf_list_cmd(&cmd_list, 1);
+	ft_printf_list_line(&line_list, 1);
+	ft_printf_list_fd(&fd_list, 1);
 	if (convert_lst_to_line(shell, &line_list, &cmd_list, &fd_list) == ERROR)
 	{
 		free_list_cmd(&cmd_list);

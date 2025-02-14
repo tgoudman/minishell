@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:44:56 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/10 17:51:45 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:55:54 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_cmd(t_lst_var **main_lst)
 	while (tmp->string[len] != '\0')
 		len++;
 	if (len > 0)
-		if (tmp->string[len - 1] == '|')
+		if (tmp->string[len - 1] == '|' && tmp->is_squote == FALSE)
 			return (ft_printf(1, "minishell: syntax error near '|'\n"), ERROR);
 	return (TRUE);
 }
@@ -34,7 +34,7 @@ int	check_cmd(t_lst_var **main_lst)
 void	null_lst_cmd(t_lst_cmd **cmd_list)
 {
 	t_lst_cmd	*cmd_tmp;
-	
+
 	cmd_tmp = create_new_node_cmd(NULL);
 	list_add_back_cmd(cmd_list, cmd_tmp);
 }

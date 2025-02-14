@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/12 15:03:09 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:46:03 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,27 @@ t_lst_var	*demolish_var(t_bash *shell, t_lst_var	*temp)
 	t_lst_var	*node;
 	char	*var;
 	int		i;
+	int		var_check;
 
 	i = 0;
 	node = temp;
+	var_check = FALSE;
 	while (node != NULL)
 	{
 		if (node->is_squote != 39)
 		{
 			var = return_var_value(shell, node->string, node);
+			if (ft_strcmp(var, node->string) != 0)
+				var_check = TRUE;
 			free(node->string);
 			if (var == NULL)
 				node->string = ft_strdup("");
 			else
+			{
 				node->string = var;
+				if (var_check == TRUE && node->is_squote == FALSE)
+					node->is_var = TRUE;
+			}
 		}
 		node = node->next;
 	}
@@ -117,8 +125,10 @@ int	search_for_var(t_bash *shell)
 	ft_printf(1, "input v3 : %s\n", input);
 	if (input != NULL)
 	{
+		free_cmd(shell->line.group);
 		if (search_for_quote(shell, input) == ERROR)
-			return (ERROR);
+			return (free(input), ERROR);
+		free(input);
 		len = 0;
 		while (shell->line.group[len] != NULL)
 			len++;

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:17:35 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/12 12:45:34 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:03:32 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_lst_var	*create_new_node_var(char *string, int is_squote)
 		return (NULL);
 	new_node->string = string;
 	new_node->is_squote = is_squote;
+	new_node->is_var = FALSE;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -39,18 +40,6 @@ void	list_add_back_var(t_lst_var **list, t_lst_var *new_node)
 		tmp = tmp->next;
 	tmp->next = new_node;
 	new_node->next = NULL;
-}
-
-void	ft_printf_list_var(t_lst_var **list, int output)
-{
-	t_lst_var	*tmp;
-
-	tmp = *list;
-	while (tmp)
-	{
-		ft_printf(output, "String is \033[34m%s\033[0m, is in quote \033[34m%c\033[0m and is space \033[34m%i\033[0m\n", tmp->string, tmp->is_squote, tmp->is_space);
-		tmp = tmp->next;
-	}
 }
 
 int	lst_create_new_var(t_lst_var **lst_var, char *str, t_var v, char quote)

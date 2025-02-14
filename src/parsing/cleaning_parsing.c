@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:19:30 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/10 14:25:26 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:21:43 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,35 +99,4 @@ void	free_list_point(t_lst_var ***lst_var, int len)
 	}
 	if (*lst_var != NULL)
 		free(*lst_var);
-}
-
-void	free_list_arg(t_lst_arg **lst_arg)
-{
-	t_lst_arg	*tmp;
-
-	while (*lst_arg)
-	{
-		tmp = *lst_arg;
-		(*lst_arg) = (*lst_arg)->next;
-		if (tmp->str != NULL)
-			free(tmp->str);
-		if (tmp != NULL)
-			free(tmp);
-	}
-	*lst_arg = NULL;
-}
-
-void free_char_arg(t_char_arg *arg)
-{
-	int	i;
-
-	i = 0;
-	if (arg == NULL)
-		return ;
-	while (arg[i].str != NULL)
-	{
-		free(arg[i++].str);
-	}
-	if (arg != NULL)
-		free(arg);
 }

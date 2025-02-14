@@ -6,27 +6,16 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:01:42 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/10 17:56:23 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:14:41 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_bash_op(char chr, char mod)
-{
-	if (mod == '|' && (chr == '|'))
-		return (TRUE);
-	else if (mod == '!' && (chr == '<' || chr == '>'))
-		return (TRUE);
-	else if (mod == '*' && (chr == '|' || chr == '<' || chr == '>'))
-		return (TRUE);
-	return (FALSE);
-}
-
 t_lst_var	*init_cmdarg(t_lst_var *m_lst, t_cmd_pos *pos, t_var *v)
 {
 	t_lst_var	*tmp;
-	
+
 	tmp = m_lst;
 	while (tmp->id < pos->start_of_arg)
 		tmp = tmp->next;
@@ -34,12 +23,12 @@ t_lst_var	*init_cmdarg(t_lst_var *m_lst, t_cmd_pos *pos, t_var *v)
 	return (tmp);
 }
 
-t_char_arg *make_arg(t_lst_arg *arg_stack, t_lst_arg *arg_str)
+t_char_arg	*make_arg(t_lst_arg *arg_stack, t_lst_arg *arg_str)
 {
-	t_char_arg *args;
-	int	len;
-	int	i;
-	
+	t_char_arg	*args;
+	int			len;
+	int			i;
+
 	arg_str = arg_stack;
 	len = 0;
 	while (arg_str != NULL)
@@ -59,9 +48,7 @@ t_char_arg *make_arg(t_lst_arg *arg_stack, t_lst_arg *arg_str)
 		i++;
 		arg_str = arg_str->next;
 	}
-	args[len].str = NULL;
-	args[len].is_space = 0;
-	return (args);
+	return (args[len].str = NULL, args[len].is_space = 0, args);
 }
 
 void	move_pos_v(t_lst_var *tmp, t_var *v, t_cmd_pos *pos)

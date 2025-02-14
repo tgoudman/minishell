@@ -26,12 +26,25 @@ int	quote_parsing_var(t_lst_var **lst_var, char *str, t_var *v, char *quote)
 	if (*quote != FALSE)
 	{
 		v->i++;
+		ft_printf(1,"test%i %i\n", v->i, v->j);
 		if (str[v->i] == '$')
 			v->i++;
+		if (str[v->i] == *quote && 
+			(str[v->i + 1] == *quote || str[v->i - 1] == *quote))
+		{
+			// ft_printf(1,"testyack %c, +%c, -%c\n",
+			// 	str[v->i] == *quote, str[v->i + 1] == *quote ,str[v->i - 1] == *quote);
+			if (lst_create_new_var(lst_var, "", *v, *quote) == ERROR)
+				return (ERROR);
+			*quote = FALSE;
+			v->i++;
+			v->j += 2;
+			return (TRUE);
+		}
 		while (str[v->i] != '\0' && str[v->i] != '$'
 			&& str[v->i] != *quote)
 			v->i++;
-		ft_printf(1,"test%c\n", str[v->i - 1]);
+		// ft_printf(1,"test%c\n", str[v->i - 1]);
 		if (lst_create_new_var(lst_var, str, *v, *quote) == ERROR)
 			return (ERROR);
 		if (str[v->i] == *quote)
@@ -39,7 +52,7 @@ int	quote_parsing_var(t_lst_var **lst_var, char *str, t_var *v, char *quote)
 	}
 	else
 	{
-		ft_printf(1,"testelse\n");
+		// ft_printf(1,"testelse%i %i\n", v->i, v->j);
 		while (str[v->i] != '\0' && str[v->i] != '$'
 			&& quote_check(str[v->i]) == FALSE)
 			v->i++;
@@ -55,15 +68,18 @@ int	quote_parsing_var(t_lst_var **lst_var, char *str, t_var *v, char *quote)
 t_lst_var	*temp_creation(char *str)
 {
 	t_lst_var *lst_var;
-	t_var	v;
-	char quote;
+	t_var		v;
+	char 		quote;
+	int			quote_res;
 
 	v.i = 0;
 	quote = quote_check(str[v.i]);
 	lst_var = NULL;
+	quote_res = 0;
 	while (str[v.i] != '\0')
 	{
-		v.j = v.i;
+		if (quote_res == 0)
+			v.j = v.i;
 		if (str[v.i] == '$')
 			v.i++;
 		if (str[v.i] == ' ' && quote == FALSE)
@@ -71,12 +87,13 @@ t_lst_var	*temp_creation(char *str)
 			v.i++;
 			v.j++;
 		}
-		if (quote_parsing_var(&lst_var, str, &v, &quote) == ERROR)
+		quote_res = quote_parsing_var(&lst_var, str, &v, &quote);
+		if (quote_res == ERROR)
 			return (free_list_var(&lst_var), NULL);
-		if (str[v.i] != '\0' && str[v.i] != '$')
+		if (str[v.i] != '\0' && str[v.i] != '$' && str[v.i + 1] != quote)
 			v.i++;
 	}
-	ft_printf_list_var(&lst_var, 1);
+	// ft_printf_list_var(&lst_var, 1);
 	return (lst_var);
 }
 

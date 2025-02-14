@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/12 13:50:57 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:55:34 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,28 @@ int	check_space(char *input, int i)
 	return (TRUE);
 }
 
+void	move_in_input(char *input, int i, char *quote)
+{
+	if (*quote != FALSE && input[i] == *quote)
+		*quote = FALSE;
+	else if (*quote == FALSE && (input[i] == 34 || input[i] == 39))
+		*quote = input[i];
+}
+
 char	*copy_space(char *input, char *tmp)
 {
 	char	quote;
 	int		i;
 	int		j;
 	int		space;
-	
+
 	i = 0;
 	j = 0;
 	space = 0;
 	quote = FALSE;
 	while (input[i] != '\0' && check_space(input, i) == TRUE)
 	{
-		if (quote != FALSE && input[i] == quote)
-			quote = FALSE;
-		if (quote == FALSE && (input[i] == 34 || input[i] == 39))
-			quote = input[i];
+		move_in_input(input, i, &quote);
 		if (input[i] == ' ' && space == 1 && quote == FALSE)
 			i++;
 		else
@@ -49,7 +54,7 @@ char	*copy_space(char *input, char *tmp)
 			tmp[j++] = input[i++];
 		}
 	}
-	return (free(input), tmp[j] = '\0', tmp);
+	return (tmp[j] = '\0', tmp);
 }
 
 int	move_space(char *input)
@@ -58,44 +63,41 @@ int	move_space(char *input)
 	int		space;
 	int		i;
 	int		len;
-	
+
 	i = 0;
 	len = 0;
 	quote = FALSE;
 	space = 0;
 	while (input[i] != '\0' && check_space(input, i) == TRUE)
 	{
-		if (quote != FALSE && input[i] == quote)
-			quote = FALSE;
-		if (quote == FALSE && (input[i] == 34 || input[i] == 39))
-			quote = input[i];
+		move_in_input(input, i, &quote);
 		if (input[i] == ' ' && space == 1 && quote == FALSE)
-		{
-			if (space == 0)
-			{
-				len++;
-				space = 1;
-			}
-		}
+			i++;
 		else
 		{
-			space = 0;
+			if (input[i] == ' ' && quote == FALSE)
+				space = 1;
+			else
+				space = 0;
+			i++;
 			len++;
 		}
-		i++;
 	}
 	return (len);
 }
 
-char *input_remake(char *input)
+char	*input_remake(char *input)
 {
 	char	*tmp;
+	char	*res;
 
-	// ft_printf(1, "len : %i\n", move_space(input));
 	tmp = malloc((move_space(input) + 1) * sizeof (char));
 	if (tmp == NULL)
 		return (NULL);
-	input = copy_space(input, tmp);
-	// ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));
-	return (input);
+	res = copy_space(input, tmp);
+	free(input);
+	return (res);
 }
+
+	// ft_printf(1, "len : %i\n", move_space(input));
+	// ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));

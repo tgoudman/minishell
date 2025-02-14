@@ -1,45 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaning.c                                         :+:      :+:    :+:   */
+/*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/14 11:35:48 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/02/14 11:41:56 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/02/14 11:43:41 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_cmd(char **cmd)
+t_lst	*create_new_node(char *data, char *name)
 {
-	int	i;
+	t_lst	*new_node;
 
-	i = 0;
-	if (cmd == NULL)
-		return ;
-	while (cmd[i] != NULL)
-	{
-		free(cmd[i++]);
-	}
-	if (cmd != NULL)
-		free(cmd);
+	new_node = malloc(sizeof(t_lst));
+	if (!new_node)
+		return (NULL);
+	new_node->data = data;
+	new_node->name = name;
+	new_node->next = NULL;
+	return (new_node);
 }
 
-void	free_list(t_lst **env)
+void	list_add_back(t_lst **list, t_lst *new_node)
 {
 	t_lst	*tmp;
 
-	while (*env)
+	tmp = *list;
+	if (*list == NULL)
 	{
-		tmp = *env;
-		(*env) = (*env)->next;
-		if (tmp->name != NULL)
-			free(tmp->name);
-		if (tmp->data != NULL)
-			free(tmp->data);
-		if (tmp != NULL)
-			free(tmp);
+		*list = new_node;
+		return ;
 	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_node;
+	new_node->next = NULL;
 }

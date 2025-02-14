@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/13 10:54:25 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:47:11 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int parsing(t_bash *shell)
 int	cmd_manager(t_bash *shell, char *input)
 {
 	int	i;
+	int	parsing_res;
 	
 	shell->line.group = NULL;
 	shell->line.cmd = NULL;
@@ -39,11 +40,12 @@ int	cmd_manager(t_bash *shell, char *input)
 		if (shell->line.group == NULL)
 			return (0);
 		free(input);
-		parsing(shell);
-		single_function(shell, shell->line.cmd);
+		parsing_res = parsing(shell);
+		if (parsing_res != ERROR)
+			single_function(shell, shell->line.cmd);
 	}
 	i = 0;
-	// ft_printf(1, "hello\n");
+	ft_printf(1, "hello\n");
 	if (shell->line.cmd != NULL)
 	{
 		while (i < shell->line.cmd_nbr)

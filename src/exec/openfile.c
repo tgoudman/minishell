@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:59:26 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/13 10:01:03 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:26:32 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	redirect_fd(t_bash *shell, char *str)
 	{
 		if (ft_strcmp(str, tmp->name) == 0)
 		{
-			if (tmp->type == 'i')
+			ft_printf(1, "%s\n", tmp->name);
+			if (tmp->type == 'i' || tmp->type == 'h')
 				dup2(tmp->fd, STDIN_FILENO);
 			else
 				dup2(tmp->fd, STDOUT_FILENO);
@@ -55,6 +56,7 @@ void	open_fds(t_bash *shell)
 		if (tmp->type == 'i')
 			fd = ft_open_file(tmp->name, 0);
 		tmp->fd = fd;
+		ft_printf(1, "%i\n", tmp->fd);
 		tmp = tmp->next;
 	}
 }
@@ -106,12 +108,12 @@ void	close_fd(t_bash *shell)
 	lst = shell->line.lst_fd;
 	while (lst)
 	{
+		close(lst->fd);
 		if (shell->line.lst_fd->type == 'h')
 		{
 			if (unlink(shell->line.lst_fd->name) == -1)
 				ft_printf(2, "Erreur: canno't remove %s\n", lst->name);
 		}
-		close(lst->fd);
 		lst = lst->next;
 	}
 }

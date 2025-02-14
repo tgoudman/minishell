@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/13 10:48:49 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:43:19 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int 	init_struct(t_bash *shell, char **env);
 
 // MAIN FUNCTION
 int		main(int argc, char **argv, char **env);
-void	ft_minishell(t_bash *shell, char **env);
+int		ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
 void	init_signale(struct sigaction *sa);
@@ -138,20 +138,6 @@ void	list_add_back(t_lst **list, t_lst *new_node);
 void	ft_printf_list(t_lst **list, int output);
 char	*get_name(char *str);
 char	*get_data(char *str);
-
-
-//BUILTIN
-
-void	init_func(t_func *builtin);
-void	heredoc(t_bash *shell, t_cmd *cmd);
-int 	ft_echo(t_bash *shell, t_cmd *cmd, int output);
-int		ft_cd(t_bash *shell, t_cmd *cmd, int output);
-int		ft_pwd(t_bash *shell, t_cmd *cmd, int output);
-int		ft_export(t_bash *shell, t_cmd *cmd, int output);
-int		ft_unset(t_bash *shell, t_cmd *cmd, int output);
-int		ft_env(t_bash *shell, t_cmd *cmd, int output);
-int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
-int		ft_execve(t_bash *shell);
 
 //UTILS
 char	**join_tab(char **tab_dst, char **tab_src);
