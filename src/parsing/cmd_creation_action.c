@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:12:14 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/14 15:14:49 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:31:41 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,12 @@ int	search_bash_op(t_lst_var *main_lst, t_lst_cmd **cmd_list,
 		*tmp = (*tmp)->next;
 		if (*tmp == NULL)
 		{
-			// ft_printf(1, "__\033[35m\033[5mFINAL\033[0m__\n");
 			exec_create(main_lst, cmd_list, pos);
 			pos->start_of_arg = pos->i;
 			pos->start_of_char = pos->j;
 			pos->last_type = CMD;
 			return (BREAK);
 		}
-		// ft_printf(1, "__\033[35m\033[5m\\0:sap\033[0m__\n");
 		pos->i++;
 		pos->j = 0;
 		return (CONTINUE);
@@ -73,14 +71,12 @@ int	act_as_end_of_line(t_lst_var *main_lst, t_lst_cmd **cmd_list,
 	{
 		if (!(pos->start_of_arg == pos->i && pos->start_of_char == pos->j))
 		{
-			// ft_printf(1, "__\033[35m\033[5mEND\033[0m__\n");
 			exec_create(main_lst, cmd_list, pos);
 			pos->i++;
 			pos->j = 0;
 			return (TRUE);
 		}
 	}
-	// ft_printf(1, "__\033[35m\033[5m\\0:eol\033[0m__\n");
 	pos->i++;
 	pos->j = 0;
 	return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:13:49 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 14:09:42 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:23:28 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ int	act_is_fd(t_lst_var *main_lst, t_lst_fd **fd_list,
 		if (*tmp == NULL)
 			return (BREAK);
 	}
-	ft_printf(1, "hello %c\n", (*tmp)->string[pos->j]);
 	if (is_bash_op((*tmp)->string[pos->j], '|') == 1)
 		return (pos->j++, TRUE);
-	ft_printf(1, "hello2\n");
 	if ((*tmp)->string[pos->j] == '\0')
 	{
 		*tmp = (*tmp)->next;

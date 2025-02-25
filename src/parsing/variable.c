@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 13:32:59 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:27:14 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*var_check(t_bash *shell, char *str, t_lst_var *node, int *return_value)
 
 char	*var_find(t_bash *shell, char *var, char *after, t_lst_var **node)
 {
-	t_lst_var	*temp_next;
 	t_lst		*search;
 	char		*tmp;
 
@@ -41,19 +40,13 @@ char	*var_find(t_bash *shell, char *var, char *after, t_lst_var **node)
 		if (ft_strcmp_var(search->name, var) == 0)
 		{
 			tmp = ft_strdup(search->data);
-			temp_next = (*node)->next;
-			(*node)->next = create_new_node_var(ft_strdup(after),
-				(*node)->is_squote);
-			(*node)->next->next = temp_next;
+			after_case(after, node);
 			return (free(var), free(after), tmp);
 		}
 		search = search->next;
 	}
 	tmp = ft_strdup("");
-	temp_next = (*node)->next;
-	(*node)->next = create_new_node_var(ft_strdup(after),
-		(*node)->is_squote);
-	(*node)->next->next = temp_next;
+	after_case(after, node);
 	return (free(var), free(after), tmp);
 }
 
@@ -107,7 +100,6 @@ t_lst_var	*demolish_var(t_bash *shell, t_lst_var	*temp)
 
 	node = temp;
 	is_var = FALSE;
-	ft_printf_list_var(&node, 1);
 	while (node != NULL)
 	{
 		if (node->is_squote != 39)
@@ -117,5 +109,3 @@ t_lst_var	*demolish_var(t_bash *shell, t_lst_var	*temp)
 	}
 	return (temp);
 }
-
-// temp = ft_sep(shell->line.group[i], '$');

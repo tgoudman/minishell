@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:00:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 13:59:52 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:31:08 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@ int	ft_new_cmd_core(t_lst_cmd *tmp_cmd, char **temp_char, t_var *v)
 {
 	if (tmp_cmd->arg[v->i].is_space == FALSE)
 	{
-		while (tmp_cmd->arg[v->i].str != NULL && tmp_cmd->arg[v->i].is_space == FALSE)
+		while (tmp_cmd->arg[v->i].str != NULL
+			&& tmp_cmd->arg[v->i].is_space == FALSE)
 		{
-			ft_printf(1, "こんにちは せカい!!! %s\n", tmp_cmd->arg[v->i].str);
 			*temp_char = ft_tmpjoin(tmp_cmd->arg[v->i].str, temp_char, 1);
 			if (*temp_char == NULL)
 				return (ERROR);
 			v->i++;
 		}
-		*temp_char = ft_tmpjoin(tmp_cmd->arg[v->i].str, temp_char, 1);
-		if (*temp_char == NULL)
-			return (ERROR);
-		ft_printf(1, "こんにちは せカい!!! %s\n", tmp_cmd->arg[v->i].str);
+		if (tmp_cmd->arg[v->i].str != NULL)
+		{
+			*temp_char = ft_tmpjoin(tmp_cmd->arg[v->i].str, temp_char, 1);
+			if (*temp_char == NULL)
+				return (ERROR);
+		}
 	}
 	else
 	{

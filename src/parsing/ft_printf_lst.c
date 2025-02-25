@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 15:02:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 12:56:51 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:07:19 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_printf_list_var(t_lst_var **list, int output)
 	t_lst_var	*tmp;
 
 	tmp = *list;
+	ft_printf(1, "%sLST_VAR$%s\n", YLW, NTL);
 	while (tmp)
 	{
 		ft_printf(output, "String is \033[34m%s\033[0m ", tmp->string);

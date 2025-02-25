@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/25 10:45:22 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:27:42 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,6 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 	free_list_var(&main_lst);
 	if (cmd_list == NULL)
 		return (free_list_line(&line_list), free_list_fd(&fd_list), ERROR);
-	// ft_printf_list_cmd(&cmd_list, 1);
-	// ft_printf_list_line(&line_list, 1);
-	// ft_printf_list_fd(&fd_list, 1);
 	remake_line(&line_list, &cmd_list);
 	// ft_printf_list_cmd(&cmd_list, 1);
 	// ft_printf_list_line(&line_list, 1);
@@ -120,44 +117,3 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 			free_list_fd(&fd_list), ERROR);
 	return (free_list_cmd(&cmd_list), free_list_line(&line_list), 1);
 }
-
-// if (info.pos->i > 0 && is_bash_op(find_char(&info.main_lst, info.pos), '*') == 0)
-			// {
-			// 	if (exec_fd(info.main_lst, &info.cmd_list, &info.tmp, info.pos) == BREAK)
-			// 		break ;
-			// 	line = create_new_node_line(ft_itoa(cmd_list_count(&info.cmd_list)));
-			// 	list_add_back_line(info.line_list, line);
-			// }
-			// info.res = act_is_fd(info.main_lst, info.fd_list, &info.tmp, info.pos);
-			// if (info.res == ERROR)
-			// 	return (NULL);
-			// fd_temp = *info.fd_list;
-			// if (fd_temp != NULL)
-			// {
-			// 	while (fd_temp->next != NULL)
-			// 		fd_temp = fd_temp->next;
-			// }
-			// if (fd_update(&info, fd_temp) == BREAK)
-			// 	break ;
-			// line = create_new_node_line(ft_strdup(fd_temp->name));
-			// list_add_back_line(info.line_list, line);
-			// info.pos->last_type = FILE;
-			// if (info.res == BREAK)
-			// 	break ;
-			// if (info.res == TRUE)
-			// {
-			// 	ft_printf(1, "hello good\n");
-			// 	line = create_new_node_line(ft_strdup("|"));
-			// 	list_add_back_line(info.line_list, line);
-			// 	info.pos->last_type = PIPE;
-			// 	if (info.tmp->string[info.pos->j] == '\0')
-			// 	{
-			// 		info.tmp = info.tmp->next;
-			// 		info.pos->i++;
-			// 		info.pos->j = 0;
-			// 		info.pos->start_of_arg = info.pos->i;
-			// 		info.pos->start_of_char = info.pos->j;
-			// 	}
-			// }
-			// info.pos->end_of_arg = info.pos->i;
-			// info.pos->end_of_char = info.pos->j;

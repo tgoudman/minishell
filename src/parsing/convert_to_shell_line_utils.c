@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:18:07 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 13:10:59 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:30:25 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_tmpjoin(char *tmp_str, char **temp_char, int mod)
 	char	*tmp;
 
 	tmp = NULL;
+	ft_printf(1, "こんにちは せカい!!! %s\n", tmp_str);
 	if (mod == 1)
 		tmp = ft_strjoin(*temp_char, tmp_str);
 	else if (mod == 2)

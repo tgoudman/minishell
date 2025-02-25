@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:44:56 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/14 12:55:54 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:34:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	check_cmd(t_lst_var **main_lst)
 			return (ERROR);
 		tmp = tmp->next;
 	}
+	if (check_consecutive_pipe(tmp->string, &pipe_mod) == ERROR)
+		return (ERROR);
 	i = 0;
 	while (tmp->string[i] != '\0')
 		i++;

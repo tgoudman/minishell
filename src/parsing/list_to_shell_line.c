@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:42:51 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 14:03:52 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:28:40 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	give_value_to_cmd(t_bash *shell)
 			shell->line.cmd_nbr++;
 		j++;
 	}
-	
 	ft_printf(1, "CMD NBR : %s%i%s\n", YLW, shell->line.cmd_nbr, NTL);
 	while (i < shell->line.cmd_nbr)
 	{
@@ -95,5 +94,3 @@ int	convert_lst_to_line(t_bash *shell, t_lst_line **lst_line,
 		return (ERROR);
 	return (TRUE);
 }
-
-		// ft_printf(1, "CMD[%i] : %t\n", i, shell->line.cmd[i].args);

@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:08:33 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 13:41:54 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:29:39 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	list_add_back_line(t_lst_line **list, t_lst_line *new_node)
 	new_node->next = NULL;
 }
 
-char *create_heredoc_name(int hd_numb)
+char	*create_heredoc_name(int hd_numb)
 {
 	char		*heredoc;
 	char		*temp1;
@@ -68,7 +68,6 @@ t_lst_fd	*create_new_node_fd(char *name, char type, char *limit)
 	new_node->type = type;
 	if (new_node->type == 'h')
 	{
-		// free(name);
 		heredoc = create_heredoc_name(hd_numb);
 		while (access(heredoc, F_OK) != -1)
 		{

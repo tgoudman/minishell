@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 12:12:20 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:25:25 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ int			check_file_type(t_lst_var **tmp, t_cmd_pos *pos, char *type);
 t_lst_var	*demolish_var(t_bash *shell, t_lst_var	*temp);
 t_lst_var	*convert_lst(t_lst_var **lst_point);
 t_lst_var	*create_new_node_var(char *string, int is_squote);
+void		after_case(char *after, t_lst_var **node);
 void		list_add_back_var(t_lst_var **list, t_lst_var *new_node);
 void		ft_printf_list_var(t_lst_var **list, int output);
 int			lst_create_new_var(t_lst_var **lst_var,
