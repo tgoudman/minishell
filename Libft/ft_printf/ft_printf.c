@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 13:11:47 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/06 09:21:07 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:57:02 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	check_string(int fd, char chr, va_list args)
 		count = ft_puthexamaj_n(fd, va_arg(args, unsigned int));
 	else if (chr == 'p')
 		count = ft_putp_n(fd, va_arg(args, void *));
+	else if (chr == 't')
+		count = ft_puttab_n(fd, va_arg(args, char **));
 	return (count);
 }
 

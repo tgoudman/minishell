@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   ft_puttab_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:21 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/28 10:56:14 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/01/28 11:00:00 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr_n(int fd, char *str)
+int	ft_puttab_n(int fd, char **tab)
 {
 	int	i;
 
 	i = 0;
-	if (str == 0)
-	{
+	if (tab == NULL)
 		return (ft_putstr_n(fd, "(null)"));
-	}
-	while (str[i] != '\0')
+	while (tab[i] != NULL)
 	{
-		write(fd, &str[i], 1);
+		ft_putstr_n(fd, tab[i]);
+		ft_putchar_n(fd, ' ');
 		i++;
 	}
 	return (i);
@@ -34,6 +33,6 @@ int	main(void)
 {
 	char *st = "hello";
 	
-	printf("%d\n", ft_putstr_n(st));
+	printf("%d\n", ft_puttab_n(st));
 }
 */

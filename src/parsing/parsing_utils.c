@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:21 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/28 16:09:53 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/02/05 14:15:59 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../minishell.h"
 
-int	ft_putstr_n(int fd, char *str)
+int	ft_strcmp_var(const char *s1, const char *s2)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (str == 0)
+	while (s1[i])
 	{
-		return (ft_putstr_n(fd, "(null)"));
-	}
-	while (str[i] != '\0')
-	{
-		write(fd, &str[i], 1);
+		if (!(isalnum(s2[i]) || s2[i] == '_'))
+			break ;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	return (i);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
-
-/*
-int	main(void)
-{
-	char *st = "hello";
-	
-	printf("%d\n", ft_putstr_n(st));
-}
-*/

@@ -1,39 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   cleaning_parsing2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:21 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/02/14 15:21:22 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/02/14 15:25:26 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../minishell.h"
 
-int	ft_putstr_n(int fd, char *str)
+void	free_list_arg(t_lst_arg **lst_arg)
+{
+	t_lst_arg	*tmp;
+
+	while (*lst_arg)
+	{
+		tmp = *lst_arg;
+		(*lst_arg) = (*lst_arg)->next;
+		if (tmp->str != NULL)
+			free(tmp->str);
+		if (tmp != NULL)
+			free(tmp);
+	}
+	*lst_arg = NULL;
+}
+
+void	free_char_arg(t_char_arg *arg)
 {
 	int	i;
 
 	i = 0;
-	if (str == 0)
+	if (arg == NULL)
+		return ;
+	while (arg[i].str != NULL)
 	{
-		return (ft_putstr_n(fd, "(null)"));
+		free(arg[i++].str);
 	}
-	while (str[i] != '\0')
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
-	return (i);
+	if (arg != NULL)
+		free(arg);
 }
-
-/*
-int	main(void)
-{
-	char *st = "hello";
-	
-	printf("%d\n", ft_putstr_n(st));
-}
-*/

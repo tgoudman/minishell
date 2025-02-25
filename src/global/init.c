@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:21 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/22 12:13:20 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/02/14 11:46:06 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../minishell.h"
 
-int	ft_putstr_n(int fd, char *str)
+int	init_struct(t_bash *shell, char **env)
 {
-	int	i;
+	struct sigaction	sa;
 
-	i = 0;
-	if (str == 0)
-	{
-		return (ft_putstr_n(fd, "(null)"));
-	}
-	while (str[i] != '\0')
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
-	return (i);
+	shell->prev_return = 0;
+	init_env(shell, env);
+	init_signale(&sa);
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		perror("Signal error");
+	init_func(shell->func);
+	return (0);
 }
-
-/*
-int	main(void)
-{
-	char *st = "hello";
-	
-	printf("%d\n", ft_putstr_n(st));
-}
-*/

@@ -1,39 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:21 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/02/14 11:35:48 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../minishell.h"
 
-int	ft_putstr_n(int fd, char *str)
+void	free_cmd(char **cmd)
 {
 	int	i;
 
 	i = 0;
-	if (str == 0)
+	if (cmd == NULL)
+		return ;
+	while (cmd[i] != NULL)
 	{
-		return (ft_putstr_n(fd, "(null)"));
+		free(cmd[i++]);
 	}
-	while (str[i] != '\0')
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
-	return (i);
+	if (cmd != NULL)
+		free(cmd);
 }
 
-/*
-int	main(void)
+void	free_list(t_lst **env)
 {
-	char *st = "hello";
-	
-	printf("%d\n", ft_putstr_n(st));
+	t_lst	*tmp;
+
+	while (*env)
+	{
+		tmp = *env;
+		(*env) = (*env)->next;
+		if (tmp->name != NULL)
+			free(tmp->name);
+		if (tmp->data != NULL)
+			free(tmp->data);
+		if (tmp != NULL)
+			free(tmp);
+	}
 }
-*/

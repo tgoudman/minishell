@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_n.c                                      :+:      :+:    :+:   */
+/*   ft_charjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:12:39 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/01/28 10:58:21 by jdhallen         ###   ########.fr       */
+/*   Created: 2025/02/14 11:05:14 by jdhallen          #+#    #+#             */
+/*   Updated: 2025/02/14 11:46:36 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../minishell.h"
 
-int	ft_putstr_n(int fd, char *str)
+char	*ft_charjoin(char *str, char chr)
 {
-	int	i;
+	char	*temp;
+	char	*temp2;
 
-	i = 0;
-	if (str == 0)
-	{
-		return (ft_putstr_n(fd, "(null)"));
-	}
-	while (str[i] != '\0')
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
-	return (i);
+	temp = str;
+	temp2 = malloc(2 * sizeof(char));
+	if (temp == NULL)
+		return (NULL);
+	temp2[0] = chr;
+	temp2[1] = '\0';
+	str = ft_strjoin(temp, temp2);
+	free(temp);
+	free(temp2);
+	return (str);
 }
-
-/*
-int	main(void)
-{
-	char *st = "hello";
-	
-	printf("%d\n", ft_putstr_n(st));
-}
-*/
