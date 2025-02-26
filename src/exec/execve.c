@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 13:27:36 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:46:54 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	launch_cmd(t_bash *shell, t_cmd cmd, int index)
 	if (file != NULL)
 		redirect_fd(shell, file + 1);
 	close_fd_heredocs(shell);
+	shell->prev_return = 0;
 	if (execve(path, cmd.args, env) == -1)
 	{
-		ft_putendl_fd("command not found: ", 2);
-		ft_putendl_fd(cmd.name, 2);
+		ft_printf(2, "minishell: Command '%s' not found\n", cmd.name);
 		free_cmd(cmd.args);
 		free_cmd(env);
-		exit (1);
+		shell->prev_return = 127;
+		exit (127);
 	}
 }
 
@@ -46,6 +47,7 @@ void	do_pipe(t_bash *shell, t_cmd cmd, int index)
 	pid = fork();
 	if (pid == 0)
 	{
+		interactive_mode(FALSE);
 		close_fd(shell);
 		close(pipe_fd[0]);
 		if (check_function(cmd) == 1)

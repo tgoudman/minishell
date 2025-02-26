@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:02 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 01:51:26 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/02/26 10:34:42 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*search_file(t_bash *shell, int index_cmd)
 	while (line.group[i] != NULL && line.group[i][0] != '|')
 	{
 		if (line.group[i][0] == '!')
-			file = line.group[i];
+			if (get_fd(shell, &line.group[i][1]) >= 0)
+				file = line.group[i];
 		i++;
 	}
 	return (file);

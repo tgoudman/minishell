@@ -37,6 +37,7 @@ for ((i = 1; i <= ITERATIONS; i++)); do
 
     pushd "$TEMP_DIR" > /dev/null
 
+    echo -e "\033[1;31mString : $FUZZ_INPUT\033[0m"
     OUTPUT=$(echo "$FUZZ_INPUT" | ./minishell 2>&1)
     EXIT_CODE=$?
 

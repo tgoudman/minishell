@@ -6,7 +6,7 @@
 #    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/02/25 12:23:54 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/02/26 10:53:34 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRCS =	main.c \
 		convert_to_shell_line_utils.c ft_printf_lst.c\
 		line_remake.c line_remake_core.c line_remake_strcmd.c\
 		cmd_fd_creation_utils2.c\
-		get_cmd_fd_case.c get_cmd_case.c variable_utils.c\
+		get_cmd_fd_case.c get_cmd_case.c variable_utils.c ft_exit.c\
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

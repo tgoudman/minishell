@@ -30,6 +30,8 @@
         "parsing.h": "c",
         "e": "cpp",
         "locale": "c",
-        "list": "c"
+        "list": "c",
+        "signal.h": "c",
+        "signal-defs.h": "c"
     }
 }

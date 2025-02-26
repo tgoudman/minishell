@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:07:05 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 11:22:24 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:28:09 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		check_cmds(t_bash *shell);
 void	launch_builtins(t_bash *shell, int index, int pipe_fd);
 void	launch_cmd(t_bash *shell, t_cmd cmd, int index);
 char	*get_path(t_bash *shell, char *cmd);
+int		ft_atoi_exit(const char *nptr);
 
 //HEREDOCS
 void	init_heredocs(t_bash *shell);

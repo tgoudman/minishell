@@ -6,12 +6,14 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 14:18:35 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:10:59 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define _POSIX_C_SOURCE 200809L
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -123,8 +125,9 @@ int		main(int argc, char **argv, char **env);
 int		ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
-void	init_signale(struct sigaction *sa);
-void	handler(int signum);
+void	init_signale(void);
+// void	handler(int signum);
+int		interactive_mode(int boolean);
 int		return_signal(int sig, int access);
 
 //CLEANING

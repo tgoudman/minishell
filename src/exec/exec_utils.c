@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 11:22:37 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:36:15 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_path(t_bash *shell, char *cmd)
 
 	all_path = ft_split(ft_getenv(shell), ':');
 	if (!all_path)
-		exit(1);
+		return (NULL);
 	j = 0;
 	while (all_path[j])
 	{
