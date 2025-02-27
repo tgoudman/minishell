@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:15:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 14:55:35 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:12:16 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	parsing_split_part1(t_bash *shell, t_lst_var **result)
 		i++;
 	}
 	*result = convert_lst(temp);
+	if (*result == NULL)
+		return (free_list_point(&result, len), ERROR);
 	return (free_list_point(&temp, len), TRUE);
 }
 
@@ -87,6 +89,8 @@ int	parsing_split(t_bash *shell)
 		return (ERROR);
 	input = input_remake2(result);
 	free_list_var(&result);
+	if (input == NULL)
+		return (ERROR);
 	ft_printf(1, "input v3 : %s\n", input);
 	if (input != NULL)
 		if (parsing_split_part2(shell, &result, &input) == ERROR)

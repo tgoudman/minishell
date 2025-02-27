@@ -33,7 +33,6 @@ int	quote_parsing_quote_case(t_lst_var **lst_var, char *str,
 		if (lst_create_new_var(lst_var, "", *v, *quote) == ERROR)
 			return (ERROR);
 		*quote = FALSE;
-		v->i++;
 		v->j += 2;
 		return (TRUE);
 	}

@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/26 10:40:59 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:44:12 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	ft_cd(t_bash *shell, t_cmd *cmd, int output)
-{
-	(void)output;
-	if (cmd->name == NULL)
-		return (0);
-	if (cmd->args[1] == NULL)
-		chdir(getenv("HOME"));
-	else
-	{
-		if (chdir(cmd->args[1]) != 0)
-		{
-			ft_printf(2, "minishell: cd: %s: %s\n",
-				cmd->args[1], strerror(errno));
-			return (shell->prev_return = 1, 1);
-		}
-	}
-	return (shell->prev_return = 0, 0);
-}
 
 int	ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 {
@@ -38,7 +19,7 @@ int	ft_pwd(t_bash *shell, t_cmd *cmd, int output)
 	(void)cmd;
 	pathname = getcwd(NULL, 0);
 	if (pathname == NULL)
-		return (ft_printf(2, "pwd: %s\n", strerror(errno)),
+		return (ft_printf(2, "minishell: %s\n", strerror(errno)),
 			shell->prev_return = 1, 1);
 	ft_printf(output, "%s\n", pathname);
 	free(pathname);

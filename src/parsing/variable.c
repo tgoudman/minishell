@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/25 13:27:14 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:02:48 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	demolish_var_core(t_bash *shell, t_lst_var **node, int *is_var)
 	char	*var;
 
 	var = return_var(shell, (*node)->string, node);
-	if (ft_strcmp(var, (*node)->string) != 0)
+	if (var != NULL && ft_strcmp(var, (*node)->string) != 0)
 		*is_var = TRUE;
 	free((*node)->string);
 	if (var == NULL)

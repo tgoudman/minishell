@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:30:22 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/26 14:29:03 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:06:29 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	interactive_mode(int boolean)
 {
-	static int result;
+	static int	result;
 
 	if (boolean != ERROR)
 		result = boolean;
@@ -60,8 +60,8 @@ void	handler(int signum, siginfo_t *info, void *context)
 
 void	init_signale(void)
 {
-	struct sigaction sigint;
-	struct sigaction sigquit;
+	struct sigaction	sigint;
+	struct sigaction	sigquit;
 
 	sigint.sa_sigaction = handler;
 	sigint.sa_flags = SA_SIGINFO;

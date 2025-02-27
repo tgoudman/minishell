@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:14:58 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/25 13:28:04 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:04:56 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	convert_core(t_lst_var	**result, t_lst_var	**temp, int *id)
 	list_add_back_var(result, node);
 	if ((*temp)->next == NULL)
 		node->is_space = TRUE;
-	else if (is_bash_op((*temp)->next->string[0], '*') == 1)
+	else if (is_bash_op((*temp)->next->string[0], '*') == 1
+		&& (*temp)->next->is_squote == FALSE)
 		node->is_space = TRUE;
 	else
 		node->is_space = FALSE;
@@ -47,7 +48,6 @@ t_lst_var	*convert_lst(t_lst_var **lst_point)
 			convert_core(&result, &temp, &id);
 		i++;
 	}
+	ft_printf_list_var(&result, 1);
 	return (result);
 }
-
-	// ft_printf_list_var(&result, 1);

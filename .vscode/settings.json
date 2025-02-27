@@ -32,6 +32,11 @@
         "locale": "c",
         "list": "c",
         "signal.h": "c",
-        "signal-defs.h": "c"
+        "signal-defs.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "ranges": "c",
+        "span": "c",
+        "vector": "c"
     }
 }
