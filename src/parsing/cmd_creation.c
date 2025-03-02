@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/20 14:30:15 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:45:22 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,9 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 	// ft_printf_list_line(&line_list, 1);
 	// ft_printf_list_fd(&fd_list, 1);
 	remake_line(&line_list, &cmd_list);
-	ft_printf(1, "OK\n");
-	ft_printf_list_cmd(&cmd_list, 1);
-	ft_printf_list_line(&line_list, 1);
-	ft_printf_list_fd(&fd_list, 1);
+	// ft_printf_list_cmd(&cmd_list, 1);
+	// ft_printf_list_line(&line_list, 1);
+	// ft_printf_list_fd(&fd_list, 1);
 	if (convert_lst_to_line(shell, &line_list, &cmd_list, &fd_list) == ERROR)
 		return (free_list_line(&line_list), free_list_cmd(&cmd_list),
 			free_list_fd(&fd_list), ERROR);

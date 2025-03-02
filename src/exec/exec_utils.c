@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 11:22:37 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/02 22:55:59 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_path(t_bash *shell, char *cmd)
 
 	all_path = ft_split(ft_getenv(shell), ':');
 	if (!all_path)
-		exit(1);
+		return (NULL);
 	j = 0;
 	while (all_path[j])
 	{
@@ -65,9 +65,10 @@ void	launch_builtins(t_bash *shell, int index, int pipe_fd)
 {
 	char	*file;
 
-	file = search_file(shell, index);
+	file = search_infile(shell);
 	if (file != NULL)
 		redirect_fd(shell, file + 1);
+	dprintf(2, "file is %s\n", file);
 	single_function(shell, shell->line.cmd, index, pipe_fd);
 	close(pipe_fd);
 	exit (1);

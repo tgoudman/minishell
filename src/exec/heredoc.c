@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 12:10:48 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/02 05:07:52 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	ft_execve_heredocs(t_bash *shell, char *str)
 			close(pipe_fd[0]);
 			dup2(pipe_fd[1], STDOUT_FILENO);
 			close(pipe_fd[1]);
-			launch_cmd(shell, shell->line.cmd[i], i);
+			// launch_cmd(shell, shell->line.cmd[i], i);
 		}
 		else
 		{
@@ -125,5 +125,36 @@ void	ft_execve_heredocs(t_bash *shell, char *str)
 			close(pipe_fd[0]);
 		}
 	}
-	launch_cmd(shell, shell->line.cmd[i], i);
+	// launch_cmd(shell, shell->line.cmd[i], i);
 }
+// int	check_heredoc(t_bash *shell)
+// {
+// 	int			i;
+// 	int			check;
+// 	int			nb_cmd;
+// 	t_line		*line;
+// 	t_lst_fd	*lst;
+
+// 	line = shell->line.group;
+// 	check = 0;
+// 	lst = shell->line.lst_fd;
+// 	nb_cmd = shell->line.cmd_nbr;
+// 	while (lst)
+// 	{
+// 		if (lst->type == 'h')
+// 			nb_cmd = get_cmd(shell, lst->name);
+// 		lst = lst->next;
+// 	}
+// 	while (nb_cmd > 0)
+// 	{
+// 		if (line->group[i][0] == '|' || line->group[i][0] == NULL)
+// 		{
+// 			nb_cmd--;
+// 			check = 0;
+// 		}
+// 		if (line->group[i][0] >= '0' && line->group[i][0] <= '9')
+// 			check = 1;
+// 		i++;
+// 	}
+// 	return (0);
+// }

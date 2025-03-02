@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:32:57 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/19 08:49:06 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:40:59 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ int	ft_env(t_bash *shell, t_cmd *cmd, int output)
 	(void)cmd;
 	ft_printf_list(&shell->lst_env, output);
 	shell->prev_return = 0;
-	return (0);
-}
-
-int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
-{
-	(void)output;
-	free_list(&shell->lst_env);
-	if (cmd->args)
-		free_cmd(cmd->args);
-	if (cmd->name)
-		free(cmd->name);
-	if (shell->line.cmd)
-		free(shell->line.cmd);
-	if (shell->line.group)
-		free_cmd(shell->line.group);
-	exit(1);
 	return (0);
 }
 

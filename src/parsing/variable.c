@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:50:54 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/17 11:38:12 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:32:59 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,35 @@ char	*var_check(t_bash *shell, char *str, t_lst_var *node, int *return_value)
 	return (NULL);
 }
 
-char	*var_find(t_bash *shell, char *var, char *after)
+char	*var_find(t_bash *shell, char *var, char *after, t_lst_var **node)
 {
-	t_lst	*node;
-	char	*tmp;
+	t_lst_var	*temp_next;
+	t_lst		*search;
+	char		*tmp;
 
-	node = shell->lst_env;
-	while (node != NULL)
+	search = shell->lst_env;
+	while (search != NULL)
 	{
-		if (ft_strcmp_var(node->name, var) == 0)
+		if (ft_strcmp_var(search->name, var) == 0)
 		{
-			tmp = ft_strjoin(node->data, after);
+			tmp = ft_strdup(search->data);
+			temp_next = (*node)->next;
+			(*node)->next = create_new_node_var(ft_strdup(after),
+				(*node)->is_squote);
+			(*node)->next->next = temp_next;
 			return (free(var), free(after), tmp);
 		}
-		node = node->next;
+		search = search->next;
 	}
-	tmp = ft_strjoin("", after);
+	tmp = ft_strdup("");
+	temp_next = (*node)->next;
+	(*node)->next = create_new_node_var(ft_strdup(after),
+		(*node)->is_squote);
+	(*node)->next->next = temp_next;
 	return (free(var), free(after), tmp);
 }
 
-char	*return_var(t_bash *shell, char *str, t_lst_var *node)
+char	*return_var(t_bash *shell, char *str, t_lst_var **node)
 {
 	char	*str_check;
 	char	*var;
@@ -57,7 +66,7 @@ char	*return_var(t_bash *shell, char *str, t_lst_var *node)
 	int		return_value;
 
 	return_value = FALSE;
-	str_check = var_check(shell, str, node, &return_value);
+	str_check = var_check(shell, str, *node, &return_value);
 	if (return_value != TRUE)
 		return (str_check);
 	var_len = 0;
@@ -70,14 +79,14 @@ char	*return_var(t_bash *shell, char *str, t_lst_var *node)
 	after = ft_strdup(str + var_len + 1);
 	if (!after)
 		return (free(var), NULL);
-	return (var_find(shell, var, after));
+	return (var_find(shell, var, after, node));
 }
 
 void	demolish_var_core(t_bash *shell, t_lst_var **node, int *is_var)
 {
 	char	*var;
 
-	var = return_var(shell, (*node)->string, (*node));
+	var = return_var(shell, (*node)->string, node);
 	if (ft_strcmp(var, (*node)->string) != 0)
 		*is_var = TRUE;
 	free((*node)->string);

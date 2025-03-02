@@ -6,7 +6,7 @@
 /*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:02 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 01:51:26 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/02 22:41:44 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,22 @@ char	*search_file(t_bash *shell, int index_cmd)
 	}
 	while (line.group[i] != NULL && line.group[i][0] != '|')
 	{
+		dprintf(2, "search %s\n", line.group[i]);
 		if (line.group[i][0] == '!')
-			file = line.group[i];
+			if (get_fd(shell, &line.group[i][1]) >= 0)
+				file = line.group[i];
 		i++;
 	}
 	return (file);
 }
 
-void	redirect_fd_infile(t_bash *shell, char *str)
+int	redirect_fd_infile(t_bash *shell, char *str)
 {
 	t_lst_fd	*tmp;
 
 	tmp = shell->line.lst_fd;
 	if (!tmp)
-		return ;
+		return (0);
 	while (tmp)
 	{
 		if (ft_strcmp(str, tmp->name) == 0)
@@ -53,10 +55,19 @@ void	redirect_fd_infile(t_bash *shell, char *str)
 			{
 				dup2(tmp->fd, STDIN_FILENO);
 				close(tmp->fd);
+				return (tmp->fd);
 			}
+			if(tmp->type == 'h')
+			{
+				tmp->fd = open(tmp->name, O_RDONLY);
+				dup2(tmp->fd, STDIN_FILENO);
+				close(tmp->fd);
+				return (tmp->fd);
+			}		
 		}
 		tmp = tmp->next;
 	}
+	return (-1);
 }
 
 char	*search_infile(t_bash *shell)
@@ -70,7 +81,7 @@ char	*search_infile(t_bash *shell)
 		return (file);
 	while (fd)
 	{
-		if (fd->type == 'i')
+		if (fd->type == 'i' || fd->type == 'h')
 			file = fd->name;
 		fd = fd->next;
 	}
@@ -105,3 +116,43 @@ int	get_fd(t_bash *shell, char *str)
 	}
 	return (-1);
 }
+
+int	search_infile_remake(t_bash *shell)
+{
+	int			check;
+	int			index;
+	int			i;
+
+	i = -1;
+	check = 0;
+	index = 0;
+	while (shell->line.group[++i] != NULL)
+	{
+		if (get_input(shell, &shell->line.group[i][1]) == 'i' || get_input(shell, &shell->line.group[i][1]) == 'h')
+			check = index;
+		if (shell->line.group[i][0] == '|')
+			index++;
+	}
+	if (check)
+		return (check);
+	else
+		return (0);
+}
+char	get_input(t_bash *shell, char *str)
+{
+	char		file;
+	t_lst_fd	*fd;
+
+	file = 'n';
+	fd = shell->line.lst_fd;
+	if (!fd)
+		return (file);
+	while (fd)
+	{
+		if (ft_strcmp(fd->name, str) == 0)
+			file = fd->type;
+		fd = fd->next;
+	}
+	return (file);
+}
+

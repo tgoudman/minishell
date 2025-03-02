@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/20 14:01:57 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:52:30 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	cmd_manager(t_bash *shell, char *input)
 		// ft_printf_list_fd(&shell->line.lst_fd, 1);
 		if (parsing_res != ERROR)
 			init_execve(shell);
-		ft_printf(1, "OK\n");
 	}
 	call_free(shell);
 	return (0);

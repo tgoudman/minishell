@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:36:14 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 10:36:47 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:39:46 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ int	get_lst_break_case(t_lst_var **tmp, char **name, t_cmd_pos *pos)
 
 int	get_lst_fd_core(t_lst_var **tmp, char **name, t_cmd_pos *pos)
 {
+	if ((*tmp)->is_squote != FALSE && ft_strcmp("", (*tmp)->string) == 0)
+		return ((*tmp) = (*tmp)->next, *name = ft_strdup(""),
+			pos->i++, pos->j = 0, BREAK);
 	if ((*tmp)->is_squote != FALSE)
 	{
 		*name = join_temp_to_name(name, (*tmp)->string, pos, 1);

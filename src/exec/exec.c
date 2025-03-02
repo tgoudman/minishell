@@ -6,7 +6,7 @@
 /*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/22 17:40:09 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/02 22:59:42 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	single_function(t_bash *shell, t_cmd *cmd, int index, int fd)
 {
-	char	*file;
+	// char	*file;
 	int		file_fd;
-
+(void)index;
 	file_fd = -1;
-	file = search_file(shell, index);
-	if (file != NULL)
-		file_fd = get_fd(shell, file + 1);
+	// file = search_file(shell, index);
+	// if (file != NULL)
+	// 	file_fd = get_fd(shell, file + 1);
 	if (file_fd == -1)
 		file_fd = fd;
 	if (ft_strncmp(cmd->name, "echo", 5) == 0)
@@ -39,8 +39,21 @@ int	single_function(t_bash *shell, t_cmd *cmd, int index, int fd)
 		return (shell->func[EXIT].exec(shell, cmd, file_fd), 1);
 	return (0);
 }
-	// else 
-	// {
-	// 	ft_printf(1, "Command '%s' not found\n", cmd->name);
-	// 	shell->prev_return = 127;
-	// }
+
+// char	get_input(t_bash *shell, char *str)
+// {
+// 	char		file;
+// 	t_lst_fd	*fd;
+
+// 	file = 'n';
+// 	fd = shell->line.lst_fd;
+// 	if (!fd)
+// 		return (file);
+// 	while (fd)
+// 	{
+// 		if (ft_strcmp(fd->name, str) == 0)
+// 			file = fd->type;
+// 		fd = fd->next;
+// 	}
+// 	return (file);
+// }

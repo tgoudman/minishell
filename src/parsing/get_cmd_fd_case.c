@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:16:40 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 13:37:11 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:19:16 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	fd_update(t_info *info, t_lst_fd *fd_temp)
 		return (BREAK);
 	if (info->res == TRUE)
 	{
-		line = create_new_node_line("|");
+		line = create_new_node_line(ft_strdup("|"));
 		list_add_back_line(info->line_list, line);
 		info->pos->last_type = PIPE;
 		if (info->tmp->string[info->pos->j] == '\0')

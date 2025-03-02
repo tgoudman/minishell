@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_to_shell_line_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:18:07 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 09:50:56 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:10:59 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_tmpjoin(char *tmp_str, char **temp_char, int mod)
 {
 	char	*tmp;
 
-	tmp =NULL;
+	tmp = NULL;
 	if (mod == 1)
 		tmp = ft_strjoin(*temp_char, tmp_str);
 	else if (mod == 2)

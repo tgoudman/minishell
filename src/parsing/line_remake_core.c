@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 11:36:21 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 11:46:34 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:33:24 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	combine_cmd_pipe_case(t_remake_line *object, t_char_arg **cmd_tempo,
 		cmd_create = create_new_node_cmd(*cmd_tempo);
 		list_add_back_cmd(object->new_cmd_list, cmd_create);
 		object->is_cmd = FALSE;
+		*cmd_actual = (*cmd_actual)->next;
 	}
-	*cmd_actual = (*cmd_actual)->next;
 	return (TRUE);
 }
 

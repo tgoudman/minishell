@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:41:26 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/20 14:59:18 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:44:21 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ int	remake_line(t_lst_line **line_list, t_lst_cmd **cmd_list)
 	*object.new_cmd_list = NULL;
 	if (combine_cmd(&object) == ERROR)
 		return (ERROR);
-	if (*object.cmd_list != NULL)
-		free_list_cmd(object.cmd_list);
-	if (*object.line_list != NULL)
-		free_list_line(object.line_list);
-	ft_printf(1, "OKP\n");
+	if (*cmd_list != NULL)
+		free_list_cmd(cmd_list);
+	if (*line_list != NULL)
+		free_list_line(line_list);
 	*object.line_list = *object.new_line_list;
 	*object.cmd_list = *object.new_cmd_list;
 	free(object.new_line_list);
