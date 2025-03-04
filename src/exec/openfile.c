@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:59:26 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/24 01:49:54 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/03 12:48:12 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	open_fds(t_bash *shell)
 			fd = ft_open_file(tmp->name, 1);
 		if (tmp->type == 'i')
 			fd = ft_open_file(tmp->name, 0);
+		if (tmp->type == 'h')
+			fd = ft_heredoc(tmp->limit, tmp->name);
 		if (fd == -1)
 			return (-1);
 		tmp->fd = fd;
@@ -65,7 +67,10 @@ int	ft_append(char *str)
 	fd = open(str, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		printf("%s: permission denied \n", str);
+		if (errno == EACCES)
+			printf("Permission denied\n");
+		else if (errno == ENOENT)
+			printf("Aucun fichier ou dossier de ce nom\n");
 		return (-1);
 	}
 	return (fd);
@@ -80,22 +85,24 @@ int	ft_open_file(char *str, int file)
 		fd = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd == -1)
 		{
-			printf("%s: permission denied \n", str);
+			if (errno == EACCES)
+				printf("Permission denied\n");
+			else if (errno == ENOENT)
+				printf("Aucun fichier ou dossier de ce nom\n");
 			return (-1);
 		}
 		return (fd);
 	}
-	if (file == 0)
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
 	{
-		fd = open(str, O_RDONLY);
-		if (fd == -1)
-		{
-			printf("%s: Permission denied\n", str);
-			return (-1);
-		}
-		return (fd);
+		if (errno == EACCES)
+			printf("Permission denied\n");
+		else if (errno == ENOENT)
+			printf("Aucun fichier ou dossier de ce nom\n");
+		return (-1);
 	}
-	return (0);
+	return (fd);
 }
 
 void	close_fd(t_bash *shell)

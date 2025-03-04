@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 10:39:23 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/26 10:42:09 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:39:33 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
 	}
 	if (i == 2)
 		shell->prev_return = ft_atoi_exit(cmd->args[1]);
-	free_list(&shell->lst_env);
+	free_list_env(shell->lst_env);
 	if (cmd->args)
 		free_cmd(cmd->args);
 	if (cmd->name)

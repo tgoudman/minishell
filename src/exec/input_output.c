@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:02 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/26 10:34:42 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:26:01 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ char	*search_file(t_bash *shell, int index_cmd)
 	return (file);
 }
 
-void	redirect_fd_infile(t_bash *shell, char *str)
+int	redirect_fd_infile(t_bash *shell, char *str)
 {
 	t_lst_fd	*tmp;
 
 	tmp = shell->line.lst_fd;
 	if (!tmp)
-		return ;
+		return (0);
 	while (tmp)
 	{
 		if (ft_strcmp(str, tmp->name) == 0)
@@ -54,10 +54,19 @@ void	redirect_fd_infile(t_bash *shell, char *str)
 			{
 				dup2(tmp->fd, STDIN_FILENO);
 				close(tmp->fd);
+				return (tmp->fd);
+			}
+			if (tmp->type == 'h')
+			{
+				tmp->fd = open(tmp->name, O_RDONLY);
+				dup2(tmp->fd, STDIN_FILENO);
+				close(tmp->fd);
+				return (tmp->fd);
 			}
 		}
 		tmp = tmp->next;
 	}
+	return (-1);
 }
 
 char	*search_infile(t_bash *shell)
@@ -71,7 +80,7 @@ char	*search_infile(t_bash *shell)
 		return (file);
 	while (fd)
 	{
-		if (fd->type == 'i')
+		if (fd->type == 'i' || fd->type == 'h')
 			file = fd->name;
 		fd = fd->next;
 	}
@@ -105,4 +114,50 @@ int	get_fd(t_bash *shell, char *str)
 		tmp = tmp->next;
 	}
 	return (-1);
+}
+
+int	get_fd_infile(t_bash *shell, char *str)
+{
+	t_lst_fd	*tmp;
+
+	tmp = shell->line.lst_fd;
+	if (!tmp)
+		return (-1);
+	while (tmp)
+	{
+		if (ft_strcmp(str, tmp->name) == 0)
+		{
+			if (tmp->type == 'i' || tmp->type == 'h')
+				return (tmp->fd);
+		}
+		tmp = tmp->next;
+	}
+	return (-1);
+}
+
+char	*search_file_two(t_bash *shell, int index_cmd)
+{
+	char	*file;
+	int		count;
+	t_line	line;
+	int		i;
+
+	i = 0;
+	count = 0;
+	file = NULL;
+	line = shell->line;
+	while (line.group[i] != NULL && index_cmd > count)
+	{
+		if (line.group[i][0] == '|')
+			count++;
+		i++;
+	}
+	while (line.group[i] != NULL && line.group[i][0] != '|')
+	{
+		if (line.group[i][0] == '!')
+			if (get_fd_infile(shell, &line.group[i][1]) >= 0)
+				file = line.group[i];
+		i++;
+	}
+	return (file);
 }

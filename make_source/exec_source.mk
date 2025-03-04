@@ -15,4 +15,4 @@ EXEC_DIR = src/exec
 SRCS_EXEC = builtins.c export.c heredoc.c ft_exit.c\
 		echo.c execve.c exec.c unset.c ft_cd.c \
 		openfile.c exec_utils.c \
-		input_output.c
+		input_output.c cleaning_exec.c\

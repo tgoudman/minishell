@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/26 10:36:32 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:44:05 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	ft_execve_heredocs(t_bash *shell, char *str)
 			close(pipe_fd[0]);
 			dup2(pipe_fd[1], STDOUT_FILENO);
 			close(pipe_fd[1]);
-			launch_cmd(shell, shell->line.cmd[i], i);
 		}
 		else
 		{
@@ -125,5 +124,4 @@ void	ft_execve_heredocs(t_bash *shell, char *str)
 			close(pipe_fd[0]);
 		}
 	}
-	launch_cmd(shell, shell->line.cmd[i], i);
 }

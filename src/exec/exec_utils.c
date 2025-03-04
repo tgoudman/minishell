@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/02/26 10:36:15 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:45:10 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	launch_builtins(t_bash *shell, int index, int pipe_fd)
 {
 	char	*file;
 
-	file = search_file(shell, index);
+	file = search_infile(shell);
 	if (file != NULL)
 		redirect_fd(shell, file + 1);
 	single_function(shell, shell->line.cmd, index, pipe_fd);
@@ -82,8 +82,11 @@ char	*ft_getenv(t_bash *shell)
 		return (NULL);
 	while (lst)
 	{
-		if (ft_strcmp("PATH", lst->name) == 0)
-			return (lst->data);
+		if (lst->name && lst->data)
+		{
+			if (ft_strcmp("PATH", lst->name) == 0)
+				return (lst->data);
+		}
 		lst = lst->next;
 	}
 	return (NULL);
