@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:59:26 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/03 12:48:12 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:42:47 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	ft_append(char *str)
 	if (fd == -1)
 	{
 		if (errno == EACCES)
-			printf("Permission denied\n");
+			printf("minishell: %s: Permission denied\n", str);
 		else if (errno == ENOENT)
-			printf("Aucun fichier ou dossier de ce nom\n");
+			printf("minishell: %s: No such file or directory\n", str);
 		return (-1);
 	}
 	return (fd);
@@ -86,9 +86,9 @@ int	ft_open_file(char *str, int file)
 		if (fd == -1)
 		{
 			if (errno == EACCES)
-				printf("Permission denied\n");
+				printf("minishell: %s: Permission denied\n", str);
 			else if (errno == ENOENT)
-				printf("Aucun fichier ou dossier de ce nom\n");
+				printf("minishell: %s: No such file or directory\n", str);
 			return (-1);
 		}
 		return (fd);
@@ -97,9 +97,9 @@ int	ft_open_file(char *str, int file)
 	if (fd == -1)
 	{
 		if (errno == EACCES)
-			printf("Permission denied\n");
+			printf("minishell: %s: Permission denied\n", str);
 		else if (errno == ENOENT)
-			printf("Aucun fichier ou dossier de ce nom\n");
+			printf("minishell: %s: No such file or directory\n", str);
 		return (-1);
 	}
 	return (fd);

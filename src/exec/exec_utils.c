@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 10:45:10 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:23:44 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,21 @@ int	check_function(t_cmd cmd)
 	return (0);
 }
 
-void	launch_builtins(t_bash *shell, int index, int pipe_fd)
+void	launch_builtins(t_bash *shell, int index, int *pipe_fd, int oldpipe)
 {
 	char	*file;
 
 	file = search_infile(shell);
 	if (file != NULL)
 		redirect_fd(shell, file + 1);
-	single_function(shell, shell->line.cmd, index, pipe_fd);
-	close(pipe_fd);
+	single_function(shell, shell->line.cmd, index, pipe_fd[1]);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	if (oldpipe)
+		close(oldpipe);
+	close_fd(shell);
+	call_free(shell);
+	free_list_env(shell->lst_env);
 	exit (1);
 }
 

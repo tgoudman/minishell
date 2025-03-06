@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/26 15:10:59 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:08:20 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		return_signal(int sig, int access);
 //CLEANING
 void	free_list(t_lst **shell);
 void	free_cmd(char **cmd);
+void	call_free(t_bash *shell);
 
 //LST
 t_lst	*create_new_node(char *data, char *name);

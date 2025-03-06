@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:28:38 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 10:51:03 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:46:03 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,22 @@ void	free_cmds(t_bash *shell)
 	if (!shell || !shell->line.cmd)
 		return ;
 	cmd = &shell->line.cmd;
-	j = 0;
-	while (cmd[j] != NULL)
+	j = -1;
+	while (cmd[++j] != NULL)
 	{
-		i = 0;
+		i = -1;
 		if (cmd[j] != NULL)
 		{
 			if (cmd[j]->args)
 			{
 				while (cmd[j]->args[i])
-				{
-					free(cmd[j]->args[i]);
-					++i;
-				}
+					free(cmd[j]->args[++i]);
 				free(cmd[j]->args);
 			}
 			if (cmd[j]->name)
 				free(cmd[j]->name);
 			free(cmd[j]);
 		}
-		++j;
 	}
 }
 

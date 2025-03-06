@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:07:05 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 10:44:48 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:06:59 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ int		redirect_fd_infile(t_bash *shell, char *str);
 int		check_function(t_cmd cmd);
 int		open_fds(t_bash *shell);
 int		check_cmds(t_bash *shell);
-void	launch_builtins(t_bash *shell, int index, int pipe_fd);
+void	launch_builtins(t_bash *shell, int index, int *pipe_fd, int oldpipe);
 char	*get_path(t_bash *shell, char *cmd);
 int		ft_atoi_exit(const char *nptr);
 char	get_input(t_bash *shell, char *str);
+int		search_pipe(t_bash *shell, int nbr);
 // void	launch_cmd(t_bash *shell, t_cmd cmd, int index);
 // char	*search_infile(t_bash *shell, int index);
 // void	do_pipe(t_bash *shell, t_cmd cmd, int index, int *pipe_fd);
@@ -110,5 +111,6 @@ void	free_cmds(t_bash *shell);
 void	free_cmd_exec(char **cmd);
 void	free_list_env(t_lst *env);
 void	free_tab(char **tab);
+void	ft_exit_signale(t_bash *shell, pid_t pid);
 
 #endif
