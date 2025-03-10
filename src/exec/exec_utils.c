@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 16:23:44 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:50:35 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,16 @@ int	check_function(t_cmd cmd)
 	return (0);
 }
 
-void	launch_builtins(t_bash *shell, int index, int *pipe_fd, int oldpipe)
+void	launch_builtins(t_bash *shell, int index, int oldpipe)
 {
-	char	*file;
+	char	*outfile;
 
-	file = search_infile(shell);
-	if (file != NULL)
-		redirect_fd(shell, file + 1);
-	single_function(shell, shell->line.cmd, index, pipe_fd[1]);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	if (oldpipe)
-		close(oldpipe);
+	(void)oldpipe;
+	outfile = search_file(shell, index);
+	if (outfile != NULL)
+		redirect_fd(shell, outfile + 1);
 	close_fd(shell);
-	call_free(shell);
-	free_list_env(shell->lst_env);
+	single_function(shell, &shell->line.cmd[index], index, STDOUT_FILENO);
 	exit (1);
 }
 

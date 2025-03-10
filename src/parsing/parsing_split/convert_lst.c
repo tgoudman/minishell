@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:14:58 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/27 13:04:56 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:58:10 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ t_lst_var	*convert_lst(t_lst_var **lst_point)
 			convert_core(&result, &temp, &id);
 		i++;
 	}
-	ft_printf_list_var(&result, 1);
 	return (result);
 }

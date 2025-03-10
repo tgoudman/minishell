@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MINISHELL="./minishell" # Path to the minishell executable
-ITERATIONS=1000000 # Number of iterations to run
+ITERATIONS=100000 # Number of iterations to run
 TEMP_DIR="/tmp/minishell_fuzzing"
 TEMP_MINISHELL="$TEMP_DIR/minishell"
 LOGFILE="fuzzing_errors.log" # Output file for crash details
@@ -37,7 +37,6 @@ for ((i = 1; i <= ITERATIONS; i++)); do
 
     pushd "$TEMP_DIR" > /dev/null
 
-    echo -e "\033[1;31mString : $FUZZ_INPUT\033[0m"
     OUTPUT=$(echo "$FUZZ_INPUT" | ./minishell 2>&1)
     EXIT_CODE=$?
 

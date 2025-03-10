@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:16:40 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/24 17:19:16 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:59:40 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	fd_update(t_info *info, t_lst_fd *fd_temp)
 			info->pos->start_of_arg = info->pos->i;
 			info->pos->start_of_char = info->pos->j;
 		}
+		else
+			info->pos->start_of_char = info->pos->j;
 	}
 	return (info->pos->end_of_arg = info->pos->i,
 		info->pos->end_of_char = info->pos->j, TRUE);

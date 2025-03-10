@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/03 12:42:57 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/07 08:31:44 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,76 @@
 
 int	single_function(t_bash *shell, t_cmd *cmd, int index, int fd)
 {
-	int		file_fd;
-
 	(void)index;
-	file_fd = -1;
-	if (file_fd == -1)
-		file_fd = fd;
 	if (ft_strncmp(cmd->name, "echo", 5) == 0)
-		return (shell->func[ECHO].exec(shell, cmd, file_fd), 1);
+		return (shell->func[ECHO].exec(shell, cmd, fd), 1);
 	else if (ft_strncmp(cmd->name, "cd", 3) == 0)
-		return (shell->func[CD].exec(shell, cmd, file_fd), 1);
+		return (shell->func[CD].exec(shell, cmd, fd), 1);
 	else if (ft_strncmp(cmd->name, "pwd", 4) == 0)
-		return (shell->func[PWD].exec(shell, cmd, file_fd), 1);
+		return (shell->func[PWD].exec(shell, cmd, fd), 1);
 	else if (ft_strncmp(cmd->name, "export", 7) == 0)
-		return (shell->func[EXPORT].exec(shell, cmd, file_fd), 1);
+		return (shell->func[EXPORT].exec(shell, cmd, fd), 1);
 	else if (ft_strncmp(cmd->name, "unset", 6) == 0)
-		return (shell->func[UNSET].exec(shell, cmd, file_fd), 1);
+		return (shell->func[UNSET].exec(shell, cmd, fd), 1);
 	else if (ft_strncmp(cmd->name, "env", 4) == 0)
-		return (shell->func[ENV].exec(shell, cmd, file_fd), 1);
+		return (shell->func[ENV].exec(shell, cmd, fd), 1);
 	else if (ft_strncmp(cmd->name, "exit", 5) == 0)
-		return (shell->func[EXIT].exec(shell, cmd, file_fd), 1);
+		return (shell->func[EXIT].exec(shell, cmd, fd), 1);
 	return (0);
 }
 
-// char	get_input(t_bash *shell, char *str)
-// {
-// 	char		file;
-// 	t_lst_fd	*fd;
+int	ft_command_one(t_bash *shell, int index)
+{
+	pid_t	pid;
+	char	*infile;
 
-// 	file = 'n';
-// 	fd = shell->line.lst_fd;
-// 	if (!fd)
-// 		return (file);
-// 	while (fd)
-// 	{
-// 		if (ft_strcmp(fd->name, str) == 0)
-// 			file = fd->type;
-// 		fd = fd->next;
-// 	}
-// 	return (file);
-// }
+	infile = search_infile(shell);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (infile != NULL)
+			redirect_fd_infile(shell, infile);
+		if (check_function(shell->line.cmd[index]) == 1)
+			launch_builtins(shell, 0, 1);
+		else
+			launch_cmd(shell, shell->line.cmd[index], 0);
+	}
+	ft_exit_signale(shell, pid);
+	waitpid(pid, NULL, 0);
+	return (0);
+}
+
+int	no_command(t_bash *shell, int index)
+{
+	char	**line;
+	int		i;
+
+	i = 0;
+	line = shell->line.group;
+	if (line[i][0] == '0' && index == 0)
+		return (ft_atoi(line[i]));
+	while (index && line[i] != NULL)
+	{
+		if (line[i][0] == '|' && line[i] != NULL)
+			index--;
+		++i;
+	}
+	while (line[i] != NULL && line[i][0] != '|')
+	{
+		if (line[i][0] != '|' && line[i][0] != '!')
+			return (ft_atoi(line[i]));
+		++i;
+	}
+	return (-1);
+}
+
+int	close_pipe(int *pipe_fd, int old_fd)
+{
+	if (pipe_fd[1] > 0)
+		close(pipe_fd[1]);
+	if (old_fd > 0)
+		close(old_fd);
+	if (pipe_fd[0] > 0)
+		close(pipe_fd[0]);
+	return (-1);
+}

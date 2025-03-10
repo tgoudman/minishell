@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:07:05 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 17:06:59 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:41:07 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int		ft_append(char *str);
 int		ft_open_file(char *str, int file);
 void	close_fd(t_bash *shell);
 void	init_func(t_func *builtin);
-char	*search_file(t_bash *shell, int index_cmd);
 void	redirect_fd(t_bash *shell, char *str);
 int		get_fd(t_bash *shell, char *str);
 int		check_cmds(t_bash *shell);
@@ -80,7 +79,7 @@ int		redirect_fd_infile(t_bash *shell, char *str);
 int		check_function(t_cmd cmd);
 int		open_fds(t_bash *shell);
 int		check_cmds(t_bash *shell);
-void	launch_builtins(t_bash *shell, int index, int *pipe_fd, int oldpipe);
+void	launch_builtins(t_bash *shell, int index, int oldpipe);
 char	*get_path(t_bash *shell, char *cmd);
 int		ft_atoi_exit(const char *nptr);
 char	get_input(t_bash *shell, char *str);
@@ -99,11 +98,15 @@ int		get_cmd(t_bash	*shell, char *str);
 void	close_fd_heredocs(t_bash *shell);
 char	*search_infile(t_bash *shell);
 int		ft_execve(t_bash *shell);
+int		ft_execve_final(t_bash *shell, int *pipe_fd, int i, int j);
 int		search_infile_remake(t_bash *shell);
 void	launch_cmd(t_bash *shell, t_cmd cmd, int index);
-int		do_pipe(t_bash *shell, int index, int old_fd, int *pipe_fd);
+int		do_pipe(t_bash *shell, int index_cmd, int old_fd, int *pipe_fd);
 int		ft_command_one(t_bash *shell, int index);
 int		get_fd_infile(t_bash *shell, char *str);
+int		no_command(t_bash *shell, int index);
+int		close_pipe(int *pipe_fd, int old_fd);
+char	*search_file(t_bash *shell, int index_cmd);
 char	*search_file_two(t_bash *shell, int index_cmd);
 
 // CLEANING

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 17:07:59 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/07 05:54:16 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ int	get_cmd(t_bash	*shell, char *str)
 	return (count);
 }
 
-// printf("execute cmd = %s nb cmd = %d fd = %d file = %s\n", 
-// shell->line.cmd[i].name, shell->line.cmd_nbr, fd, str);
 void	ft_execve_heredocs(t_bash *shell, char *str)
 {
 	int		i;

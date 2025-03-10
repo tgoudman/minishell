@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
+#    By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 09:01:08 by tgoudman          #+#    #+#              #
-#    Updated: 2025/02/27 14:54:35 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/03/06 21:09:26 by nezumickey       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 include make_source/source.mk
 

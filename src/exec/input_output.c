@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:02 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 16:22:35 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:50:12 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*search_file(t_bash *shell, int index_cmd)
-{
-	char	*file;
-	int		count;
-	t_line	line;
-	int		i;
-
-	i = 0;
-	count = 0;
-	file = NULL;
-	line = shell->line;
-	while (line.group[i] != NULL && index_cmd > count)
-	{
-		if (line.group[i][0] == '|')
-			count++;
-		i++;
-	}
-	while (line.group[i] != NULL && line.group[i][0] != '|')
-	{
-		if (line.group[i][0] == '!')
-			if (get_fd(shell, &line.group[i][1]) >= 0)
-				file = line.group[i];
-		i++;
-	}
-	return (file);
-}
 
 int	redirect_fd_infile(t_bash *shell, char *str)
 {
@@ -87,10 +60,24 @@ char	*search_infile(t_bash *shell)
 
 int	check_cmds(t_bash *shell)
 {
+	pid_t	pid;
+
 	if (shell->line.cmd_nbr == 1)
 	{
-		if (single_function(shell, shell->line.cmd, 0, 1) == 1)
+		if (check_function(shell->line.cmd[0]) == 1)
+		{
+			pid = fork();
+			if (pid == 0)
+			{
+				launch_builtins(shell, 0, -1);
+				shell->prev_return = 0;
+				close_fd(shell);
+				exit(0);
+			}
+			else
+				waitpid(pid, NULL, 0);
 			return (1);
+		}
 	}
 	return (0);
 }

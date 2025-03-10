@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_creation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:40:17 by jdhalv.l          #+#    #+#             */
-/*   Updated: 2025/02/27 13:37:57 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:58:21 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,3 @@ t_lst_cmd	*get_lst_cmd(t_lst_var *main_lst, t_lst_line **line_list,
 		null_lst_cmd(&info.cmd_list);
 	return (info.cmd_list);
 }
-

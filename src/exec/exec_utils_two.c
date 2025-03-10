@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_two.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:49:09 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/05 16:28:57 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:51:12 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,38 +72,12 @@ int	get_fd_infile(t_bash *shell, char *str)
 	return (-1);
 }
 
-char	*search_file_two(t_bash *shell, int index_cmd)
-{
-	char	*file;
-	int		count;
-	t_line	line;
-	int		i;
-
-	i = 0;
-	count = 0;
-	file = NULL;
-	line = shell->line;
-	while (line.group[i] != NULL && index_cmd > count)
-	{
-		if (line.group[i][0] == '|')
-			count++;
-		i++;
-	}
-	while (line.group[i] != NULL && line.group[i][0] != '|')
-	{
-		if (line.group[i][0] == '!')
-			if (get_fd_infile(shell, &line.group[i][1]) >= 0)
-				file = line.group[i];
-		i++;
-	}
-	return (file);
-}
-
 int	search_pipe(t_bash *shell, int nbr)
 {
 	int	i;
 	int	count;
-(void)nbr;
+
+	(void)nbr;
 	i = 0;
 	count = 0;
 	while (shell->line.group[i] != NULL)
