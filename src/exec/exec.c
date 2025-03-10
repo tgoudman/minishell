@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/07 08:31:44 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/10 13:51:46 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int	ft_command_one(t_bash *shell, int index)
 	char	*infile;
 
 	infile = search_infile(shell);
+	if (infile != NULL)
+		redirect_fd_infile(shell, infile);
+	if (check_function(shell->line.cmd[index]) == 1)
+	{
+		launch_builtins(shell, 0, 1);
+		return (0);
+	}
 	pid = fork();
 	if (pid == 0)
-	{
-		if (infile != NULL)
-			redirect_fd_infile(shell, infile);
-		if (check_function(shell->line.cmd[index]) == 1)
-			launch_builtins(shell, 0, 1);
-		else
-			launch_cmd(shell, shell->line.cmd[index], 0);
-	}
+		launch_cmd(shell, shell->line.cmd[index], 0);
 	ft_exit_signale(shell, pid);
 	waitpid(pid, NULL, 0);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/07 07:50:35 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/10 16:30:55 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ char	*get_path(t_bash *shell, char *cmd)
 		if (access(exec, F_OK | X_OK) == 0)
 		{
 			free_cmd(all_path);
+			ft_printf(2, "path == %s\n", exec);
 			return (exec);
 		}
 		free(exec);
 		j++;
 	}
 	free_cmd(all_path);
-	return (cmd);
+	return (NULL);
 }
 
 int	check_function(t_cmd cmd)
@@ -71,7 +72,12 @@ void	launch_builtins(t_bash *shell, int index, int oldpipe)
 		redirect_fd(shell, outfile + 1);
 	close_fd(shell);
 	single_function(shell, &shell->line.cmd[index], index, STDOUT_FILENO);
-	exit (1);
+	if (shell->line.cmd_nbr > 1)
+	{
+		call_free(shell);
+		free_list_env(shell->lst_env);
+		exit (0);
+	}
 }
 
 char	*ft_getenv(t_bash *shell)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/07 05:54:16 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/10 17:02:59 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int	ft_heredoc(char *del, char *str)
 		ft_printf(fd, "%s\n", input);
 		free(input);
 	}
-	close(fd);
-	return (fd);
+	return (close(fd), fd);
 }
 
 char	*handle_multiple_heredocs(t_bash *shell)

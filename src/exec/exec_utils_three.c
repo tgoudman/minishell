@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 07:49:44 by nezumickey        #+#    #+#             */
-/*   Updated: 2025/03/10 12:09:43 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:26:02 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,13 @@ char	*search_file_two(t_bash *shell, int index_cmd)
 		i++;
 	}
 	return (free(index), file);
+}
+void	free_cmd_path(t_bash *shell, t_cmd cmd, char **env)
+{
+	ft_printf(2, "minishell: Command '%s' not found\n", cmd.name);
+	call_free(shell);
+	free_list_env(shell->lst_env);
+	free_cmd_exec(env);
+	shell->prev_return = 127;
+	exit (127);
 }

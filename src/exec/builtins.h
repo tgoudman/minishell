@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:07:05 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/07 07:41:07 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/10 15:26:19 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	launch_builtins(t_bash *shell, int index, int oldpipe);
 char	*get_path(t_bash *shell, char *cmd);
 int		ft_atoi_exit(const char *nptr);
 char	get_input(t_bash *shell, char *str);
+void	free_cmd_path(t_bash *shell, t_cmd cmd,  char **env);
 int		search_pipe(t_bash *shell, int nbr);
 // void	launch_cmd(t_bash *shell, t_cmd cmd, int index);
 // char	*search_infile(t_bash *shell, int index);

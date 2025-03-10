@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/10 11:30:37 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:25:39 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	launch_cmd(t_bash *shell, t_cmd cmd, int index)
 	close_fd_heredocs(shell);
 	path = get_path(shell, cmd.name);
 	env = lst_to_tab(shell->lst_env);
+	if (!path)
+		free_cmd_path(shell, cmd, env);
 	shell->prev_return = 0;
-	if (execve(path, cmd.args, env) == -1)
+	if (execve(path, cmd.args, env ) == -1)
 	{
 		ft_printf(2, "minishell: Command '%s' not found\n", cmd.name);
 		call_free(shell);
@@ -68,16 +70,10 @@ int	do_pipe(t_bash *shell, int index_cmd, int old_fd, int *pipe_fd)
 
 int	init_execve(t_bash *shell)
 {
+	if (shell->line.cmd_nbr == 0)
+		return (0);
 	if (open_fds(shell) == -1)
 		return (1);
-	if (search_pipe(shell, 0) == 0)
-	{
-		if (check_cmds(shell) == 1)
-		{
-			close_fd(shell);
-			return (0);
-		}
-	}
 	if (shell->line.cmd_nbr == 1 && search_pipe(shell, 0) == 0)
 		ft_command_one(shell, 0);
 	else

@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:58:16 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/12 20:27:20 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:54:01 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_lst	*delete_node(t_lst *lst, int n)
 	if (tmp)
 	{
 		prev->next = tmp->next;
+		free(tmp->name);
+		free(tmp->data);
 		free(tmp);
 	}
 	return (lst);

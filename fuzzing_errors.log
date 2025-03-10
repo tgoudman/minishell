@@ -1,0 +1,27 @@
+/
+> s
+<< here
+ctrl+c in heredoc
+echo 0	
+exit
+pwd
+unset PATH
+env -i valgrind ./minishell
+{
+	ls
+	/bin/ls
+}
+tout les builtin leak
+export
+
+Input : echo "'$PATH'"
+ echo "'""/home/tgoudman/bin:/home/tgoudman/bin:/home/tgoudman/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin""'"
+'/home/tgoudman/bin:/home/tgoudman/bin:/home/tgoudman/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin'
+
+
+Input :         (tab = ctrl+v ctrl+i)
+ 	
+minishell: Command '	' not found
+
+cat | cat | ls
+
