@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/04 14:08:20 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:21:07 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,9 @@ int		ft_minishell(t_bash *shell, char **env);
 
 // SIGNALE
 void	init_signale(void);
+int		interactive_mode_heredocs(int boolean);
+void	handler(int signum, siginfo_t *info, void *context);
+
 // void	handler(int signum);
 int		interactive_mode(int boolean);
 int		return_signal(int sig, int access);

@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/10 16:30:55 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:44:06 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*get_path(t_bash *shell, char *cmd)
 		if (access(exec, F_OK | X_OK) == 0)
 		{
 			free_cmd(all_path);
-			ft_printf(2, "path == %s\n", exec);
 			return (exec);
 		}
 		free(exec);

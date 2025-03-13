@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/10 13:51:46 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:43:20 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,26 @@ int	ft_command_one(t_bash *shell, int index)
 	pid_t	pid;
 	char	*infile;
 
-	infile = search_infile(shell);
-	if (infile != NULL)
-		redirect_fd_infile(shell, infile);
+
 	if (check_function(shell->line.cmd[index]) == 1)
 	{
+		infile = search_infile(shell);
+		if (infile != NULL)
+			redirect_fd_infile(shell, infile);
 		launch_builtins(shell, 0, 1);
 		return (0);
 	}
 	pid = fork();
 	if (pid == 0)
+	{
+		infile = search_infile(shell);
+		if (infile != NULL)
+			redirect_fd_infile(shell, infile);
 		launch_cmd(shell, shell->line.cmd[index], 0);
+	}
+	else
+		waitpid(pid, NULL, 0);
 	ft_exit_signale(shell, pid);
-	waitpid(pid, NULL, 0);
 	return (0);
 }
 

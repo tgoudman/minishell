@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/10 17:02:59 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:44:50 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ void	init_heredocs(t_bash *shell)
 
 int	ft_heredoc(char *del, char *str)
 {
-	char	*input;
-	int		fd;
+	char			*input;
+	int				fd;
 
 	fd = open(str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd == -1)
 		return (perror("Erreur lors de l'ouverture du fichier"), -1);
+	interactive_mode_heredocs(TRUE);
 	while (1)
 	{
 		input = readline("heredoc> ");

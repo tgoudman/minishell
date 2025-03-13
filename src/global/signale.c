@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signale.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:30:22 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/27 13:06:29 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:51:58 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,40 @@ int	return_signal(int sig, int access)
 	}
 	return (130);
 }
+int	interactive_mode_heredocs(int boolean)
+{
+	static int	result;
+
+	if (boolean != ERROR)
+		result = boolean;
+	if (result == TRUE)
+		return (TRUE);
+	return (FALSE);
+}
 
 void	handler(int signum, siginfo_t *info, void *context)
 {
 	(void)context;
 	(void)info;
+
 	if (interactive_mode(ERROR) == TRUE)
 	{
 		if (signum == SIGINT)
 		{
+			dprintf(2, "signale -- %d\n", info->si_code);
 			return_signal(130, 1);
 			ft_printf(1, "\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
+		}
+	}
+	else if (interactive_mode_heredocs(ERROR) == TRUE)
+	{
+		if (signum == SIGINT)
+		{
+			ft_printf(1, "\n");
+			return ;
 		}
 	}
 	else
@@ -62,7 +82,6 @@ void	init_signale(void)
 {
 	struct sigaction	sigint;
 	struct sigaction	sigquit;
-
 	sigint.sa_sigaction = handler;
 	sigint.sa_flags = SA_SIGINFO;
 	sigemptyset(&sigint.sa_mask);
