@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 15:00:08 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:59:52 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_path(t_bash *shell, char *cmd)
 		j++;
 	}
 	free_cmd(all_path);
-	return (NULL);
+	return (cmd);
 }
 
 int	check_function(t_cmd cmd)
