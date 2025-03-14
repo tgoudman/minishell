@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 00:51:00 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/14 17:29:18 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	do_pipe(t_bash *shell, int index_cmd, int old_fd, int *pipe_fd)
 			launch_builtins(shell, index_cmd, old_fd);
 		launch_cmd(shell, shell->line.cmd[index_cmd], index_cmd);
 	}
-	waitpid(pid, NULL, 0);
+	shell->line.cmd[index_cmd].pid = pid;
+	close(pipe_fd[1]);
 	if (old_fd > 0)
 		close(old_fd);
-	close(pipe_fd[1]);
 	return (pipe_fd[0]);
 }
 
@@ -78,7 +78,7 @@ int	init_execve(t_bash *shell)
 		ft_command_one(shell, 0);
 	else
 		ft_execve(shell);
-	close_fd(shell);
+	close_fd(shell, 1);
 	return (0);
 }
 
@@ -100,10 +100,11 @@ int	ft_execve(t_bash *shell)
 		else
 			old_fd = do_pipe(shell, ++i, old_fd, pipe_fd);
 	}
-	wait(NULL);
+	close(pipe_fd[1]);
 	ft_execve_final(shell, pipe_fd, ++i, j);
 	if (old_fd > 0)
 		close(old_fd);
+	ft_waitpid(shell, i);
 	return (0);
 }
 
@@ -125,12 +126,11 @@ int	ft_execve_final(t_bash *shell, int *pipe_fd, int i, int j)
 		}
 		if (no_command(shell, j) == -1)
 		{
-			close_fd(shell);
+			close_fd(shell, 0);
 			exit (0);
 		}
 		launch_cmd(shell, shell->line.cmd[i], i);
 	}
-	close_fd(shell);
-	ft_exit_signale(shell, pid);
+	shell->line.cmd[i].pid = pid;
 	return (0);
 }

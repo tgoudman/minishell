@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:07:05 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 00:39:02 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/14 14:59:36 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_exit(t_bash *shell, t_cmd *cmd, int output);
 int		init_execve(t_bash *shell);
 int		ft_append(char *str);
 int		ft_open_file(char *str, int file);
-void	close_fd(t_bash *shell);
+void	close_fd(t_bash *shell, int heredoc);
 void	init_func(t_func *builtin);
 void	redirect_fd(t_bash *shell, char *str);
 int		get_fd(t_bash *shell, char *str);
@@ -93,7 +93,6 @@ int		search_pipe(t_bash *shell, int nbr);
 //HEREDOCS
 int		init_heredocs(char *delimiter, char *str);
 int		ft_heredoc(char *del, int fd);
-ssize_t	read_heredoc_line(char *buffer, size_t buffer_size);
 void	ft_execve_heredocs(t_bash *shell, char *str);
 int		get_cmd(t_bash	*shell, char *str);
 void	close_fd_heredocs(t_bash *shell);
@@ -109,12 +108,12 @@ int		no_command(t_bash *shell, int index);
 int		close_pipe(int *pipe_fd, int old_fd);
 char	*search_file(t_bash *shell, int index_cmd);
 char	*search_file_two(t_bash *shell, int index_cmd);
+void	ft_waitpid(t_bash *shell, int i);
 
 // CLEANING
 void	free_cmds(t_bash *shell);
 void	free_cmd_exec(char **cmd);
 void	free_list_env(t_lst *env);
 void	free_tab(char **tab);
-void	ft_exit_signale(t_bash *shell, pid_t pid);
 
 #endif

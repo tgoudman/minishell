@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/13 10:44:06 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:00:08 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	launch_builtins(t_bash *shell, int index, int oldpipe)
 	outfile = search_file(shell, index);
 	if (outfile != NULL)
 		redirect_fd(shell, outfile + 1);
-	close_fd(shell);
+	close_fd(shell, 0);
 	single_function(shell, &shell->line.cmd[index], index, STDOUT_FILENO);
 	if (shell->line.cmd_nbr > 1)
 	{

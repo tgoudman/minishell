@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/14 00:40:15 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/14 14:45:54 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ int	ft_command_one(t_bash *shell, int index)
 			redirect_fd_infile(shell, infile);
 		launch_cmd(shell, shell->line.cmd[index], 0);
 	}
-	else
-		waitpid(pid, NULL, 0);
-	ft_exit_signale(shell, pid);
+	shell->line.cmd[index].pid = pid;
+	ft_waitpid(shell, 1);
 	return (0);
 }
 

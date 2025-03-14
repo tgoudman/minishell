@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:02 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/13 10:43:52 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:53:10 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_cmds(t_bash *shell)
 			{
 				launch_builtins(shell, 0, -1);
 				shell->prev_return = 0;
-				close_fd(shell);
+				close_fd(shell, 1);
 				exit(0);
 			}
 			else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 00:58:02 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/14 17:31:44 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,58 +32,32 @@ int	init_heredocs(char *delimiter, char *str)
 	return (fd);
 }
 
-ssize_t	read_heredoc_line(char *buffer, size_t buffer_size)
-{
-	char	c;
-	ssize_t	bytes_read;
-	size_t	index;
-
-	index = 0;
-	write(1, "heredoc> ", 9);
-	while (index < buffer_size - 1)
-	{
-		bytes_read = read(STDIN_FILENO, &c, 1);
-		if (bytes_read == -1)
-		{
-			perror("read");
-			return (-1);
-		}
-		if (bytes_read == 0)
-		{
-			write(1, "\n", 1);
-			return (0);
-		}
-		buffer[index++] = c;
-		if (c == '\n')
-			break ;
-	}
-	buffer[index] = '\0';
-	return (index);
-}
-
 int	ft_heredoc(char *delimiter, int fd)
 {
-	char	buffer[BUFFER_SIZE];
-	ssize_t	line_size;
+	char	*line;
+	char	*line_trim;
 
 	while (1)
 	{
+		write(1, "heredoc> ", 9);
+		line = get_next_line(STDIN_FILENO);
 		if (g_stop == 1)
-			return (g_stop = 0, -1);
-		line_size = read_heredoc_line(buffer, BUFFER_SIZE);
-		if (line_size == -1)
-			return (-1);
-		if (line_size == 0)
+			return (free(line), g_stop = 0, -1);
+		if (!line)
 		{
-			dprintf(2, "here-document delimited by end-of-file (wanted `%s`)\n",
-				delimiter);
-			return (0);
+			dprintf(2, "here-document delimited by EOF %s\n", delimiter);
+			return (free(line), 0);
 		}
-		if (strncmp(buffer, delimiter, strlen(delimiter)) == 0
-			&& buffer[strlen(delimiter)] == '\n')
-			break ;
-		dprintf(fd, "%s", buffer);
+		if (line[0] == '\n')
+			continue ;
+		line_trim = ft_strtrim(line, "\n");
+		if (ft_strcmp(line_trim, delimiter) == 0)
+			return (free(line), free(line_trim), 0);
+		free(line_trim);
+		dprintf(fd, "%s", line);
+		free(line);
 	}
+	free(line);
 	return (0);
 }
 

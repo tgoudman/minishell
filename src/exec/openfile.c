@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:59:26 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/13 22:40:59 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/14 15:01:17 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_open_file(char *str, int file)
 	return (fd);
 }
 
-void	close_fd(t_bash *shell)
+void	close_fd(t_bash *shell, int heredoc)
 {
 	t_lst_fd	*lst;
 
@@ -114,7 +114,7 @@ void	close_fd(t_bash *shell)
 	{
 		if (lst->fd != STDIN_FILENO && lst->fd != STDOUT_FILENO)
 			close(lst->fd);
-		if (lst->type == 'h')
+		if (lst->type == 'h' && heredoc == 1)
 		{
 			if (unlink(lst->name) == -1)
 				ft_printf(2, "Erreur %s: canno't remove %s\n",

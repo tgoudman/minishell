@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signale.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:30:22 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/14 00:28:03 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/14 10:04:58 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	handler(int signum, siginfo_t *info, void *context)
 	if (interactive_mode_heredocs(ERROR) == TRUE)
 	{
 		if (signum == SIGINT)
+		{
 			g_stop = 1;
+			ft_printf(1, "\n");
+		}
 	}
 	else if (interactive_mode(ERROR) == TRUE)
 	{
