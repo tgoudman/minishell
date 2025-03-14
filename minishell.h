@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:47:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/13 14:21:07 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:24:48 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/ioctl.h>
 # include <unistd.h>
 # include "Libft/libft.h"
 # include <readline/readline.h>

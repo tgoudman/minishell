@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_three.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 07:49:44 by nezumickey        #+#    #+#             */
-/*   Updated: 2025/03/10 15:26:02 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:41:09 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ char	*search_file_two(t_bash *shell, int index_cmd)
 	}
 	return (free(index), file);
 }
+
 void	free_cmd_path(t_bash *shell, t_cmd cmd, char **env)
 {
 	ft_printf(2, "minishell: Command '%s' not found\n", cmd.name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:59:26 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/10 11:30:58 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/13 22:40:59 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	open_fds(t_bash *shell)
 		if (tmp->type == 'i')
 			fd = ft_open_file(tmp->name, 0);
 		if (tmp->type == 'h')
-			fd = ft_heredoc(tmp->limit, tmp->name);
+			fd = init_heredocs(tmp->limit, tmp->name);
 		if (fd == -1)
 			return (-1);
 		tmp->fd = fd;

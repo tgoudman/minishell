@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:07:05 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/10 15:26:19 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:39:02 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-typedef struct s_line	t_line;
-typedef struct s_func	t_func;
-typedef struct s_bash	t_bash;
-typedef struct s_cmd	t_cmd;
-typedef struct s_lst	t_lst;
-
+typedef struct s_line			t_line;
+typedef struct s_func			t_func;
+typedef struct s_bash			t_bash;
+typedef struct s_cmd			t_cmd;
+typedef struct s_lst			t_lst;
+extern volatile sig_atomic_t	g_stop;
 /* # define close(fd) \
 do \
 { \
@@ -83,7 +83,7 @@ void	launch_builtins(t_bash *shell, int index, int oldpipe);
 char	*get_path(t_bash *shell, char *cmd);
 int		ft_atoi_exit(const char *nptr);
 char	get_input(t_bash *shell, char *str);
-void	free_cmd_path(t_bash *shell, t_cmd cmd,  char **env);
+void	free_cmd_path(t_bash *shell, t_cmd cmd, char **env);
 int		search_pipe(t_bash *shell, int nbr);
 // void	launch_cmd(t_bash *shell, t_cmd cmd, int index);
 // char	*search_infile(t_bash *shell, int index);
@@ -91,9 +91,9 @@ int		search_pipe(t_bash *shell, int nbr);
 // void	print_open_fds(const char *where);
 
 //HEREDOCS
-void	init_heredocs(t_bash *shell);
-int		ft_heredoc(char *del, char *str);
-char	*handle_multiple_heredocs(t_bash *shell);
+int		init_heredocs(char *delimiter, char *str);
+int		ft_heredoc(char *del, int fd);
+ssize_t	read_heredoc_line(char *buffer, size_t buffer_size);
 void	ft_execve_heredocs(t_bash *shell, char *str);
 int		get_cmd(t_bash	*shell, char *str);
 void	close_fd_heredocs(t_bash *shell);

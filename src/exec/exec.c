@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/13 10:43:20 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:40:15 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_command_one(t_bash *shell, int index)
 {
 	pid_t	pid;
 	char	*infile;
-
 
 	if (check_function(shell->line.cmd[index]) == 1)
 	{

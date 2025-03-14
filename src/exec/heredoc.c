@@ -3,80 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:49:13 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/13 14:44:50 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:58:02 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_heredocs(t_bash *shell)
+int	init_heredocs(char *delimiter, char *str)
 {
-	int		fd;
-	char	*name;
+	int	fd;
 
-	name = handle_multiple_heredocs(shell);
-	if (name == NULL)
-		return ;
-	fd = open(name, O_RDONLY);
-	dup2(fd, STDIN_FILENO);
-	close(fd);
-	ft_execve_heredocs(shell, name);
-	close_fd(shell);
-}
-
-int	ft_heredoc(char *del, char *str)
-{
-	char			*input;
-	int				fd;
-
+	interactive_mode_heredocs(TRUE);
 	fd = open(str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd == -1)
 		return (perror("Erreur lors de l'ouverture du fichier"), -1);
-	interactive_mode_heredocs(TRUE);
-	while (1)
+	if (ft_heredoc(delimiter, fd) == -1)
 	{
-		input = readline("heredoc> ");
-		if (!input)
-		{
-			printf("here-document delimited by end-of-file (wanted `%s')\n",
-				del);
-			break ;
-		}
-		if (strcmp(input, del) == 0)
-		{
-			free(input);
-			break ;
-		}
-		ft_printf(fd, "%s\n", input);
-		free(input);
+		close(fd);
+		unlink(str);
+		interactive_mode_heredocs(FALSE);
+		return (-1);
 	}
-	return (close(fd), fd);
+	interactive_mode_heredocs(FALSE);
+	close(fd);
+	return (fd);
 }
 
-char	*handle_multiple_heredocs(t_bash *shell)
+ssize_t	read_heredoc_line(char *buffer, size_t buffer_size)
 {
-	t_lst_fd	*lst;
-	char		*name;
-	int			fd;
+	char	c;
+	ssize_t	bytes_read;
+	size_t	index;
 
-	fd = -1;
-	lst = shell->line.lst_fd;
-	name = NULL;
-	while (lst)
+	index = 0;
+	write(1, "heredoc> ", 9);
+	while (index < buffer_size - 1)
 	{
-		if (lst->type == 'h')
+		bytes_read = read(STDIN_FILENO, &c, 1);
+		if (bytes_read == -1)
 		{
-			fd = ft_heredoc(lst->limit, lst->name);
-			name = lst->name;
+			perror("read");
+			return (-1);
 		}
-		lst = lst->next;
+		if (bytes_read == 0)
+		{
+			write(1, "\n", 1);
+			return (0);
+		}
+		buffer[index++] = c;
+		if (c == '\n')
+			break ;
 	}
-	if (fd != -1)
-		close(fd);
-	return (name);
+	buffer[index] = '\0';
+	return (index);
+}
+
+int	ft_heredoc(char *delimiter, int fd)
+{
+	char	buffer[BUFFER_SIZE];
+	ssize_t	line_size;
+
+	while (1)
+	{
+		if (g_stop == 1)
+			return (g_stop = 0, -1);
+		line_size = read_heredoc_line(buffer, BUFFER_SIZE);
+		if (line_size == -1)
+			return (-1);
+		if (line_size == 0)
+		{
+			dprintf(2, "here-document delimited by end-of-file (wanted `%s`)\n",
+				delimiter);
+			return (0);
+		}
+		if (strncmp(buffer, delimiter, strlen(delimiter)) == 0
+			&& buffer[strlen(delimiter)] == '\n')
+			break ;
+		dprintf(fd, "%s", buffer);
+	}
+	return (0);
 }
 
 int	get_cmd(t_bash	*shell, char *str)

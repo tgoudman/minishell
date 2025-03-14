@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/13 10:34:24 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 00:51:00 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	launch_cmd(t_bash *shell, t_cmd cmd, int index)
 	if (!path)
 		free_cmd_path(shell, cmd, env);
 	shell->prev_return = 0;
-	if (execve(path, cmd.args, env ) == -1)
+	if (execve(path, cmd.args, env) == -1)
 	{
 		ft_printf(2, "minishell: Command '%s' not found\n", cmd.name);
 		call_free(shell);
