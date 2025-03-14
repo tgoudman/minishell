@@ -1,0 +1,16 @@
+build
+fuzzing.sh
+l
+Libft
+ll
+main.c
+Makefile
+make_source
+minishell
+minishell.h
+readline.supp
+README.md
+s
+src
+std.supp
+TODO

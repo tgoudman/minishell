@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 17:29:18 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:09:29 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	launch_cmd(t_bash *shell, t_cmd cmd, int index)
 		call_free(shell);
 		free_list_env(shell->lst_env);
 		free_cmd_exec(env);
+		free(path);
 		shell->prev_return = 127;
 		exit (127);
 	}

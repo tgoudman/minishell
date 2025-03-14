@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:24:23 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/12 20:26:56 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:21:34 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	insert_export(t_bash *shell, char *str)
 		tmp_str = get_name(str);
 		if (ft_strcmp(tmp->name, tmp_str) == 0)
 		{
-			tmp->data = ft_strdup(get_data(str));
+			free(tmp->data);
+			tmp->data = get_data(str);
 			free(tmp_str);
 			return ;
 		}
