@@ -1,0 +1,35 @@
+<< here
+
+..
+
+/
+
+/|/
+
+<< here ls
+
+SIGQUIT (ctrl+\) in child
+
+{
+	export s=s
+	export s=s
+	unset s
+}
+
+/bin/ls
+
+/clear
+
+echo - s
+
+exit ps
+
+exit 11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+
+exit 5 s
+
+{
+			Input : ^C
+(ctrl+D)	Input : 
+			exit
+}
