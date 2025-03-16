@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 10:39:23 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 10:39:33 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/16 04:03:18 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 int	ft_atoi_exit(const char *nptr)
 {
-	int	i;
-	int	s;
-	int	n;
+	int			i;
+	int			s;
+	long		n;
 
 	i = 0;
-	s = 0;
+	s = 1;
 	n = 0;
-	if ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		while (((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32))
-			i++;
-	if ((nptr[i] == '+' && ++s) || (nptr[i] == '-' && --s))
+	while (((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32))
 		i++;
-	else
-		s = 1;
-	if ((nptr[i] != '\0') && nptr[i] >= 48 && nptr[i] <= 57)
+	if (nptr[i] == '+')
+		i++;
+	else if (nptr[i] == '-')
 	{
-		while ((nptr[i] != '\0' && nptr[i] >= 48 && nptr[i] <= 57))
-		{
-			n = (n * 10) + (nptr[i] - '0');
-			i++;
-		}
-		if ((nptr[i] != '\0' && (nptr[i] < 48 || nptr[i] > 57)))
-			return (printf("%s: numeric argument required\n", nptr), 2);
+		s = -1;
+		i++;
 	}
-	return (n *= s);
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		n = (n * 10) + (nptr[i] - '0');
+		i++;
+	}
+	if (nptr[i] != '\0' || n > INT_MAX || n * s < INT_MIN)
+		return (printf("%s: numeric argument required\n", nptr), 2);
+	return (n * s);
 }
 
 int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
@@ -49,11 +48,10 @@ int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
 	(void)output;
 	while (cmd->args[i])
 		++i;
-	if (i > 3)
+	if (i > 2)
 	{
-		shell->prev_return = 127;
+		shell->prev_return = 1;
 		printf("bash: exit: too many arguments\n");
-		return (1);
 	}
 	if (i == 2)
 		shell->prev_return = ft_atoi_exit(cmd->args[1]);

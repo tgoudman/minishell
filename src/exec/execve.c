@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 18:09:29 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/16 04:01:49 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//	dprintf(2, "execute cmd %s in %s index is  %d\n", cmd.name, outfile, index);
 void	launch_cmd(t_bash *shell, t_cmd cmd, int index)
 {
 	char	**env;
@@ -34,7 +33,6 @@ void	launch_cmd(t_bash *shell, t_cmd cmd, int index)
 		call_free(shell);
 		free_list_env(shell->lst_env);
 		free_cmd_exec(env);
-		free(path);
 		shell->prev_return = 127;
 		exit (127);
 	}

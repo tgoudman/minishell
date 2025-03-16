@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:38:05 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/14 11:35:48 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/15 23:46:42 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ void	free_cmd(char **cmd)
 		return ;
 	while (cmd[i] != NULL)
 	{
-		free(cmd[i++]);
+		free(cmd[i]);
+		cmd[i] = NULL;
+		++i;
 	}
 	if (cmd != NULL)
+	{
 		free(cmd);
+		cmd = NULL;
+	}
 }
 
 void	free_list(t_lst **env)

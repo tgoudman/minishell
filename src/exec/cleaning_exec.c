@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:28:38 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/04 15:46:03 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/16 04:01:34 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ void	free_cmd_exec(char **cmd)
 		return ;
 	while (cmd[i] != NULL)
 	{
-		free(cmd[i++]);
+		free(cmd[i]);
+		cmd[i] = NULL;
+		++i;
 	}
 	if (cmd != NULL)
 		free(cmd);
+	cmd = NULL;
 }
 
 void	free_list_env(t_lst *env)
@@ -64,10 +67,17 @@ void	free_list_env(t_lst *env)
 		tmp = env;
 		env = env->next;
 		if (tmp->name != NULL)
+		{
 			free(tmp->name);
+			tmp->name = NULL;
+		}
 		if (tmp->data != NULL)
+		{
 			free(tmp->data);
+			tmp->data = NULL;
+		}
 		free(tmp);
+		tmp = NULL;
 	}
 }
 

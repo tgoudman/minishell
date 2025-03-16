@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/10 11:59:44 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/16 00:02:07 by nezumickey       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,21 @@ void	call_free(t_bash *shell)
 	{
 		while (i < shell->line.cmd_nbr)
 		{
-			if (shell->line.cmd[i].name == NULL)
-				break ;
-			free(shell->line.cmd[i].name);
-			if (shell->line.cmd[i].args == NULL)
-				break ;
-			free_cmd(shell->line.cmd[i].args);
+			if (shell->line.cmd[i].name)
+			{
+				free(shell->line.cmd[i].name);
+				shell->line.cmd[i].name = NULL;
+			}
+			if (shell->line.cmd[i].args)
+				free_cmd(shell->line.cmd[i].args);
 			i++;
 		}
-		free(shell->line.cmd);
+		if (shell->line.cmd)
+			free(shell->line.cmd);
 	}
-	if (shell->line.group != NULL)
+	if (shell->line.group)
 		free_cmd(shell->line.group);
-	if (shell->line.lst_fd != NULL)
+	if (shell->line.lst_fd)
 		free_list_fd(&shell->line.lst_fd);
 }
 
