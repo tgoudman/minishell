@@ -6,3 +6,26 @@ valeur de retour:
 
 
 /asda (leak)
+
+exit 5 s (doit pas quiter)
+
+Input : exit e 5 (exit code)
+
+ctrl+D in child
+
+tab in double quote ex: echo "cat lol.c | 	cat > lol.c"
+
+return /usr/bin/ls in exec
+
+Input : "" (leak)
+
+Input : "|"
+minishell: syntax error near '|'
+
+env | cat (attend pour rien)
+
+export
+
+cd prend qu max 1 arg:
+tgoudman@c1r2p3:~/student/Dracolosse$ cd .. ..
+bash: cd: too many arguments
