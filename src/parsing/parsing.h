@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:00:55 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/25 14:48:59 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:55:45 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,12 +144,14 @@ int			combine_cmd_end_case(t_remake_line *object,
 				t_char_arg **cmd_tempo);
 
 //INPUT REMAKE
+void		replace_and_convert_tab(char **tmp, char *input, int *i, int *j);
 char		*ft_charjoin(char *str, char chr);
 char		*input_remake(char *input);
 char		*input_remake2(t_lst_var *lst_var);
 char		*var_case(t_lst_var **tmp, char *input);
 char		*space_add(t_lst_var **tmp, char *input);
 char		*quote_add(t_lst_var **tmp, char *input);
+int			if_whitespace(char c);
 
 //CONVERT LST
 char		*ft_tmpjoin(char *tmp_str, char **temp_char, int mod);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:06:49 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/16 00:02:07 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/10 15:05:02 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,19 @@ void	call_free(t_bash *shell)
 	{
 		while (i < shell->line.cmd_nbr)
 		{
-			if (shell->line.cmd[i].name)
-			{
-				free(shell->line.cmd[i].name);
-				shell->line.cmd[i].name = NULL;
-			}
-			if (shell->line.cmd[i].args)
-				free_cmd(shell->line.cmd[i].args);
+			if (shell->line.cmd[i].name == NULL)
+				break ;
+			free(shell->line.cmd[i].name);
+			if (shell->line.cmd[i].args == NULL)
+				break ;
+			free_cmd(shell->line.cmd[i].args);
 			i++;
 		}
-		if (shell->line.cmd)
-			free(shell->line.cmd);
+		free(shell->line.cmd);
 	}
-	if (shell->line.group)
+	if (shell->line.group != NULL)
 		free_cmd(shell->line.group);
-	if (shell->line.lst_fd)
+	if (shell->line.lst_fd != NULL)
 		free_list_fd(&shell->line.lst_fd);
 }
 
@@ -72,3 +70,6 @@ int	cmd_manager(t_bash *shell, char *input)
 	call_free(shell);
 	return (0);
 }
+
+// ft_printf(1, "LINE after parsing is : %t\n", shell->line.group);
+// ft_printf(1, "LINE after creation is : %t\n", shell->line.group);

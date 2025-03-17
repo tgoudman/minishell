@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:37:42 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/10 11:57:23 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:06:02 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,7 @@ int	cmd_parsing(t_bash *shell, t_lst_var *main_lst)
 			free_list_fd(&fd_list), ERROR);
 	return (free_list_cmd(&cmd_list), free_list_line(&line_list), 1);
 }
+
+	// ft_printf_list_cmd(&cmd_list, 1);
+	// ft_printf_list_line(&line_list, 1);
+	// ft_printf_list_fd(&fd_list, 1);

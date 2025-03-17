@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:00:14 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/17 10:40:28 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:01:03 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,3 @@ int	search_for_quote(t_bash *shell, char *input)
 	create_group(shell, input, group_nbr, 0);
 	return (0);
 }
-
-	// ft_printf(1, "group_nbr %i\n", group_nbr);

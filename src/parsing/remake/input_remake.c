@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/25 11:29:10 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:59:59 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_space(char *input, int i)
 {
-	while (input[i] != '\0' && input[i] == ' ')
+	while (input[i] != '\0' && if_whitespace(input[i]))
 		i++;
 	if (input[i] == '\0')
 		return (FALSE);
@@ -43,15 +43,15 @@ char	*copy_space(char *input, char *tmp)
 	while (input[i] != '\0' && check_space(input, i) == TRUE)
 	{
 		move_in_input(input, i, &quote);
-		if (input[i] == ' ' && space == 1 && quote == FALSE)
+		if (if_whitespace(input[i]) && space == 1 && quote == FALSE)
 			i++;
 		else
 		{
-			if (input[i] == ' ' && quote == FALSE)
+			if (if_whitespace(input[i]) && quote == FALSE)
 				space = 1;
 			else
 				space = 0;
-			tmp[j++] = input[i++];
+			replace_and_convert_tab(&tmp, input, &i, &j);
 		}
 	}
 	return (tmp[j] = '\0', tmp);
@@ -71,11 +71,11 @@ int	move_space(char *input)
 	while (input[i] != '\0' && check_space(input, i) == TRUE)
 	{
 		move_in_input(input, i, &quote);
-		if (input[i] == ' ' && space == 1 && quote == FALSE)
+		if (if_whitespace(input[i]) && space == 1 && quote == FALSE)
 			i++;
 		else
 		{
-			if (input[i] == ' ' && quote == FALSE)
+			if (if_whitespace(input[i]) && quote == FALSE)
 				space = 1;
 			else
 				space = 0;
@@ -98,6 +98,3 @@ char	*input_remake(char *input)
 	free(input);
 	return (res);
 }
-
-	// ft_printf(1, "len : %i\n", move_space(input));
-	// ft_printf(1, "input v2 : %s, with len %i\n", input, ft_strlen(input));

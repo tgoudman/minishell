@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_shell_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:42:51 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/10 12:12:23 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:51:18 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,13 @@ int	convert_lst_to_line(t_bash *shell, t_lst_line **lst_line,
 		return (ERROR);
 	return (TRUE);
 }
+
+	// ft_printf(1, "CMD NBR : %s%i%s\n", YLW, shell->line.cmd_nbr, NTL);
+	// ft_printf(1, "CMD[%i] input [%i] output [%i] : ", i,
+	// 	shell->line.cmd[i].input, shell->line.cmd[i].output);
+	// for (int k = 0; shell->line.cmd[i].args[k] != NULL; k++)
+	// 	ft_printf(1, "%s[%s]%s", YLW, shell->line.cmd[i].args[k], NTL);
+	// ft_printf(1, "\n");
+	// ft_printf(1, "_____%sPARSING_RESULT%s____\n", ORG, NTL);
+	// ft_printf_list_fd(&shell->line.lst_fd, 1);
+	// ft_printf(1, "LINE : %s%t%s\n", YLW, shell->line.group, NTL);
