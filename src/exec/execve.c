@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/17 10:58:00 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:05:48 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int	do_pipe(t_bash *shell, int index_cmd, int old_fd, int *pipe_fd)
 int	init_execve(t_bash *shell)
 {
 	if (open_fds(shell) == -1)
+	{
+		close_fd(shell, 0);
 		return (1);
+	}
 	if (shell->line.cmd_nbr == 0)
 	{
 		close_fd(shell, 1);

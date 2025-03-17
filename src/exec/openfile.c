@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:59:26 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 15:01:17 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:10:33 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	open_fds(t_bash *shell)
 			fd = ft_open_file(tmp->name, 0);
 		if (tmp->type == 'h')
 			fd = init_heredocs(tmp->limit, tmp->name);
+		tmp->fd = fd;
 		if (fd == -1)
 			return (-1);
-		tmp->fd = fd;
 		tmp = tmp->next;
 	}
 	return (0);
@@ -112,7 +112,7 @@ void	close_fd(t_bash *shell, int heredoc)
 	lst = shell->line.lst_fd;
 	while (lst)
 	{
-		if (lst->fd != STDIN_FILENO && lst->fd != STDOUT_FILENO)
+		if (lst->fd != STDIN_FILENO && lst->fd != STDOUT_FILENO && lst->fd != -1)
 			close(lst->fd);
 		if (lst->type == 'h' && heredoc == 1)
 		{

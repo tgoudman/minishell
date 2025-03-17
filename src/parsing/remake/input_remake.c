@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:04 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/10 14:59:59 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:57:19 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,28 @@ void	move_in_input(char *input, int i, char *quote)
 char	*copy_space(char *input, char *tmp)
 {
 	char	quote;
-	int		i;
-	int		j;
+	t_var	v;
 	int		space;
 
-	i = 0;
-	j = 0;
+	v.i = 0;
+	v.j = 0;
 	space = 1;
 	quote = FALSE;
-	while (input[i] != '\0' && check_space(input, i) == TRUE)
+	while (input[v.i] != '\0' && check_space(input, v.i) == TRUE)
 	{
-		move_in_input(input, i, &quote);
-		if (if_whitespace(input[i]) && space == 1 && quote == FALSE)
-			i++;
+		move_in_input(input, v.i, &quote);
+		if (if_whitespace(input[v.i]) && space == 1 && quote == FALSE)
+			v.i++;
 		else
 		{
-			if (if_whitespace(input[i]) && quote == FALSE)
+			if (if_whitespace(input[v.i]) && quote == FALSE)
 				space = 1;
 			else
 				space = 0;
-			replace_and_convert_tab(&tmp, input, &i, &j);
+			replace_and_convert_tab(&tmp, input, &v, quote);
 		}
 	}
-	return (tmp[j] = '\0', tmp);
+	return (tmp[v.j] = '\0', tmp);
 }
 
 int	move_space(char *input)

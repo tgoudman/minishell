@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 10:39:23 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/16 04:03:18 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/17 12:07:39 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int	ft_exit(t_bash *shell, t_cmd *cmd, int output)
 		++i;
 	if (i > 2)
 	{
-		shell->prev_return = 1;
+		shell->prev_return = 2;
 		printf("bash: exit: too many arguments\n");
+		return (0);
 	}
 	if (i == 2)
 		shell->prev_return = ft_atoi_exit(cmd->args[1]);

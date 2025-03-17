@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:20:12 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/27 13:04:41 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:28:05 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	ft_cd(t_bash *shell, t_cmd *cmd, int output)
 	if (cmd->name == NULL)
 		return (FALSE);
 	if (cmd_count_args(cmd) > 2)
-		return (shell->prev_return = 1, FALSE);
+		return (ft_printf(2, "minishell: cd: too many arguments\n"),
+			shell->prev_return = 1, FALSE);
 	if (cmd->args[1] == NULL)
 	{
 		if (cd_home_case(shell) == FALSE)

@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:29:28 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/14 14:45:54 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:17:00 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_command_one(t_bash *shell, int index)
 		launch_cmd(shell, shell->line.cmd[index], 0);
 	}
 	shell->line.cmd[index].pid = pid;
-	ft_waitpid(shell, 1);
+	ft_waitpid(shell, 0);
 	return (0);
 }
 

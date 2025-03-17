@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:21:14 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/14 17:31:05 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:14:48 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_waitpid(t_bash *shell, int nb)
 	int		i;
 
 	i = -1;
-	while (++i < nb)
+	while (++i <= nb)
 	{
 		if (shell->line.cmd[i].pid > 0)
 		{

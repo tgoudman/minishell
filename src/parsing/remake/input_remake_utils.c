@@ -6,7 +6,7 @@
 /*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:35:03 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/10 14:55:48 by jdhallen         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:58:56 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@ int	if_whitespace(char c)
 	return (FALSE);
 }
 
-void	replace_and_convert_tab(char **tmp, char *input, int *i, int *j)
+void	replace_and_convert_tab(char **tmp, char *input, t_var *v, char q)
 {
-	if (input[(*i)] == '\t')
-		(*tmp)[(*j)++] = ' ';
+	if (q == FALSE)
+	{
+		if (input[v->i] == '\t')
+			(*tmp)[v->j++] = ' ';
+		else
+			(*tmp)[v->j++] = input[v->i++];
+	}
 	else
-		(*tmp)[(*j)++] = input[(*i)++];
+		(*tmp)[v->j++] = input[v->i++];
 }

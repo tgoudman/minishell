@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:40:19 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/16 04:02:13 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/17 12:17:32 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ char	*get_path(t_bash *shell, char *cmd)
 	char	*exec;
 
 	all_path = ft_split(ft_getenv(shell), ':');
-	if (!all_path || cmd[0] == '/' || cmd[0] == '.')
+	if (!all_path)
 		return (cmd);
+	if (cmd[0] == '/' || cmd[0] == '.' || cmd[0] == '\0')
+		return (free_cmd(all_path), cmd);
 	j = -1;
 	while (all_path[++j])
 	{
@@ -33,13 +35,11 @@ char	*get_path(t_bash *shell, char *cmd)
 		if (access(exec, F_OK | X_OK) == 0)
 		{
 			free_cmd(all_path);
-			dprintf(2, "return %s\n", exec);
 			return (exec);
 		}
 		free(exec);
 	}
-	free_cmd(all_path);
-	return (cmd);
+	return (free_cmd(all_path), cmd);
 }
 
 int	check_function(t_cmd cmd)
