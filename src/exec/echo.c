@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:14:25 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/02/19 12:25:08 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:51:46 by jdhallen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_echo_printf(t_cmd *cmd, int output, t_var *v)
+void	ft_echo_prtf(t_cmd *cmd, int output, t_var *v, int newline)
 {
 	while (cmd->args[v->i] != NULL)
 	{
@@ -28,6 +28,8 @@ void	ft_echo_printf(t_cmd *cmd, int output, t_var *v)
 			ft_printf(output, " ");
 		}
 	}
+	if (newline == TRUE)
+		ft_printf(output, "\n");
 }
 
 int	ft_echo(t_bash *shell, t_cmd *cmd, int output)
@@ -50,13 +52,13 @@ int	ft_echo(t_bash *shell, t_cmd *cmd, int output)
 			v.j++;
 		if (cmd->args[v.i][v.j] != '\0')
 			break ;
-		newline = FALSE;
+		if (cmd->args[v.i][v.j - 1] == 'n')
+			newline = FALSE;
+		else
+			break ;
 		v.i++;
 	}
-	ft_echo_printf(cmd, output, &v);
-	if (newline == TRUE)
-		ft_printf(output, "\n");
-	return (shell->prev_return = 0, 0);
+	return (ft_echo_prtf(cmd, output, &v, newline), shell->prev_return = 0, 0);
 }
 
 	// for (int i = 0; i > -1; i++)

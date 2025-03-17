@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/16 04:01:49 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/17 10:43:28 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	do_pipe(t_bash *shell, int index_cmd, int old_fd, int *pipe_fd)
 
 int	init_execve(t_bash *shell)
 {
-	if (shell->line.cmd_nbr == 0)
-		return (0);
 	if (open_fds(shell) == -1)
 		return (1);
+	if (shell->line.cmd_nbr == 0)
+		return (0);
 	if (shell->line.cmd_nbr == 1 && search_pipe(shell, 0) == 0)
 		ft_command_one(shell, 0);
 	else

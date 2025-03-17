@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nezumickey <nezumickey@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:15:13 by jdhallen          #+#    #+#             */
-/*   Updated: 2025/03/16 04:05:33 by nezumickey       ###   ########.fr       */
+/*   Updated: 2025/03/17 10:41:36 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	parsing_split_part2(t_bash *shell, t_lst_var **result, char **input)
 	return (free_list_point(&temp, len), TRUE);
 }
 
+// ft_printf(1, " %s\n", input);
 int	parsing_split(t_bash *shell)
 {
 	t_lst_var	*result;
@@ -91,7 +92,6 @@ int	parsing_split(t_bash *shell)
 	free_list_var(&result);
 	if (input == NULL)
 		return (ERROR);
-	// ft_printf(1, " %s\n", input);
 	if (input != NULL)
 		if (parsing_split_part2(shell, &result, &input) == ERROR)
 			return (ERROR);
