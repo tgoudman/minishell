@@ -29,10 +29,3 @@ export
 cd prend qu max 1 arg:
 tgoudman@c1r2p3:~/student/Dracolosse$ cd .. ..
 bash: cd: too many arguments
-
-ls | sleep 5 (il faut wait la dernier commande)
-
-
-< Makefile >oo  << asd cat >oufile2 >>of << kk > oufile
-
-< Makefile << kks cat (leak fd quand ctrl+C)
