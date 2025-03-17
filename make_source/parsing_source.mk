@@ -6,7 +6,7 @@
 #    By: jdhallen <jdhallen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 14:16:56 by jdhallen          #+#    #+#              #
-#    Updated: 2025/02/27 14:54:56 by jdhallen         ###   ########.fr        #
+#    Updated: 2025/03/10 14:43:36 by jdhallen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRCS_PARS = parsing.c \
 		parsing_split.c parsing_utils.c \
 		line_remake.c line_remake_core.c \
 		line_remake_strcmd.c input_remake2.c \
-		input_remake.c input_remake2_var.c ft_charjoin.c \
+		input_remake_utils.c input_remake.c \
+		input_remake2_var.c ft_charjoin.c \
 		cleaning_parsing.c cleaning_parsing2.c \
 		ft_printf_lst.c \
 		cmd_parsing.c \
