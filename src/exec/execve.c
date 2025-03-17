@@ -6,7 +6,7 @@
 /*   By: tgoudman <tgoudman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:33:07 by tgoudman          #+#    #+#             */
-/*   Updated: 2025/03/17 10:43:28 by tgoudman         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:58:00 by tgoudman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	init_execve(t_bash *shell)
 	if (open_fds(shell) == -1)
 		return (1);
 	if (shell->line.cmd_nbr == 0)
+	{
+		close_fd(shell, 1);
 		return (0);
+	}
 	if (shell->line.cmd_nbr == 1 && search_pipe(shell, 0) == 0)
 		ft_command_one(shell, 0);
 	else
